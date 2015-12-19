@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourDeFrance.Core", "TourDeFrance.Core\TourDeFrance.Core.csproj", "{D334EB65-6E31-486A-A778-C45218108ACF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E6E80C32-F5F1-4CCC-A0CB-FB4003E0E6C0}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6E93B10-3529-41FE-8C0D-45641711C991}"
+	ProjectSection(SolutionItems) = preProject
+		SolutionInfo.cs = SolutionInfo.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourDeFrance.Tests", "TourDeFrance.Tests\TourDeFrance.Tests.csproj", "{C6D6DD09-CE5E-4BF3-9726-00EA2A76A5BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourDeFrance.Client", "TourDeFrance.Client\TourDeFrance.Client.csproj", "{99DA6C70-93E9-4186-AC5F-B3E1C27B3643}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourDeFrance.Service", "TourDeFrance.Service\TourDeFrance.Service.csproj", "{47DEB592-9283-495A-842B-208969BC4531}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourDeFrance.ASP.Common", "TourDeFrance.ASP.Common\TourDeFrance.ASP.Common.csproj", "{19644D77-2E95-4826-B5B8-C63BB61121BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourDeFrance.ASP", "TourDeFrance.ASP\TourDeFrance.ASP.csproj", "{AA22068C-C480-450D-AC06-6A1AA5A2D407}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D334EB65-6E31-486A-A778-C45218108ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D334EB65-6E31-486A-A778-C45218108ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D334EB65-6E31-486A-A778-C45218108ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D334EB65-6E31-486A-A778-C45218108ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6D6DD09-CE5E-4BF3-9726-00EA2A76A5BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6D6DD09-CE5E-4BF3-9726-00EA2A76A5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6D6DD09-CE5E-4BF3-9726-00EA2A76A5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99DA6C70-93E9-4186-AC5F-B3E1C27B3643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99DA6C70-93E9-4186-AC5F-B3E1C27B3643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99DA6C70-93E9-4186-AC5F-B3E1C27B3643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99DA6C70-93E9-4186-AC5F-B3E1C27B3643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47DEB592-9283-495A-842B-208969BC4531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47DEB592-9283-495A-842B-208969BC4531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47DEB592-9283-495A-842B-208969BC4531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47DEB592-9283-495A-842B-208969BC4531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19644D77-2E95-4826-B5B8-C63BB61121BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19644D77-2E95-4826-B5B8-C63BB61121BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19644D77-2E95-4826-B5B8-C63BB61121BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19644D77-2E95-4826-B5B8-C63BB61121BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA22068C-C480-450D-AC06-6A1AA5A2D407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA22068C-C480-450D-AC06-6A1AA5A2D407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA22068C-C480-450D-AC06-6A1AA5A2D407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA22068C-C480-450D-AC06-6A1AA5A2D407}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
