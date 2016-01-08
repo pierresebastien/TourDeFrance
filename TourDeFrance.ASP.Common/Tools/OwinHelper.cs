@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Helpers;
+using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -18,6 +19,7 @@ using TourDeFrance.Core;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
+using TourDeFrance.ASP.Common.Providers;
 using TourDeFrance.Core.Tools.DataBase;
 
 namespace TourDeFrance.ASP.Common.Tools
@@ -38,7 +40,7 @@ namespace TourDeFrance.ASP.Common.Tools
 		public virtual void Inititialize(ApplicationConfig config)
 		{
 			#if DEBUG
-			// TODO: to active => HostingEnvironment.RegisterVirtualPathProvider(new DebugVirtualPathProvider());
+			HostingEnvironment.RegisterVirtualPathProvider(new DebugVirtualPathProvider());
 			#endif
 
 			IDialectProvider dialectProvider;
@@ -95,7 +97,7 @@ namespace TourDeFrance.ASP.Common.Tools
 				AuthenticationType = "Cookies",
 			});
 
-			// TODO: openif, google, ... ?
+			// TODO: openid, google, ... ?
 			// !!! tour de france membership provider
 		}
 
@@ -138,7 +140,7 @@ namespace TourDeFrance.ASP.Common.Tools
 				);
 
 			// Force JSON to return object in camelCase
-			var settings = GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings;
+			var settings = config.Formatters.JsonFormatter.SerializerSettings;
 			settings.Formatting = Formatting.Indented;
 			settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 

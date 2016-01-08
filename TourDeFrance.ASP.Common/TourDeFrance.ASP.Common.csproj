@@ -49,8 +49,8 @@
       <HintPath>..\packages\Autofac.Owin.3.1.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Autofac.Integration.WebApi, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.WebApi.3.1.0\lib\net40\Autofac.Integration.WebApi.dll</HintPath>
+    <Reference Include="Autofac.Integration.WebApi, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac.Integration.WebApi.Owin, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -123,6 +123,10 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NotFoundMvc, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NotFoundMvc.1.4.0\lib\net40\NotFoundMvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Npgsql, Version=3.0.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
@@ -241,6 +245,7 @@
     <Compile Include="Tools\HtmlUtility.cs" />
     <Compile Include="Tools\OwinHelper.cs" />
     <Compile Include="Providers\VirtualPathProvider.cs" />
+    <Compile Include="Tools\VirtualPathProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Angular\app\app.js" />
@@ -341,6 +346,7 @@
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Views\Home\Partial\CssReferences.cshtml" />
     <Content Include="Views\Home\Partial\JavascriptReferences.cshtml" />
+    <None Include="Views\Shared\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Angular\app\app.ts" />

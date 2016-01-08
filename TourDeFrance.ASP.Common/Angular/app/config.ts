@@ -14,49 +14,54 @@ class ApiSetUp { // Not working if moved into app.ts
 
 // TODO: replace toastr by matrial - toast
 class RestangularConfig { // Used in a .run since .config does not allow Services
-    constructor(Restangular: restangular.IProvider, $state: ng.ui.IStateService, GlobalService: TourDeFrance.Service.IGlobalService, $mdToast: ng.material.IToastService, $location: ng.ILocationService, $window: Window) {
-        Restangular.setErrorInterceptor((response: restangular.IResponse, deferred: ng.IDeferred<any>) => {
-            var currentState = {
-                name: $state.current.name,
-                params: $state.params,
-                url: $state.href($state.current.name, $state.params)
-            };
-            switch (response.status) {
-                case 400: // Bad Request = TourDeFranceException
-                    // TODO: check angular toast usage !!!
-                    //var toastOptions: ng.material.IToastOptions = {};
-                    //toastOptions.closeButton = true;
-                    //toastOptions.newestOnTop = true;
-                    //toastOptions.positionClass = "toast-top-full-width";
-                    //toastOptions.timeOut = 0;
-                    //toastOptions.hideDuration = 0;
-                    //toastOptions.showDuration = 0;
-                    //$mdToast.options = toastOptions;
-                    //$mdToast.show(response.data, "Bad Request");
-                    return true; // The error is not handled and the calling function will execute its error callback
-                case 401: // Unauthorized
-                    var baseInstanceUrl: any = TourDeFrance.Service.GlobalService.getWebUrl();
-                    $window.location = baseInstanceUrl;
-                    return false; // The error is considered as handled and the calling function will do nothing
-                case 403: // Forbidden
-                    GlobalService.setError(response.data, currentState);
-                    $state.go("root.forbidden");
-                    return false;
-                case 404: // Not Found
-                    GlobalService.setError(response.data, currentState);
-                    $state.go("root.notfound");
-                    return false;
-                case 500: // Internal Server Error
-                    GlobalService.setError(response.data);
-                    $state.go("root.error");
-                    return false;
-                default:
-                    GlobalService.setError(response.status + " - " + response.data);
-                    $state.go("root.error");
-                    return false;
-            }
-        });
-    }
+	constructor(Restangular: restangular.IProvider, $state: ng.ui.IStateService, GlobalService: TourDeFrance.Service.IGlobalService, $mdToast: ng.material.IToastService, $location: ng.ILocationService, $window: Window) {
+		Restangular.setErrorInterceptor((response: restangular.IResponse, deferred: ng.IDeferred<any>) => {
+			var currentState = {
+				name: $state.current.name,
+				params: $state.params,
+				url: $state.href($state.current.name, $state.params)
+			};
+			switch (response.status) {
+			case 400: // Bad Request = TourDeFranceException
+				// TODO: check angular toast usage !!!
+				//var toastOptions: ng.material.IToastOptions = {};
+				//toastOptions.closeButton = true;
+				//toastOptions.newestOnTop = true;
+				//toastOptions.positionClass = "toast-top-full-width";
+				//toastOptions.timeOut = 0;
+				//toastOptions.hideDuration = 0;
+				//toastOptions.showDuration = 0;
+				//$mdToast.options = toastOptions;
+				//$mdToast.show(response.data, "Bad Request");
+				return true; // The error is not handled and the calling function will execute its error callback
+			case 401: // Unauthorized
+				var baseInstanceUrl: any = TourDeFrance.Service.GlobalService.getWebUrl();
+				$window.location = baseInstanceUrl;
+				return false; // The error is considered as handled and the calling function will do nothing
+			case 403: // Forbidden
+				GlobalService.setError(response.data, currentState);
+				$state.go("root.forbidden");
+				return false;
+			case 404: // Not Found
+				GlobalService.setError(response.data, currentState);
+				$state.go("root.notfound");
+				return false;
+			case 500: // Internal Server Error
+				GlobalService.setError(response.data);
+				$state.go("root.error");
+				return false;
+			default:
+				GlobalService.setError(response.status + " - " + response.data);
+				$state.go("root.error");
+				return false;
+			}
+		});
+
+		// Restangular adds the current time to the request to force cache refresh for each API call (needed for IE)
+		Restangular.setFullRequestInterceptor((element, operation, what, url, headers, params) => {
+			return { headers: headers, params: _.extend(params, { cacheKiller: new Date().getTime() }), element: element };
+		});
+	}
 }
 
 class RouteConfig {

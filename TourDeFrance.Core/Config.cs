@@ -6,7 +6,6 @@ using System.Reflection;
 using TourDeFrance.Core.Extensions;
 using TourDeFrance.Core.Interfaces;
 using TourDeFrance.Core.Repositories.Interfaces;
-using TourDeFrance.Core.Tools;
 using TourDeFrance.Core.Tools.DataBase;
 
 namespace TourDeFrance.Core
@@ -107,7 +106,6 @@ namespace TourDeFrance.Core
 		public string SmtpSenderDisplayName => _configurationRepository.GetValue<string>("SmtpSenderDisplayName");
 
 		public string ErrorMailRecipient => _configurationRepository.GetValue<string>("ErrorMailRecipient");
-
 
 		// user et password
 		public int MinUserNameLength => _configurationRepository.GetValue<int>("MinUserNameLength");

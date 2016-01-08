@@ -1,7 +1,6 @@
 ﻿@model TourDeFrance.ASP.Common.Models.LoginModel
 
 @{
-    ViewBag.Title = "Login";
     string continueUrl = Request.Params["returnUrl"] ?? Url.RouteUrl(new { Controller = "Home", Action = "Index" });
 }
 

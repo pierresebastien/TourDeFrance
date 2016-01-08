@@ -15,18 +15,26 @@ using TourDeFrance.Core.Tools.DataBase;
 
 namespace TourDeFrance.Core
 {
-	// TODO: review cache (check possibility with roslyn instead of using fody)
-	// TODO: unit test (nunit)
-	// TODO: wixsharp setup
-	// TODO: improve autofac usage -> module??, factories?? (module in test to change default autofac registration)
-	// TODO: review owner mechanism in all repo
-	// TODO: improve usage of const in repositories
-	// TODO: reduce usage of var
-	// TODO: !! date => to universal time
-	// TODO: !! json object in database
-	// TODO: all method in repositories => virtual
-	// TODO: usage of required on non nullable field in database??
-	// TODO: ensure 18 years old for each birth date??? or ensure is in past
+	// TODO: to remember
+	// review cache (check possibility with roslyn instead of using fody)
+	// unit test (nunit)
+	// wixsharp setup
+	// improve autofac usage -> module??, factories?? (module in test to change default autofac registration)
+	// review owner mechanism in all repo
+	// improve usage of const in repositories
+	// reduce usage of var
+	// !! date => to universal time
+	// !! json object in database
+	// all method in repositories => virtual
+	// usage of required on non nullable field in database??
+	// ensure 18 years old for each birth date??? or ensure is in past
+	// investigate : https://github.com/damianh/LibLog
+	// investigate : https://code.google.com/p/elmah/
+	// investigate : https://github.com/turquoiseowl/i18n/tree/v2.0 or https://github.com/dotnetwise/i18N-Complete
+	// usage of citext in dapper or simplestack.orm
+	// add support for : https://coveralls.io/
+	// add support for : https://scan.coverity.com/
+	// add support for : https://travis-ci.org/
 	public class Setup
 	{
 		private static readonly ILog Logger = LogManager.GetLogger(typeof (Setup));

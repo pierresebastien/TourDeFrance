@@ -111,12 +111,12 @@ namespace TourDeFrance.Core.Tools.DataBase
 					string basePath = Path.Combine(Path.GetTempPath(), "TourDeFrance");
 
 					string temporaryPath = Path.Combine(basePath, "Temp");
-					scope.Connection.Update(new DbConfig { Key = "TempFolder", Value = temporaryPath, DefaultValue = temporaryPath },
-						x => new { x.Value, x.DefaultValue });
+					scope.Connection.UpdateAll(new DbConfig {Value = temporaryPath, DefaultValue = temporaryPath},
+						x => x.Key == "TempFolder", x => new {x.Value, x.DefaultValue});
 
 					string lucenePath = Path.Combine(basePath, "Lucene");
-					scope.Connection.Update(new DbConfig { Key = "IndexFolder", Value = lucenePath, DefaultValue = lucenePath },
-						x => new { x.Value, x.DefaultValue });
+					scope.Connection.UpdateAll(new DbConfig {Value = lucenePath, DefaultValue = lucenePath},
+						x => x.Key == "IndexFolder", x => new {x.Value, x.DefaultValue});
 					break;
 			}
 		}
