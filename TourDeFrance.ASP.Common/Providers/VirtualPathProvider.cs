@@ -24,28 +24,28 @@ namespace TourDeFrance.ASP.Common.Providers
 			PathMappings = new ConcurrentDictionary<string, string>();
 			AspCommonPath = string.Empty;
 
-			// TODO: to restore
-			//string gitModuleFilePath = Path.Combine(ApplicationPath, "..", GitModulePath);
-			//if (!File.Exists(gitModuleFilePath))
-			//{
-			//	throw new FileNotFoundException("Cannot find .gitmodules file", gitModuleFilePath);
-			//}
-			//Regex subModulePathRegex = new Regex("^\\tpath = (?<path>.+)$");
-			//foreach (var line in File.ReadAllLines(gitModuleFilePath))
-			//{
-			//	if (subModulePathRegex.IsMatch(line))
-			//	{
-			//		string subModulePath = subModulePathRegex.Match(line).Groups["path"].Value.Trim();
-			//		AspCommonPath = Path.Combine(ApplicationPath, "..", subModulePath, "TourDeFrance.ASP.Common");
-			//		break;
-			//	}
-			//}
-			//if (string.IsNullOrEmpty(AspCommonPath))
-			//{
-			//	throw new Exception("Could not parse sub module path");
-			//}
-
-			AspCommonPath = Path.Combine(ApplicationPath, "..", "TourDeFrance.ASP.Common");
+			string gitModuleFilePath = Path.Combine(ApplicationPath, "..", GitModulePath);
+			if (!File.Exists(gitModuleFilePath))
+			{
+				AspCommonPath = Path.Combine(ApplicationPath, "..", "TourDeFrance.ASP.Common");
+			}
+			else
+			{
+				Regex subModulePathRegex = new Regex("^\\tpath = (?<path>.+)$");
+				foreach (var line in File.ReadAllLines(gitModuleFilePath))
+				{
+					if (subModulePathRegex.IsMatch(line))
+					{
+						string subModulePath = subModulePathRegex.Match(line).Groups["path"].Value.Trim();
+						AspCommonPath = Path.Combine(ApplicationPath, "..", subModulePath, "TourDeFrance.ASP.Common");
+						break;
+					}
+				}
+				if (string.IsNullOrEmpty(AspCommonPath))
+				{
+					throw new Exception("Could not parse sub module path");
+				}
+			}
 		}
 
 		public override bool FileExists(string virtualPath)
