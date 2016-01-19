@@ -265,20 +265,6 @@ namespace TourDeFrance.Core.Repositories
 			BaseEmailModel result;
 			switch (mailTemplateType)
 			{
-				case DbMailTemplate.ErrorOccurred:
-					try
-					{
-						throw new TourDeFranceException("Some Sample exception");
-					}
-					catch (Exception e)
-					{
-						result = new ErrorEmailModel
-						{
-							Exception = new ExceptionEmailModel(e),
-							Url = "http://This_is_the_url_of_the_page_in_error"
-						};
-					}
-					break;
 				case DbMailTemplate.LostPassword:
 					result = new LostPasswordEmailModel
 					{

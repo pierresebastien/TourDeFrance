@@ -3,10 +3,8 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
-using TourDeFrance.Core;
-using TourDeFrance.Core.Business.Database;
-using TourDeFrance.Core.Business.Email;
 using TourDeFrance.Core.Exceptions;
+using TourDeFrance.Core.Tools;
 
 namespace TourDeFrance.ASP.Common.Tools
 {
@@ -40,20 +38,7 @@ namespace TourDeFrance.ASP.Common.Tools
 			{
 				status = HttpStatusCode.InternalServerError;
 				content = new StringContent(string.Empty); // TODO: remove exception message ???
-
-				try
-				{
-					Context.Current.EmailSender.SendEmail(new[] { Context.Current.Config.ErrorMailRecipient }, DbMailTemplate.ErrorOccurred, null,
-						new ErrorEmailModel
-						{
-							Exception = new ExceptionEmailModel(context.Exception),
-							Url = context.Request.RequestUri.AbsoluteUri
-						});
-				}
-				catch (Exception e)
-				{
-					Logger.Error("Error while sending email to administrator", e);
-				}
+				ErrorLogger.LogException(context.Exception, context.Request.RequestUri.AbsoluteUri);
 			}
 			context.Response = new HttpResponseMessage(status) { Content = content };
 		}

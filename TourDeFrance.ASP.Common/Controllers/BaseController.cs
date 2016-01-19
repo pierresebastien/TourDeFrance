@@ -5,10 +5,9 @@ using System.Web.Routing;
 using TourDeFrance.ASP.Common.Tools;
 using TourDeFrance.Core;
 using TourDeFrance.Core.Business;
-using TourDeFrance.Core.Business.Database;
-using TourDeFrance.Core.Business.Email;
 using TourDeFrance.Core.Interfaces;
 using TourDeFrance.Core.Repositories.Interfaces;
+using TourDeFrance.Core.Tools;
 
 namespace TourDeFrance.ASP.Common.Controllers
 {
@@ -47,31 +46,13 @@ namespace TourDeFrance.ASP.Common.Controllers
 
 		#endregion
 
-		protected void SendMail(Exception exception, string url)
-		{
-			EmailSender.SendEmail(new[] {Config.ErrorMailRecipient},
-				DbMailTemplate.ErrorOccurred,
-				null,
-				new ErrorEmailModel
-				{
-					Exception = new ExceptionEmailModel(exception),
-					Url = url
-				});
-		}
-
 		protected override void OnException(ExceptionContext filterContext)
 		{
 			if (filterContext != null)
 			{
 				string url = filterContext.HttpContext.Request.Url.ToString();
-				try
-				{
-					SendMail(filterContext.Exception, url);
-				}
-				catch (Exception e)
-				{
-					Logger.Error("Error while sending email to administrator", e);
-				}
+				ErrorLogger.LogException(filterContext.Exception, url);
+				// TODO: does not exists
 				filterContext.Result = RedirectToAction("E500", "Error");
 				filterContext.ExceptionHandled = true;
 			}

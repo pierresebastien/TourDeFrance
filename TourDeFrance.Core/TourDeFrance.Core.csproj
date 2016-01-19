@@ -125,7 +125,6 @@
     <Compile Include="Business\Database\User.cs" />
     <Compile Include="Business\Drink.cs" />
     <Compile Include="Business\Email\BaseEmailModel.cs" />
-    <Compile Include="Business\Email\Error.cs" />
     <Compile Include="Business\Email\LostPassword.cs" />
     <Compile Include="Business\Email\UserCreated.cs" />
     <Compile Include="Business\Log.cs" />
@@ -191,6 +190,7 @@
     <Compile Include="Tools\DataBase\OrmDatabaseManager.cs" />
     <Compile Include="Tools\DataBase\ScriptDatabaseManager.cs" />
     <Compile Include="Tools\EmailSender.cs" />
+    <Compile Include="Tools\ErrorLogger.cs" />
     <Compile Include="Tools\EventDispatcher.cs" />
     <Compile Include="Extensions\ArgumentCheckExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />

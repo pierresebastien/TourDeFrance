@@ -7,7 +7,6 @@ namespace TourDeFrance.Core.Business.Database
 	[Alias("mail_templates")]
 	public class DbMailTemplate : BaseOwnObjectNameable
 	{
-		public const string ErrorOccurred = "ErrorOccurred";
 		public const string LostPassword = "LostPassword";
 		public const string UserCreated = "UserCreated";
 
