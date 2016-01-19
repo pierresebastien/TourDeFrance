@@ -245,7 +245,6 @@
     <Compile Include="Tools\HtmlUtility.cs" />
     <Compile Include="Tools\OwinHelper.cs" />
     <Compile Include="Providers\VirtualPathProvider.cs" />
-    <Compile Include="Tools\VirtualPathProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Angular\app\app.js" />
@@ -298,6 +297,10 @@
     <Content Include="libs\bower\jquery\dist\jquery.min.js" />
     <Content Include="libs\bower\lodash\lodash.js" />
     <Content Include="libs\bower\lodash\lodash.min.js" />
+    <Content Include="libs\bower\material-design-lite\material.css" />
+    <Content Include="libs\bower\material-design-lite\material.js" />
+    <Content Include="libs\bower\material-design-lite\material.min.css" />
+    <Content Include="libs\bower\material-design-lite\material.min.js" />
     <Content Include="libs\bower\ngInfiniteScroll\build\ng-infinite-scroll.js" />
     <Content Include="libs\bower\ngInfiniteScroll\build\ng-infinite-scroll.min.js" />
     <Content Include="libs\bower\restangular\dist\restangular.js" />
@@ -347,6 +350,7 @@
     <Content Include="Views\Home\Partial\CssReferences.cshtml" />
     <Content Include="Views\Home\Partial\JavascriptReferences.cshtml" />
     <None Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\User\_LayoutUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Angular\app\app.ts" />
