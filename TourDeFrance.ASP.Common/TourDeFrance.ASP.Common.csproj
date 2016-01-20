@@ -308,7 +308,7 @@
     <Content Include="libs\bower\spinjs\spin.js" />
     <Content Include="libs\bower\spinjs\spin.min.js" />
     <Content Include="robots.txt" />
-    <Content Include="UnhandledError.html" />
+    <Content Include="Content\UnhandledError.html" />
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -382,7 +382,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Angular\directives\" />
-    <Folder Include="Content\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">

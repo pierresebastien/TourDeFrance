@@ -48,7 +48,7 @@ namespace TourDeFrance.ASP
 					return;
 				}
 				Logger.Error("Application Error", ex);
-				Response.Redirect("~/UnhandledError.html");
+				Response.Redirect("~/Content/UnhandledError.html");
 			}
 		}
 
