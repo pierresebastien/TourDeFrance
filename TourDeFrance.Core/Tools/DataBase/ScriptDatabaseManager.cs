@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Dapper;
-using log4net;
 using SimpleStack.Orm;
 using TourDeFrance.Core.Business.Database;
+using TourDeFrance.Core.Logging;
 
 namespace TourDeFrance.Core.Tools.DataBase
 {
@@ -17,7 +17,7 @@ namespace TourDeFrance.Core.Tools.DataBase
 		protected readonly ApplicationConfig Config;
 		protected readonly string ScriptPath;
 
-		private static readonly ILog Logger = LogManager.GetLogger(typeof(ScriptDatabaseManager));
+		private static readonly ILog Logger = LogProvider.For<ScriptDatabaseManager>();
 
 		public ScriptDatabaseManager(IDialectProvider dialectProvider, ApplicationConfig config)
 		{

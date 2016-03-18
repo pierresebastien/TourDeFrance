@@ -4,17 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Dapper;
-using log4net;
 using ServiceStack.Text;
 using SimpleStack.Orm;
 using TourDeFrance.Client.Enums;
 using TourDeFrance.Core.Business.Database;
+using TourDeFrance.Core.Logging;
 
 namespace TourDeFrance.Core.Tools.DataBase
 {
 	public class OrmDatabaseManager : IDatabaseManager
 	{
-		private static readonly ILog Logger = LogManager.GetLogger(typeof (OrmDatabaseManager));
+		private static readonly ILog Logger = LogProvider.For<OrmDatabaseManager>();
 		protected static readonly DateTime DefaultDateTime = new DateTime(2000, 1, 1);
 		protected static readonly string DefaultUser = "System";
 

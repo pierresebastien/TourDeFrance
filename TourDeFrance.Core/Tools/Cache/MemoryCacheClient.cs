@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using log4net;
 using ServiceStack.CacheAccess;
 using ServiceStack.Net30.Collections.Concurrent;
+using TourDeFrance.Core.Logging;
 
 namespace TourDeFrance.Core.Tools.Cache
 {
 	public sealed class MemoryCacheClient : ICacheClient
 	{
-		private static readonly ILog Log = LogManager.GetLogger(typeof(MemoryCacheClient));
+		private static readonly ILog Log = LogProvider.For<MemoryCacheClient>();
 
 		private ConcurrentDictionary<string, CacheEntry> _memory;
 		private ConcurrentDictionary<string, int> _counters;

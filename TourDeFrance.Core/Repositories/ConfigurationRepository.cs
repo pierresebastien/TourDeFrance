@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using log4net;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Exceptions;
 using TourDeFrance.Core.Extensions;
 using TourDeFrance.Core.Repositories.Interfaces;
-using TourDeFrance.Core.Tools;
 using TourDeFrance.Core.Tools.Cache;
 using Autofac;
+using TourDeFrance.Core.Logging;
 using TourDeFrance.Core.Tools.DataBase;
 
 namespace TourDeFrance.Core.Repositories
 {
 	public class ConfigurationRepository : BaseRepository, IConfigurationRepositoryExtended
 	{
-		private static readonly ILog Logger = LogManager.GetLogger(typeof(ConfigurationRepository));
+		private static readonly ILog Logger = LogProvider.For<ConfigurationRepository>();
 
 		[InvalidateCache(types: new[] { typeof(DbConfig) }, typeArgumentOrders: new[] { 0 })]
 		public DbConfig SetValue(string key, string value)
