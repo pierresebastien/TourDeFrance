@@ -1,16 +1,16 @@
-﻿using log4net;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
 using TourDeFrance.Core.Exceptions;
+using TourDeFrance.Core.Logging;
 using TourDeFrance.Core.Tools;
 
 namespace TourDeFrance.ASP.Common.Tools
 {
 	public class ExceptionFilterAttribute : System.Web.Http.Filters.ExceptionFilterAttribute
 	{
-		private static readonly ILog Logger = LogManager.GetLogger(typeof(ExceptionFilterAttribute));
+		private static readonly ILog Logger = LogProvider.For<ExceptionFilterAttribute>();
 
 		// TODO: argument, null & out of range exception
 		public override void OnException(HttpActionExecutedContext context)

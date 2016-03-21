@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ServiceStack.CacheAccess;
 using ServiceStack.Net30.Collections.Concurrent;
 using TourDeFrance.Core.Logging;
+using TourDeFrance.Core.Extensions;
 
 namespace TourDeFrance.Core.Tools.Cache
 {

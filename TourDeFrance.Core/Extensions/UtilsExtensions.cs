@@ -6,6 +6,7 @@ using Autofac;
 using TourDeFrance.Core.Business;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Interfaces;
+using TourDeFrance.Core.Logging;
 
 namespace TourDeFrance.Core.Extensions
 {
@@ -137,5 +138,10 @@ namespace TourDeFrance.Core.Extensions
 		}
 
 		#endregion
+
+		public static void Error(this ILog logger, string message, Exception e)
+		{
+			logger.Error($"{message}{e.Message}\nStacktrace : {e.StackTrace}");
+		}
 	}
 }

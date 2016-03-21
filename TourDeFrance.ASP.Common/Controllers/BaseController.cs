@@ -1,11 +1,11 @@
-﻿using log4net;
-using System;
+﻿using System;
 using System.Web.Mvc;
 using System.Web.Routing;
 using TourDeFrance.ASP.Common.Tools;
 using TourDeFrance.Core;
 using TourDeFrance.Core.Business;
 using TourDeFrance.Core.Interfaces;
+using TourDeFrance.Core.Logging;
 using TourDeFrance.Core.Repositories.Interfaces;
 using TourDeFrance.Core.Tools;
 
@@ -14,7 +14,7 @@ namespace TourDeFrance.ASP.Common.Controllers
 	[HandleError]
 	public abstract class BaseController : Controller
 	{
-		private static readonly ILog Logger = LogManager.GetLogger(typeof(BaseController));
+		private static readonly ILog Logger = LogProvider.For<BaseController>();
 
 		protected Config Config => Context.Current.Config;
 

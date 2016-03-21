@@ -1,4 +1,5 @@
 ﻿using System;
+using TourDeFrance.Core.Extensions;
 using TourDeFrance.Core.Logging;
 
 namespace TourDeFrance.Core.Tools
@@ -8,9 +9,9 @@ namespace TourDeFrance.Core.Tools
 		private static readonly ILog Logger = LogProvider.For<ErrorLogger>();
 
 		// TODO: to review
-		public static void LogException(Exception e, string url = "", string message = "Exception : ")
+		public static void LogException(Exception e, string message = "Exception : ")
 		{
-			Logger.Error($"{message}{e.Message}\nStacktrace : {e.StackTrace}");
+			Logger.Error(message, e);
 		}
 	}
 }
