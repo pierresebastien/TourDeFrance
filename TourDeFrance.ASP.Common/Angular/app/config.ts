@@ -35,8 +35,8 @@ class RestangularConfig { // Used in a .run since .config does not allow Service
 				//$mdToast.show(response.data, "Bad Request");
 				return true; // The error is not handled and the calling function will execute its error callback
 			case 401: // Unauthorized
-				var baseInstanceUrl: any = TourDeFrance.Service.GlobalService.getWebUrl();
-				$window.location = baseInstanceUrl;
+				var baseUrl: any = TourDeFrance.Service.GlobalService.getWebUrl();
+				$window.location = baseUrl;
 				return false; // The error is considered as handled and the calling function will do nothing
 			case 403: // Forbidden
 				GlobalService.setError(response.data, currentState);

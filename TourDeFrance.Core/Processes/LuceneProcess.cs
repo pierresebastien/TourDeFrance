@@ -24,7 +24,7 @@ namespace TourDeFrance.Core.Processes
 
 		public override void Running(Func<bool> watchdog)
 		{
-			Logger.Debug("Looking for indexation jobs in instance");
+			Logger.Debug("Looking for indexation jobs");
 			Context.Current.Container.Resolve<ILuceneRepository>().ProcessWaitingJobs();
 		}
 	}

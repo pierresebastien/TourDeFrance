@@ -40,8 +40,7 @@ module TourDeFrance.Service {
 
         public connectAs(userId: string) {
             this.Restangular.one('users', userId).one('connect').put().then((newUser: AuthenticatedUser) => {
-                var url: any = GlobalService.getWebUrl() + 'Instance#' + this.$state.get('root.home').url;
-                // Only setting the url do not reload the page
+                var url: any = GlobalService.getWebUrl() + '#' + this.$state.get('root.home').url;
                 this.$window.location = url;
                 this.$window.location.reload();
             });
