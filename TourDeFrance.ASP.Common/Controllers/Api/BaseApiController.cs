@@ -7,6 +7,8 @@ using TourDeFrance.Core.Repositories.Interfaces;
 
 namespace TourDeFrance.ASP.Common.Controllers.Api
 {
+	// TODO: check usage of grunt to compile typescript + scss ?
+	// TODO: add node js dependencies in node_module file inside project
 	// TODO: authentication
 	// TODO: check route prefix usage
 	// TODO: methodes to get only own objects??

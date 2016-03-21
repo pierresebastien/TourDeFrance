@@ -1,0 +1,8 @@
+/* node-sass sass/ -o css/ */
+body {
+  font: 100% "Roboto", sans-serif; }
+  body div .background-ribbon {
+    width: 100%;
+    height: 40vh;
+    background-color: #3F51B5;
+    flex-shrink: 0; }

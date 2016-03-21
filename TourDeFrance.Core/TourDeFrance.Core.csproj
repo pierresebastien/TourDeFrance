@@ -46,6 +46,10 @@
       <HintPath>..\packages\MimeKit.1.2.19\lib\net45\BouncyCastle.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="C5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\C5.2.4.5828.26833\lib\net45\C5.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CacheMethodResult.Attributes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CacheMethodResult.Fody.1.0.0.0\lib\net40\CacheMethodResult.Attributes.dll</HintPath>
       <Private>True</Private>

@@ -21,6 +21,7 @@
     "angular-material": "~1.0.1",
     "angular-spinner": "~0.8.0",
     "angular-ui-router": "~0.2.15",
-    "material-design-lite": "angular-material-design-light#~1.0.6"
+    "material-design-lite": "angular-material-design-light#~1.0.6",
+    "roboto-fontface": "~0.4.3"
   }
 }

@@ -265,6 +265,7 @@
     <Content Include="Angular\models\stage.js" />
     <Content Include="Angular\models\team.js" />
     <Content Include="Angular\models\user.js" />
+    <Content Include="Content\css\asp.css" />
     <Content Include="libs\bower\angular-animate\angular-animate.js" />
     <Content Include="libs\bower\angular-animate\angular-animate.min.js" />
     <Content Include="libs\bower\angular-aria\angular-aria.js" />
