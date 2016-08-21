@@ -4,5 +4,6 @@
 
 * bower
 * typescript
-* tsd
+* typings
 * node-sass
+* gulp
