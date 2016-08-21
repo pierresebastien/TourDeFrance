@@ -197,6 +197,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Tools\Cache\MemoryCacheClient.cs" />
     <Compile Include="Business\PagingResult.cs" />
+    <Compile Include="Tools\PrioritizedStack.cs" />
     <Compile Include="Tools\SaltedHash.cs" />
     <Compile Include="Tools\DataBase\TransactionScope.cs" />
     <Compile Include="Extensions\UtilsExtensions.cs" />

@@ -15,6 +15,8 @@ namespace TourDeFrance.Core.Tools.DataBase
 
 		private OrmConnection _rootScopeConnection;
 		private IDbTransaction _transaction;
+
+		// TODO: to remove, find another way to do it
 		private IRedisClient _redisClient;
 		private IRedisTransaction _redisTransaction;
 
@@ -63,6 +65,7 @@ namespace TourDeFrance.Core.Tools.DataBase
 			}
 		}
 
+		[Obsolete]
 		public IRedisTransaction RedisTransaction
 		{
 			get

@@ -95,15 +95,17 @@ namespace TourDeFrance.Core
 				if (string.IsNullOrWhiteSpace(config.RedisHost))
 				{
 					b.RegisterType<MemoryCacheClient>().AsImplementedInterfaces().SingleInstance();
+					b.RegisterType<InMemoryPrioritizedStack>().AsImplementedInterfaces().SingleInstance();
 				}
 				else{
-					PooledRedisClientManager redisClientManager = new PooledRedisClientManager(0, config.RedisHost);
+					IRedisClientsManager redisClientManager = new PooledRedisClientManager(0, config.RedisHost);
 					using (IRedisClient client = redisClientManager.GetClient())
 					{
 						client.RemoveAll(client.SearchKeys(Constants.BASE_CACHE_KEY + "*"));
 					}
 					b.RegisterInstance(redisClientManager).AsImplementedInterfaces().SingleInstance();
 					b.RegisterType<RedisClientManagerCacheClient>().AsImplementedInterfaces().SingleInstance();
+					b.RegisterType<RedisPrioritizedStack>().AsImplementedInterfaces().SingleInstance();
 				}
 
 				// TODO: repository single instance ???
