@@ -1,7 +1,5 @@
 /* TODO:
 - minify files -> https://github.com/terinjokes/gulp-uglify?
-- adpapt sass code
-- launch task in visual studio
 */
 'use strict';
 
@@ -16,13 +14,13 @@ gulp.task('default', function() {
 
 /* SASS */
 gulp.task('sass', function () {
-	return gulp.src('./Content/**/*.scss')
+	return gulp.src('./Content/sass/**/*.scss')
 		.pipe(sass().on('error', sass.logError))
-		.pipe(gulp.dest('./Content/'));
+		.pipe(gulp.dest('./Content/css/'));
 });
 
 gulp.task('sass:watch', function () {
-	gulp.watch('./Content/**/*.scss', ['sass']);
+	gulp.watch('./Content/sass/**/*.scss', ['sass']);
 });
 
 /* TYPESCRIPT */
