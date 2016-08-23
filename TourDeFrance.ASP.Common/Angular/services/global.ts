@@ -1,95 +1,109 @@
 ﻿/// <reference path="../references.ts"/>
 
 module TourDeFrance.Service {
-    'use strict';
+	'use strict';
 
-    export interface IGlobalService {
-        accessedState: any;
-        errorMessage: string;
-        previousState: ng.ui.IState;
-        setError(message: string, accessedPage?: any);
+	export interface IGlobalService {
+		accessedState: any;
+		errorMessage: string;
+		previousState: ng.ui.IState;
+		setError(message: string, accessedPage?: any);
 
-        getRealUser(): AuthenticatedUser;
-        getCurrentUser(): ng.IPromise<AuthenticatedUser>;
+		getRealUser(): AuthenticatedUser;
+		getCurrentUser(): ng.IPromise<AuthenticatedUser>;
 
-        connectAs(userId: string);
-        logBack();
-    }
+		connectAs(userId: string);
+		logBack();
+	}
 
-    export class GlobalService implements IGlobalService {
-        private static webUrl: string;
+	export class GlobalService implements IGlobalService {
+		private static webUrl: string;
 
-        private currentUser: AuthenticatedUser;
-        private realUser: AuthenticatedUser;
-        accessedState: any;
-        errorMessage: string;
-        previousState: ng.ui.IState;
+		private currentUser: AuthenticatedUser;
+		private realUser: AuthenticatedUser;
+		accessedState: any;
+		errorMessage: string;
+		previousState: ng.ui.IState;
 
-        constructor(private Restangular: restangular.IService, private $q: ng.IQService, private $stateParams: ng.ui.IStateParamsService,
-            private $rootScope: ng.IRootScopeService, private $state: ng.ui.IStateService, private $window: Window, websiteUrl: string) {
-            if (websiteUrl.slice(-1) !== "/") {
-                websiteUrl += "/";
-            }
-            GlobalService.webUrl = websiteUrl;
-        }
+		constructor(private Restangular: restangular.IService,
+			private $q: ng.IQService,
+			private $stateParams: ng.ui.IStateParamsService,
+			private $rootScope: ng.IRootScopeService,
+			private $state: ng.ui.IStateService,
+			private $window: Window,
+			websiteUrl: string) {
 
-        public setError(message: string, accessedState?: any) {
-            this.accessedState = accessedState;
-            this.errorMessage = message;
-        }
+			if (websiteUrl.slice(-1) !== "/") {
+				websiteUrl += "/";
+			}
+			GlobalService.webUrl = websiteUrl;
+		}
 
-        public connectAs(userId: string) {
-            this.Restangular.one('users', userId).one('connect').put().then((newUser: AuthenticatedUser) => {
-                var url: any = GlobalService.getWebUrl() + '#' + this.$state.get('root.home').url;
-                this.$window.location = url;
-                this.$window.location.reload();
-            });
-        }
+		public setError(message: string, accessedState?: any) {
+			this.accessedState = accessedState;
+			this.errorMessage = message;
+		}
 
-        public logBack() {
-            this.connectAs(this.realUser.id);
-        }
+		public connectAs(userId: string) {
+			this.Restangular.one('users', userId)
+				.one('connect')
+				.put()
+				.then((newUser: AuthenticatedUser) => {
+					var url: any = GlobalService.getWebUrl() + '#' + this.$state.get('root.home').url;
+					this.$window.location = url;
+					this.$window.location.reload();
+				});
+		}
 
-        public getCurrentUser(): ng.IPromise<AuthenticatedUser> {
-            var deferred = this.$q.defer();
+		public logBack() {
+			this.connectAs(this.realUser.id);
+		}
 
-            if (this.currentUser != null) {
-                deferred.resolve(this.currentUser);
-            } else {
-                this.initialize(deferred);
-            }
+		public getCurrentUser(): ng.IPromise<AuthenticatedUser> {
+			var deferred = this.$q.defer();
 
-            return deferred.promise;
-        }
+			if (this.currentUser != null) {
+				deferred.resolve(this.currentUser);
+			} else {
+				this.initialize(deferred);
+			}
 
-        public getRealUser(): AuthenticatedUser {
-            return this.realUser;
-        }
+			return deferred.promise;
+		}
 
-        public static getWebUrl(): string {
-            return GlobalService.webUrl;
-        }
+		public getRealUser(): AuthenticatedUser {
+			return this.realUser;
+		}
 
-        public static getApiUrl(): string {
-            return GlobalService.getWebUrl() + "api";
-        }
+		public static getWebUrl(): string {
+			return GlobalService.webUrl;
+		}
 
-        private initialize(deferred: ng.IDeferred<AuthenticatedUser>): void {
-            var requests: ng.IPromise<void>[] = [];
+		public static getApiUrl(): string {
+			return GlobalService.getWebUrl() + "api";
+		}
 
-            requests.push(this.Restangular.all("users").one("me").get<AuthenticatedUser>().then((x: any) => this.currentUser = x));
-            requests.push(this.Restangular.all("users").one("realme").get<AuthenticatedUser>().then((x: any) => {
-                if (x != null) {
-                    this.realUser = x;
-                }
-            }));
+		private initialize(deferred: ng.IDeferred<AuthenticatedUser>): void {
+			var requests: ng.IPromise<void>[] = [];
 
-            this.$q.all(requests).then(() => {
-                deferred.resolve(this.currentUser);
-            });
-        }
-    }
+			requests.push(this.Restangular
+				.all("users")
+				.one("me")
+				.get<AuthenticatedUser>()
+				.then((x: any) => this.currentUser = x));
+			requests.push(this.Restangular.all("users")
+				.one("realme")
+				.get<AuthenticatedUser>()
+				.then((x: any) => {
+					if (x != null) {
+						this.realUser = x;
+					}
+				}));
 
-    angular.module('tourdefrance.services', [])
-        .service('GlobalService', GlobalService);
+			this.$q.all(requests)
+				.then(() => {
+					deferred.resolve(this.currentUser);
+				});
+		}
+	}
 }

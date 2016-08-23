@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -265,6 +266,8 @@
     <Content Include="Angular\models\stage.js" />
     <Content Include="Angular\models\team.js" />
     <Content Include="Angular\models\user.js" />
+    <Content Include="Angular\services\global.js" />
+    <Content Include="Angular\services\services.js" />
     <Content Include="Content\css\asp.css" />
     <Content Include="libs\bower\angular-animate\angular-animate.js" />
     <Content Include="libs\bower\angular-animate\angular-animate.min.js" />
@@ -457,6 +460,7 @@
     <TypeScriptCompile Include="Angular\models\team.ts" />
     <TypeScriptCompile Include="Angular\models\user.ts" />
     <TypeScriptCompile Include="Angular\references.ts" />
+    <TypeScriptCompile Include="Angular\services\services.ts" />
     <TypeScriptCompile Include="Angular\services\global.ts" />
     <TypeScriptCompile Include="libs\typings\globals\angular-gettext\index.d.ts" />
     <TypeScriptCompile Include="libs\typings\globals\angular-material\index.d.ts" />
@@ -475,7 +479,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
-    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
     <TypeScriptRemoveComments>False</TypeScriptRemoveComments>

@@ -17,3 +17,10 @@
 /// <reference path="./app/shared/header.ts" />
 /// <reference path="./app/shared/menu.ts" />
 /// <reference path="./app/home/home.ts" />
+
+// Services
+/// <reference path="./services/global.ts" />
+/// <reference path="./services/services.ts" />
+
+// Others
+/// <reference path="./app/config.ts" />
