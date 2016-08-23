@@ -1,0 +1,56 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.8.8\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+#: app\shared\not_found.tpl.html:2
+msgid ""
+"Could not find the page: {{ error.accessedState.url }}. This page is "
+"supposed to exist? Help us and report the issue to <a ng-href=\"mailto:"
+"{{ error.adminMail }}\">{{ error.adminMail }}</a>"
+msgstr ""
+"Impossible de trouver la page: {{error.accessedState.url}}. Cette page est "
+"censée exister? Aidez nous en signalant le problème à <a ng-href=\"mailto:"
+"{{ error.adminMail }}\">{{error.adminMail}}</a>"
+
+#: app\shared\error.tpl.html:1
+msgid "Error"
+msgstr "Erreur"
+
+#: app\shared\not_found.tpl.html:4
+msgid ""
+"Go back to the <a ng-href=\"{{ error.previousState.url }}\">previous page</"
+"a>."
+msgstr ""
+"Aller à la <a ng-href=\"{{ error.previousState.url }}\">page précédente</"
+"a>."
+
+#: app\shared\error.tpl.html:4
+msgid "More informations"
+msgstr "Plus d'informations"
+
+#: app\shared\not_found.tpl.html:1
+msgid "Page Not Found"
+msgstr "Page non trouvée"
+
+#: app\shared\forbidden.tpl.html:1
+msgid "Sorry,"
+msgstr "Désolé,"
+
+#: app\shared\error.tpl.html:2
+msgid "There was an error processing your request."
+msgstr "Une erreur s'est produite lors du traitement de votre requête."
+
+#: app\shared\forbidden.tpl.html:3
+msgid "you don't have sufficient permissions to access this page."
+msgstr ""
+"vous n'avez pas les autorisations suffisantes pour accéder à cette page."
