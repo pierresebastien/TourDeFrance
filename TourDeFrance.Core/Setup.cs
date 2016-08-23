@@ -19,6 +19,7 @@ namespace TourDeFrance.Core
 	// review cache (check possibility with roslyn instead of using fody)
 	// unit test (nunit)
 	// wixsharp setup
+	// script for debian package?
 	// improve autofac usage -> module??, factories?? (module in test to change default autofac registration)
 	// review owner mechanism in all repo
 	// improve usage of const in repositories
@@ -35,6 +36,7 @@ namespace TourDeFrance.Core
 	// add support for : https://coveralls.io/
 	// add support for : https://scan.coverity.com/
 	// add support for : https://travis-ci.org/
+	// review servicestack licence
 	public class Setup
 	{
 		private static readonly ILog Logger = LogManager.GetLogger(typeof (Setup));

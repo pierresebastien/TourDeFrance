@@ -1,4 +1,4 @@
-﻿/// <reference path="../libs/tsd/tsd.d.ts" />
+﻿/// <reference path="../libs/typings/index.d.ts" />
 
 // Models
 /// <reference path="./models/config.ts" />
