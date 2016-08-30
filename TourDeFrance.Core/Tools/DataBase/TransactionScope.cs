@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using Dapper;
 using ServiceStack.Logging;
 using ServiceStack.Redis;
 using SimpleStack.Orm;

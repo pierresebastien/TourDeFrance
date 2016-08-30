@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -14,8 +15,11 @@ using TourDeFrance.Core.Business;
 using TourDeFrance.Core.Extensions;
 using TourDeFrance.Core.Repositories.Interfaces;
 using Dapper;
+using Npgsql;
 using TourDeFrance.Client.Enums;
+using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Tools.DataBase;
+using SimpleStack.Orm.Attributes;
 
 namespace TourDeFrance.Tests
 {
@@ -28,6 +32,8 @@ namespace TourDeFrance.Tests
 		protected abstract string ConnectionString { get; }
 
 		protected abstract void CleanDatabase();
+
+		protected abstract Type DatabaseManagerType { get; }
 
 		protected const string SchemaName = "tourdefrance_test";
 
@@ -83,7 +89,7 @@ namespace TourDeFrance.Tests
 				RedisHost = "", // TODO: use redis in test ???
 				UseLucene = false
 			};
-			var setup = new Setup(DialectProvider) {DataBaseManagerType = typeof (OrmDatabaseManager)};
+			var setup = new Setup(DialectProvider) {DataBaseManagerType = DatabaseManagerType };
 			setup.Initialize(config);
 			Container = setup.Container;
 			setup.InitializeContext();
@@ -93,6 +99,8 @@ namespace TourDeFrance.Tests
 				null, false, "password", false, false);
 			UserRepository.CreateUser("OtherAdmin", "Other", "Admin", Gender.Female, "otheradmin@tourdefrance.com", null, null,
 				null, true, "password", false, false);
+
+			
 		}
 
 		protected void AsSimpleUser()
@@ -200,6 +208,8 @@ namespace TourDeFrance.Tests
 		protected override void CleanDatabase()
 		{
 		}
+
+		protected override Type DatabaseManagerType => typeof(OrmDatabaseManager);
 	}
 
 	[TestFixture]
@@ -227,5 +237,7 @@ namespace TourDeFrance.Tests
 				connection.Execute($"CREATE DATABASE {SchemaName}");
 			}
 		}
+
+		protected override Type DatabaseManagerType => typeof(ScriptDatabaseManager);
 	}
 }

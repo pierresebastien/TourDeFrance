@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Dapper;
+using Npgsql;
 using SimpleStack.Orm;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Logging;
@@ -99,6 +100,11 @@ namespace TourDeFrance.Core.Tools.DataBase
 			{
 				case DatabaseType.SQLite:
 					scope.Connection.Execute("PRAGMA foreign_keys = ON;");
+					break;
+				case DatabaseType.PostgreSQL:
+					// NOTE: ugly way to detect new extensions added in scripts
+					// delete refernece to npgsql in this project if there is another way to achieve that
+					((NpgsqlConnection) scope.Connection.DbConnection).ReloadTypes();
 					break;
 			}
 		}
