@@ -115,6 +115,8 @@ namespace TourDeFrance.Core.Repositories
 				scope.Connection.Insert(stageDrink);
 
 				StageDrink result = GetStageDrinkViewById(stageDrink.Id);
+				Cache.Remove(stageDrink.Id.GenerateCacheKey<DbStageDrink>());
+
 				scope.Complete();
 				return result;
 			}

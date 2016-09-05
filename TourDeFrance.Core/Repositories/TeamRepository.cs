@@ -37,7 +37,7 @@ namespace TourDeFrance.Core.Repositories
 
 			using (var scope = new TransactionScope())
 			{
-				EnsureObjectWithSameNameDoesNotExist<DbDrink>(name, TeamObjectName);
+				EnsureObjectWithSameNameDoesNotExist<DbTeam>(name, TeamObjectName);
 				var team = new DbTeam {Name = name};
 				team.SetOwner();
 				team.BeforeInsert();

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -15,11 +14,9 @@ using TourDeFrance.Core.Business;
 using TourDeFrance.Core.Extensions;
 using TourDeFrance.Core.Repositories.Interfaces;
 using Dapper;
-using Npgsql;
 using TourDeFrance.Client.Enums;
-using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Tools.DataBase;
-using SimpleStack.Orm.Attributes;
+using TourDeFrance.Tests.Tools;
 
 namespace TourDeFrance.Tests
 {
@@ -99,8 +96,6 @@ namespace TourDeFrance.Tests
 				null, false, "password", false, false);
 			UserRepository.CreateUser("OtherAdmin", "Other", "Admin", Gender.Female, "otheradmin@tourdefrance.com", null, null,
 				null, true, "password", false, false);
-
-			
 		}
 
 		protected void AsSimpleUser()
@@ -169,6 +164,14 @@ namespace TourDeFrance.Tests
 			AssertTwoObjectAreEquals(cacheT, t);
 		}
 
+		protected void CheckCache<T, TKey>(T t, TKey key)
+		{
+			string cacheKey = key.GenerateCacheKey<T>();
+			var cacheT = Cache.Get<T>(cacheKey);
+			Assert.IsNotNull(cacheT);
+			AssertTwoObjectAreEquals(cacheT, t);
+		}
+
 		protected IList<T> CheckCacheOnList<T, TKey>(string cacheName, TKey key, Func<TKey, IEnumerable<T>> getObject)
 		{
 			string cacheKey = $"{cacheName}:{key}".FormatCacheKey();
@@ -194,6 +197,8 @@ namespace TourDeFrance.Tests
 		#endregion
 	}
 
+	// TODO: in memory not supported for the moment because we create a lot of new connections
+	// => put on disk + review with shared memory db
 	[TestFixture]
 	public class RepositoryTestsBaseSqLite : BaseRepositoryTests
 	{
@@ -238,6 +243,6 @@ namespace TourDeFrance.Tests
 			}
 		}
 
-		protected override Type DatabaseManagerType => typeof(ScriptDatabaseManager);
+		protected override Type DatabaseManagerType => typeof(TestScriptDatabaseManager);
 	}
 }

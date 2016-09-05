@@ -12,7 +12,6 @@ using TourDeFrance.Core.Business.Email;
 using TourDeFrance.Core.Exceptions;
 using TourDeFrance.Core.Extensions;
 using TourDeFrance.Core.Repositories.Interfaces;
-using TourDeFrance.Core.Tools;
 using TourDeFrance.Core.Tools.DataBase;
 
 namespace TourDeFrance.Core.Repositories

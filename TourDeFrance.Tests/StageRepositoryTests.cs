@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using ServiceStack.Common;
 using TourDeFrance.Client.Enums;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Exceptions;
@@ -579,36 +578,39 @@ namespace TourDeFrance.Tests
 			DbStage stage = StageRepository.CreateStage("Test", 1);
 			StageRepository.AddDrinkToStage(stage.Id, drink.Id, 3, 2, StageType.Moutain);
 
-			DbStageDrink stageDrink = StageRepository.AddDrinkToStage(stage.Id, drink.Id, 1, null, StageType.Flat).TranslateTo<DbStageDrink>();
+			Guid stageDrinkId = StageRepository.AddDrinkToStage(stage.Id, drink.Id, 1, null, StageType.Flat).Id;
+			DbStageDrink stageDrink = StageRepository.GetStageDrinkById(stageDrinkId);
 			Assert.AreEqual(stage.Id, stageDrink.StageId);
 			Assert.AreEqual(drink.Id, stageDrink.DrinkId);
 			Assert.AreEqual(1, stageDrink.NumberToDrink);
 			Assert.AreEqual(2, stageDrink.Order);
 			Assert.IsNull(stageDrink.OverridedVolume);
 			Assert.AreEqual(StageType.Flat, stageDrink.Type);
-			CheckCache(stageDrink, stageDrink.Id, id => StageRepository.GetStageDrinkById(id));
+			CheckCache(stageDrink, stageDrinkId);
 
-			stageDrink = StageRepository.UpdateStageDrink(stageDrink.Id, 5, 1, StageType.IntermediateSprint).TranslateTo<DbStageDrink>();
+			StageRepository.UpdateStageDrink(stageDrink.Id, 5, 1, StageType.IntermediateSprint);
+			stageDrink = StageRepository.GetStageDrinkById(stageDrinkId);
 			Assert.AreEqual(stage.Id, stageDrink.StageId);
 			Assert.AreEqual(drink.Id, stageDrink.DrinkId);
 			Assert.AreEqual(5, stageDrink.NumberToDrink);
 			Assert.AreEqual(2, stageDrink.Order);
 			Assert.AreEqual(1, stageDrink.OverridedVolume);
 			Assert.AreEqual(StageType.IntermediateSprint, stageDrink.Type);
-			CheckCache(stageDrink, stageDrink.Id, id => StageRepository.GetStageDrinkById(id));
+			CheckCache(stageDrink, stageDrinkId);
 
-			stageDrink = StageRepository.ChangeDrinkOrder(stageDrink.Id, 1).TranslateTo<DbStageDrink>();
+			StageRepository.ChangeDrinkOrder(stageDrink.Id, 1);
+			stageDrink = StageRepository.GetStageDrinkById(stageDrinkId);
 			Assert.AreEqual(stage.Id, stageDrink.StageId);
 			Assert.AreEqual(drink.Id, stageDrink.DrinkId);
 			Assert.AreEqual(5, stageDrink.NumberToDrink);
 			Assert.AreEqual(1, stageDrink.Order);
 			Assert.AreEqual(1, stageDrink.OverridedVolume);
 			Assert.AreEqual(StageType.IntermediateSprint, stageDrink.Type);
-			CheckCache(stageDrink, stageDrink.Id, id => StageRepository.GetStageDrinkById(id));
+			CheckCache(stageDrink, stageDrinkId);
 
-			StageRepository.RemoveDrinkFromStage(stageDrink.Id);
-			Assert.IsNull(GetCacheObject<DbStageDrink>(stageDrink.Id));
-			Assert.Throws<NotFoundException>(() => StageRepository.GetStageDrinkById(stageDrink.Id));
+			StageRepository.RemoveDrinkFromStage(stageDrinkId);
+			Assert.IsNull(GetCacheObject<DbStageDrink>(stageDrinkId));
+			Assert.Throws<NotFoundException>(() => StageRepository.GetStageDrinkById(stageDrinkId));
 		}
 
 		#endregion

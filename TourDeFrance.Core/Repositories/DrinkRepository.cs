@@ -65,13 +65,13 @@ namespace TourDeFrance.Core.Repositories
 				}
 
 				Drink result = GetDrinkById(drink.Id);
+				Cache.Remove(drink.Id.GenerateCacheKey<Drink>());
+
 				scope.Complete();
 				return result;
 			}
 		}
 
-		// TODO: invalidate before get drink by id
-		// TODO : or return db object for each create, update and delete methods
 		[InvalidateCache(types: new[] { typeof(Drink) }, typeArgumentOrders: new[] { 0 })]
 		public Drink UpdateDrink(Guid id, string name, decimal? alcoholByVolume, decimal? volume, IEnumerable<SubDrinkDefinition> subDrinks)
 		{
@@ -107,7 +107,7 @@ namespace TourDeFrance.Core.Repositories
 				drink.AlcoholByVolume = alcoholByVolume;
 				drink.Volume = volume;
 				drink.BeforeUpdate();
-				scope.Connection.Update(drink);
+				scope.Connection.Update<DbDrink>(drink);
 
 				scope.Connection.DeleteAll<DbSubDrink>(x => x.DrinkId == drink.Id);
 				foreach (var subDrink in subDrinksList)
@@ -127,6 +127,7 @@ namespace TourDeFrance.Core.Repositories
 					scope.Connection.Insert(dbSubDrink);
 				}
 
+				Cache.Remove(drink.Id.GenerateCacheKey<Drink>());
 				Drink result = GetDrinkById(drink.Id);
 				scope.Complete();
 				return result;

@@ -147,6 +147,7 @@
     <Compile Include="RaceRepositoryTests.cs" />
     <Compile Include="StageRepositoryTests.cs" />
     <Compile Include="TeamRepositoryTests.cs" />
+    <Compile Include="Tools\ScriptDatabaseManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

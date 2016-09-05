@@ -192,7 +192,7 @@ namespace TourDeFrance.Tests
 		public void DeleteTeamUsedForRiders()
 		{
 			DbTeam team = TeamRepository.CreateTeam("Test");
-			RiderRepository.CreateRider("John", "Doe", Gender.Male, DateTime.Now, "Belgian", null, null, null, team.Id);
+			RiderRepository.CreateRider("John", "Doe", Gender.Male, DateTime.Today.AddYears(-5), "Belgian", null, null, null, team.Id);
 			Assert.Throws<TourDeFranceException>(() => TeamRepository.DeleteTeam(team.Id));
 		}
 
