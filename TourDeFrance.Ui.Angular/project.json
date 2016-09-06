@@ -1,0 +1,15 @@
+﻿{
+  "version": "0.1.0.0",
+  "description": "Angular UI for Tour de France application",
+  "authors": [ "Sébastien Pierre" ],
+
+  "dependencies": {
+  },
+
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+      }
+    }
+  }
+}

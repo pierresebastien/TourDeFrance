@@ -1,0 +1,16 @@
+﻿/* node-sass sass/ -o css/ */
+$font-roboto: 'Roboto', sans-serif;
+$primary-color: #3F51B5;
+
+body {
+    font: 100% $font-roboto;
+
+    div {
+        .background-ribbon{
+            width: 100%;
+            height: 40vh;
+            background-color: $primary-color;
+            flex-shrink: 0;
+        }
+    }
+}

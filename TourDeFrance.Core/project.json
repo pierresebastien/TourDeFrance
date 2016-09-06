@@ -1,0 +1,42 @@
+{
+  "version": "0.1.0.0",
+  "description": "Business core of Tour de France application",
+  "authors": [ "Sébastien Pierre" ],
+
+  "dependencies": {
+    "Autofac": "4.1.0",
+    "C5": "2.4.5828.26833",
+    "CacheMethodResult.Fody": "1.0.0.0",
+    "Dapper": "1.50-rc2",
+    "DotLiquid": "1.8.0",
+    "Fody": "1.28.3",
+    "LibLog": "4.2.4",
+    "Lucene.Net": "3.0.3",
+    "MailKit": "1.4.2.1",
+    "MethodDecoratorExtension.Fody": "1.0.1.0",
+    "MimeKit": "1.4.2",
+    "ServiceStack.Common": "3.9.71",
+    "ServiceStack.Redis": "3.9.71",
+    "ServiceStack.Text": "3.9.71",
+    "SharpZipLib": "0.86.0",
+    "SimpleStack.Orm": "1.0.0-rc9",
+    "TourDeFrance.Client": { "target": "project" }
+  },
+
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System.ComponentModel.DataAnnotations": "4.0.0.0",
+        "System.Configuration": "4.0.0.0",
+        "System.Web": "4.0.0.0"
+      }
+    }
+  },
+
+  "buildOptions": {
+    "define": [ "LIBLOG_PUBLIC" ],
+    "copyToOutput": {
+      "include": "./Sql/**"
+    }
+  }
+}

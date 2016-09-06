@@ -1,0 +1,28 @@
+﻿{
+  "version": "0.1.0.0",
+  "description": "NUnit tests for Tour de France application",
+  "authors": [ "Sébastien Pierre" ],
+
+  "dependencies": {
+    "log4net": "2.0.5",
+    "Moq": "4.2.1510.2205",
+    "Npgsql": "3.1.7",
+    "NUnit": "2.6.4",
+    //"NUnit": "3.4.1",
+    //"dotnet-test-nunit": "3.4.0-beta-2",
+    "SimpleStack.Orm.PostgreSQL": "1.0.0-rc9",
+    "SimpleStack.Orm.Sqlite": "1.0.0-rc9",
+    "System.Data.SQLite.Core": "1.0.102.0",
+    "TourDeFrance.Client": { "target": "project" },
+    "TourDeFrance.Core": { "target": "project" }
+  },
+
+  //"testRunner": "nunit",
+
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+      }
+    }
+  }
+}

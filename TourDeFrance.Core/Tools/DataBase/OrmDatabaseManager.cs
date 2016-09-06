@@ -16,7 +16,6 @@ namespace TourDeFrance.Core.Tools.DataBase
 	{
 		private static readonly ILog Logger = LogProvider.For<OrmDatabaseManager>();
 		protected static readonly DateTime DefaultDateTime = new DateTime(2000, 1, 1);
-		protected static readonly string DefaultUser = "System";
 
 		protected readonly IDialectProvider DialectProvider;
 		protected readonly ApplicationConfig Config;
@@ -146,7 +145,7 @@ namespace TourDeFrance.Core.Tools.DataBase
 				RequireNewPasswordAtLogon = false,
 				ApiKey = Guid.NewGuid().ToString(),
 				CreationDate = DefaultDateTime,
-				LastUpdateBy = DefaultUser,
+				LastUpdateBy = Constants.SYSTEM_USERNAME,
 				LastUpdateDate = DefaultDateTime,
 				PreviousPasswords =
 					new Dictionary<int, Dictionary<string, string>> {{1, new Dictionary<string, string> {{hash, salt}}}}.ToJson()
@@ -264,7 +263,7 @@ namespace TourDeFrance.Core.Tools.DataBase
 				Order = order,
 				Dangerous = dangerous,
 				CreationDate = DefaultDateTime,
-				LastUpdateBy = DefaultUser,
+				LastUpdateBy = Constants.SYSTEM_USERNAME,
 				LastUpdateDate = DefaultDateTime
 			});
 		}

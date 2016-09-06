@@ -29,7 +29,7 @@ namespace TourDeFrance.Core.Business.Database
 		public void BeforeUpdate()
 		{
 			LastUpdateDate = DateTime.Now.ToUniversalTime();
-			LastUpdateBy = Context.Current.User != null ? Context.Current.User.Username : "System";
+			LastUpdateBy = Context.Current.User != null ? Context.Current.User.Username : Constants.SYSTEM_USERNAME;
 		}
 	}
 

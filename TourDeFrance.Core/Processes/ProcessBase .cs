@@ -20,6 +20,7 @@ namespace TourDeFrance.Core.Processes
 			Name = name;
 			LoopDelay = TimeSpan.FromMinutes(5);
 			WatchdogDelay = TimeSpan.FromMinutes(1);
+			Schedule = "* * * * *";
 		}
 
 		public virtual void Initializing()

@@ -1,0 +1,24 @@
+{
+  "version": "0.1.0.0",
+  "description": "Api definition of Tour de France application",
+  "authors": [ "Sébastien Pierre" ],
+
+  "dependencies": {
+    "Microsoft.Owin.Host.HttpListener": "3.0.1",
+    "Microsoft.Owin.Hosting": "3.0.1",
+    "Nancy": "1.4.3",
+    "Nancy.Bootstrappers.Autofac": "1.4.1",
+    "Nancy.Owin": "1.4.1",
+    "Nancy.Validation.FluentValidation": "1.4.1",
+    "Newtonsoft.Json": "9.0.1",
+    "TourDeFrance.Client": { "target": "project" },
+    "TourDeFrance.Core": { "target": "project" }
+  },
+
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+      }
+    }
+  }
+}

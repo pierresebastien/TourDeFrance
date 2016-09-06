@@ -34,7 +34,7 @@ namespace TourDeFrance.Service
 			Setup setup = new Setup(dialectProvider);
 			setup.Initialize(config);
 			setup.InitializeContext();
-			Context.Current.User = Context.Current.UserRepository.GetAuthenticatedUser("System");
+			Context.Current.User = Context.Current.UserRepository.GetAuthenticatedUser(Constants.SYSTEM_USERNAME);
 
 			foreach (IProcess process in setup.Container.Resolve<IEnumerable<IProcess>>())
 			{

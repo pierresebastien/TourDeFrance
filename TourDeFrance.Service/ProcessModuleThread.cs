@@ -32,7 +32,7 @@ namespace TourDeFrance.Service
 		protected override void Starting()
 		{
 			_setup.InitializeContext();
-			Context.Current.User = Context.Current.UserRepository.GetAuthenticatedUser("System");
+			Context.Current.User = Context.Current.UserRepository.GetAuthenticatedUser(Constants.SYSTEM_USERNAME);
 			_process.Starting();
 		}
 

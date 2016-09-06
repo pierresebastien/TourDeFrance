@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Tour de France Application")]
-[assembly: AssemblyCopyright("Copyright © Sébastien Pierre 2015")]
+[assembly: AssemblyCopyright("Copyright © Sébastien Pierre 2015-2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
