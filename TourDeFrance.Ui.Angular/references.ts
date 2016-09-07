@@ -1,4 +1,4 @@
-﻿/// <reference path="../libs/typings/index.d.ts" />
+﻿/// <reference path="./libs/typings/index.d.ts" />
 
 // Models
 /// <reference path="./models/config.ts" />
@@ -10,6 +10,7 @@
 /// <reference path="./models/stage.ts" />
 /// <reference path="./models/team.ts" />
 /// <reference path="./models/user.ts" />
+/// <reference path="./models/info.ts" />
 
 // Controllers
 /// <reference path="./app/shared/base_controller.ts" />

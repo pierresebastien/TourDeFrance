@@ -4,8 +4,8 @@ using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Autofac;
 using Nancy.Responses.Negotiation;
 using Nancy.Security;
-using ServiceStack.Logging;
 using TourDeFrance.Api.Tools;
+using TourDeFrance.Core.Logging;
 
 namespace TourDeFrance.Api
 {
@@ -13,7 +13,7 @@ namespace TourDeFrance.Api
 	{
 		private readonly IContainer _container;
 
-		private static readonly ILog Logger = LogManager.GetLogger(typeof(Bootstrapper));
+		private static readonly ILog Logger = LogProvider.For<Bootstrapper>();
 
 		public Bootstrapper(IContainer container)
 		{

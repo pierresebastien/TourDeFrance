@@ -1,6 +1,6 @@
 ﻿class HomeController extends BaseController {
 	constructor(Restangular: restangular.IService,
-		GlobalService: TourDeFrance.Service.IGlobalService,
+		GlobalService: tourdefrance.services.IGlobalService,
 		$state: ng.ui.IStateService,
 		$mdToast: ng.material.IToastService,
 		protected $q: ng.IQService,

@@ -4,7 +4,7 @@ class HeaderController extends BaseController {
 	hasSharedUsers: boolean;
 
 	constructor(Restangular: restangular.IService,
-		GlobalService: TourDeFrance.Service.IGlobalService,
+		GlobalService: tourdefrance.services.IGlobalService,
 		$state: ng.ui.IStateService,
 		$mdToast: ng.material.IToastService,
 		currentUser: AuthenticatedUser) {

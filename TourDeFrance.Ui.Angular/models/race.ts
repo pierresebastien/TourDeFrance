@@ -1,4 +1,6 @@
-﻿class Race {
+﻿/// <reference path="../references.ts"/>
+
+class Race {
     id: string;
     name: string;
     ownerId: string;

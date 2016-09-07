@@ -1,4 +1,6 @@
-﻿class SimpleUser {
+﻿/// <reference path="../references.ts"/>
+
+class SimpleUser {
     id: string;
     username: string;
     firstName: string;

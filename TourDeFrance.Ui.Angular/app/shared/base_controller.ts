@@ -7,12 +7,10 @@ abstract class BaseController {
 	realUser: AuthenticatedUser;
 
 	constructor(protected Restangular: restangular.IService,
-		protected GlobalService: TourDeFrance.Service.IGlobalService,
+		protected GlobalService: tourdefrance.services.IGlobalService,
 		protected $state: ng.ui.IStateService,
 		protected $mdToast: ng.material.IToastService,
 		currentUser: AuthenticatedUser) {
-		this.baseWebUrl = TourDeFrance.Service.GlobalService.getWebUrl();
-		this.baseApiUrl = TourDeFrance.Service.GlobalService.getApiUrl();
 
 		this.currentUser = currentUser;
 		this.realUser = GlobalService.getRealUser();

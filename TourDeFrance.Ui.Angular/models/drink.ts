@@ -1,4 +1,6 @@
-﻿class Drink {
+﻿/// <reference path="../references.ts"/>
+
+class Drink {
     id: string;
     name: string;
     ownerId: string;

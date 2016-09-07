@@ -1,4 +1,6 @@
-﻿class Config {
+﻿/// <reference path="../references.ts"/>
+
+class Config {
     key: string;
     stringValue: string;
     value: any;

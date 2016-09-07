@@ -1,20 +1,23 @@
 ﻿/// <reference path="../references.ts" />
 
+// Url of API
+var CONST_API_URL = location.protocol.concat("//").concat(window.location.hostname).concat("/api");
+
 class GravatarConfig {
     constructor(gravatarServiceProvider: any) {
         gravatarServiceProvider.defaults = { "default": "mm" };
     }
 }
 
-class ApiSetUp { // Not working if moved into app.ts
+class ApiSetUp {
 	constructor(RestangularProvider: restangular.IProvider) {
-		RestangularProvider.setBaseUrl(TourDeFrance.Service.GlobalService.getApiUrl());
+		RestangularProvider.setBaseUrl(CONST_API_URL);
 	}
 }
 
 // TODO: replace toastr by matrial - toast
 class RestangularConfig { // Used in a .run since .config does not allow Services
-	constructor(Restangular: restangular.IProvider, $state: ng.ui.IStateService, GlobalService: TourDeFrance.Service.IGlobalService, $mdToast: ng.material.IToastService, $location: ng.ILocationService, $window: Window) {
+	constructor(Restangular: restangular.IProvider, $state: ng.ui.IStateService, GlobalService: tourdefrance.services.IGlobalService, $mdToast: ng.material.IToastService, $location: ng.ILocationService, $window: Window) {
 		Restangular.setErrorInterceptor((response: restangular.IResponse, deferred: ng.IDeferred<any>) => {
 			var currentState = {
 				name: $state.current.name,
@@ -35,8 +38,7 @@ class RestangularConfig { // Used in a .run since .config does not allow Service
 				//$mdToast.show(response.data, "Bad Request");
 				return true; // The error is not handled and the calling function will execute its error callback
 			case 401: // Unauthorized
-				var baseUrl: any = TourDeFrance.Service.GlobalService.getWebUrl();
-				$window.location = baseUrl;
+				$state.go("not_logged.unauthorized");
 				return false; // The error is considered as handled and the calling function will do nothing
 			case 403: // Forbidden
 				GlobalService.setError(response.data, currentState);
@@ -49,6 +51,10 @@ class RestangularConfig { // Used in a .run since .config does not allow Service
 			case 500: // Internal Server Error
 				GlobalService.setError(response.data);
 				$state.go("root.error.internal");
+				return false;
+			case 502: // Bad gateway
+			case 503:
+				$state.go("not_logged.api_stopped");
 				return false;
 			default:
 				GlobalService.setError(response.status + " - " + response.data);
@@ -75,7 +81,7 @@ class RouteConfig {
 				url: "",
 				abstract: true, // Cannot access directly to the page, must call a child
 				resolve: {
-					currentUser: function(GlobalService: TourDeFrance.Service.IGlobalService) {
+					currentUser: function(GlobalService: tourdefrance.services.IGlobalService) {
 						return GlobalService.getCurrentUser();
 					}
 				},
@@ -172,19 +178,28 @@ class UiRouterConfig {
 class HtmlTemplateHttpInterceptor {
 	version: string;
 
-	constructor(applicationVersion: string) {
-		this.version = applicationVersion;
+	constructor() {
+		var v: string;
+		$.ajax({
+				url: CONST_API_URL + "/infos/version",
+				method: "GET",
+				success(data: Info) {
+					v = data.message;
+				}
+			})
+			.done(() => {
+				this.version = v;
+			});
 	}
-
+	
 	public request = (config: ng.IRequestConfig) => {
-		// Checks if it's a template file contained in /Angular/ folder (avoid adding version to a library template) 
-		if (config.method === "GET" && _.endsWith(config.url, ".tpl.html") && config.url.indexOf("/Angular/") >= 0) {
+		if (config.method === "GET" && _.endsWith(config.url, ".tpl.html") && config.url.indexOf("app/") >= 0) {
 			config.url = config.url + "?v=" + this.version;
 		}
 		return config;
 	}
 
-	public static factory(applicationVersion: string) {
-		return new HtmlTemplateHttpInterceptor(applicationVersion);
+	public static factory() {
+		return new HtmlTemplateHttpInterceptor();
 	}
 }

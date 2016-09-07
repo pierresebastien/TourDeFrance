@@ -139,6 +139,7 @@ namespace TourDeFrance.Core.Extensions
 
 		#endregion
 
+		// TODO: check if better thant ILog.ErrorException()
 		public static void Error(this ILog logger, string message, Exception e)
 		{
 			logger.Error($"{message}{e.Message}\nStacktrace : {e.StackTrace}");

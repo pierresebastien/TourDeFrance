@@ -25,8 +25,4 @@ namespace TourDeFrance.Client.Config
 		public bool Dangerous { get; set; }
 	}
 
-	public class UpdateConfig
-	{
-		public string Value { get; set; }
-	}
 }

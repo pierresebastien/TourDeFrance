@@ -1,6 +1,6 @@
 ﻿/// <reference path="../references.ts"/>
 
-module TourDeFrance.Service {
+module tourdefrance.services {
 	'use strict';
 
 	angular.module('tourdefrance.services', [])

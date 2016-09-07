@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
-using ServiceStack.Logging;
 using TourDeFrance.Core.Interfaces;
 using TourDeFrance.Core.Repositories;
 using TourDeFrance.Core.Tools;
@@ -11,6 +10,7 @@ using TourDeFrance.Core.Tools.Cache;
 using ServiceStack.Redis;
 using System.IO;
 using SimpleStack.Orm;
+using TourDeFrance.Core.Logging;
 using TourDeFrance.Core.Tools.DataBase;
 
 namespace TourDeFrance.Core
@@ -39,7 +39,7 @@ namespace TourDeFrance.Core
 	// review servicestack licence
 	public class Setup
 	{
-		private static readonly ILog Logger = LogManager.GetLogger(typeof (Setup));
+		private static readonly ILog Logger = LogProvider.For<Setup>();
 
 		public Setup(IDialectProvider dialectProvider)
 		{
@@ -136,10 +136,10 @@ namespace TourDeFrance.Core
 			}
 			catch (ReflectionTypeLoadException reflectionTypeLoadException)
 			{
-				Logger.Fatal("Error while loading Autofac components", reflectionTypeLoadException);
+				Logger.FatalException("Error while loading Autofac components", reflectionTypeLoadException);
 				foreach (var e in reflectionTypeLoadException.LoaderExceptions)
 				{
-					Logger.Fatal("Reflection error", e);
+					Logger.FatalException("Reflection error", e);
 				}
 				throw;
 			}

@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Data;
-using Dapper;
-using ServiceStack.Logging;
 using ServiceStack.Redis;
 using SimpleStack.Orm;
+using TourDeFrance.Core.Logging;
 
 namespace TourDeFrance.Core.Tools.DataBase
 {
 	public class TransactionScope : IDisposable
 	{
-		private static readonly ILog Logger = LogManager.GetLogger(typeof(TransactionScope));
+		private static readonly ILog Logger = LogProvider.For<TransactionScope>();
 
 		[ThreadStatic]
 		private static TransactionScope _rootScope;

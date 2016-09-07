@@ -1,4 +1,6 @@
-﻿class Player {
+﻿/// <reference path="../references.ts"/>
+
+class Player {
     id: string;
     ownerId: string;
     nickname: string;

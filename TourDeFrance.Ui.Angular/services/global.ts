@@ -1,6 +1,6 @@
 ﻿/// <reference path="../references.ts"/>
 
-module TourDeFrance.Service {
+module tourdefrance.services {
 	'use strict';
 
 	export interface IGlobalService {
@@ -17,8 +17,6 @@ module TourDeFrance.Service {
 	}
 
 	export class GlobalService implements IGlobalService {
-		private static webUrl: string;
-
 		private currentUser: AuthenticatedUser;
 		private realUser: AuthenticatedUser;
 		accessedState: any;
@@ -30,13 +28,7 @@ module TourDeFrance.Service {
 			private $stateParams: ng.ui.IStateParamsService,
 			private $rootScope: ng.IRootScopeService,
 			private $state: ng.ui.IStateService,
-			private $window: Window,
-			websiteUrl: string) {
-
-			if (websiteUrl.slice(-1) !== "/") {
-				websiteUrl += "/";
-			}
-			GlobalService.webUrl = websiteUrl;
+			private $window: Window) {
 		}
 
 		public setError(message: string, accessedState?: any) {
@@ -49,9 +41,10 @@ module TourDeFrance.Service {
 				.one('connect')
 				.put()
 				.then((newUser: AuthenticatedUser) => {
-					var url: any = GlobalService.getWebUrl() + '#' + this.$state.get('root.home').url;
-					this.$window.location = url;
-					this.$window.location.reload();
+					// TODO:
+					// var url: any = GlobalService.getWebUrl() + '#' + this.$state.get('root.home').url;
+					// this.$window.location = url;
+					// this.$window.location.reload();
 				});
 		}
 
@@ -73,14 +66,6 @@ module TourDeFrance.Service {
 
 		public getRealUser(): AuthenticatedUser {
 			return this.realUser;
-		}
-
-		public static getWebUrl(): string {
-			return GlobalService.webUrl;
-		}
-
-		public static getApiUrl(): string {
-			return GlobalService.getWebUrl() + "api";
 		}
 
 		private initialize(deferred: ng.IDeferred<AuthenticatedUser>): void {

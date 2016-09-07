@@ -7,7 +7,7 @@ class ErrorController {
 	adminMail: string;
 
 	constructor(Restangular: restangular.IService,
-		GlobalService: TourDeFrance.Service.IGlobalService,
+		GlobalService: tourdefrance.services.IGlobalService,
 		public previousState: any) {
 
 		Restangular.one('configs', 'AdminMail')

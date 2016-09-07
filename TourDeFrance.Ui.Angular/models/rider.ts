@@ -1,4 +1,6 @@
-﻿class Rider {
+﻿/// <reference path="../references.ts"/>
+
+class Rider {
     id: string;
     ownerId: string;
     firstName: string;

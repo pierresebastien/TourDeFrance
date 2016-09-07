@@ -24,15 +24,4 @@ namespace TourDeFrance.Client.Drink
 
 		public decimal CalculatedAlcoholByVolume { get; set; }
 	}
-
-	public class CreateUpdateDrink
-	{
-		public string Name { get; set; }
-
-		public decimal? AlcoholByVolume { get; set; }
-
-		public decimal? Volume { get; set; }
-
-		public SubDrinkDefinition[] SubDrinkDefinitions { get; set; }
-	}
 }

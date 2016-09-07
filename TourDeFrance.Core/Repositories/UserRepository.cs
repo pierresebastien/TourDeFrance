@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
-using ServiceStack.Logging;
 using TourDeFrance.Core.Business;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Exceptions;
@@ -18,13 +17,14 @@ using SimpleStack.Orm.Expressions;
 using TourDeFrance.Client.Enums;
 using TourDeFrance.Core.Business.Database.Views;
 using TourDeFrance.Core.Business.Email;
+using TourDeFrance.Core.Logging;
 using TourDeFrance.Core.Tools.DataBase;
 
 namespace TourDeFrance.Core.Repositories
 {
 	public class UserRepository : BaseRepository, IUserRepository
 	{
-		private static readonly ILog Logger = LogManager.GetLogger(typeof(UserRepository));
+		private static readonly ILog Logger = LogProvider.For<UserRepository>();
 		protected static readonly Regex UsernameRegex = new Regex("[A-Za-z0-9._-]+", RegexOptions.Compiled);
 
 		protected const string UserObjectName = "User"; // TODO: to use

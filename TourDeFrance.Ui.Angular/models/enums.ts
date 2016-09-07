@@ -1,4 +1,6 @@
-﻿enum ConfigType {
+﻿/// <reference path="../references.ts"/>
+
+enum ConfigType {
     String = 0,
     Integer = 1,
     Boolean = 2,

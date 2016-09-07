@@ -1,5 +1,4 @@
 ﻿using System;
-using TourDeFrance.Core.Extensions;
 using TourDeFrance.Core.Logging;
 
 namespace TourDeFrance.Core.Tools
@@ -12,7 +11,7 @@ namespace TourDeFrance.Core.Tools
 		// TODO: to review
 		public static void LogException(Exception e, string message = "Exception : ")
 		{
-			Logger.Error(message, e);
+			Logger.ErrorException(message, e);
 		}
 	}
 }

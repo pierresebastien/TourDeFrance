@@ -132,7 +132,7 @@ namespace TourDeFrance.Core.Tools.Cache
 				}
 				catch (Exception ex)
 				{
-					Log.Error($"Error trying to remove {key} from the cache", ex);
+					Log.ErrorException($"Error trying to remove {key} from the cache", ex);
 				}
 			}
 		}

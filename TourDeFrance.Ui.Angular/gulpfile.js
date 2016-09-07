@@ -14,13 +14,13 @@ gulp.task('default', function() {
 
 /* SASS */
 gulp.task('sass', function () {
-	return gulp.src('./Content/sass/**/*.scss')
+	return gulp.src('./content/sass/**/*.scss')
 		.pipe(sass().on('error', sass.logError))
-		.pipe(gulp.dest('./Content/css/'));
+		.pipe(gulp.dest('./content/css/'));
 });
 
 gulp.task('sass:watch', function () {
-	gulp.watch('./Content/sass/**/*.scss', ['sass']);
+	gulp.watch('./content/sass/**/*.scss', ['sass']);
 });
 
 /* TYPESCRIPT */
@@ -34,31 +34,31 @@ var tsProject = ts.createProject({
 });
 
 gulp.task('typescript', function () {
-	return gulp.src(['./Angular/**/*.ts'])
+	gulp.src(['./**/*.ts', '!node_modules/**/*.ts'])
 		.pipe(ts(tsProject))
-		.pipe(gulp.dest('./Angular/'));
+		.pipe(gulp.dest('./'));
 });
 
 gulp.task('typescript:watch', function () {
-	gulp.watch('./Angular/**/*.ts', ['typescript']);
+	gulp.watch(['./app/**/*.ts','./models/**/*.ts','./services/**/*.ts'], ['typescript']);
 });
 
 /* GET TEXT */
 gulp.task('pot', function () {
-    return gulp.src(['./Angular/**/*.html', './Angular/**/*.js'])
+    return gulp.src(['./app/**/*.html', './app/**/*.js'])
         .pipe(gettext.extract('template.pot', {
             // options to pass to angular-gettext-tools...
         }))
-        .pipe(gulp.dest('./Angular/po/'));
+        .pipe(gulp.dest('./po/'));
 });
 
 gulp.task('translations', function () {
-    return gulp.src('./Angular/po/**/*.po')
+    return gulp.src('./po/**/*.po')
         .pipe(gettext.compile({
             // options to pass to angular-gettext-tools...
             format: 'json'
         }))
-        .pipe(gulp.dest('./Angular/translations/'));
+        .pipe(gulp.dest('./translations/'));
 });
 
 

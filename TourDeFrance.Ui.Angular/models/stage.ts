@@ -1,4 +1,6 @@
-﻿class Stage {
+﻿/// <reference path="../references.ts"/>
+
+class Stage {
     id: string;
     name: string;
     ownerId: string;

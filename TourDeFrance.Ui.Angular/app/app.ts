@@ -1,11 +1,11 @@
 ﻿/// <reference path="../references.ts" />
 
-module TourDeFrance {
+module tourdefrance {
 	'use strict';
 
-	angular.module('TourDeFrance',
+	angular.module('tourdefrance',
 		[
-			'ui.router', 'restangular', 'infinite-scroll', 'ui.gravatar', 'angularSpinner', 'ngMaterial', 'tourdefrance.services'
+			'tourdefrance.services', 'ui.router', 'restangular', 'infinite-scroll', 'ui.gravatar', 'angularSpinner', 'ngMaterial', 'gettext'
 		])
 		.config([
 			'$httpProvider', ($httpProvider: ng.IHttpProvider) => {
