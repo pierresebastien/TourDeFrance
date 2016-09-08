@@ -2,6 +2,7 @@
 
 namespace TourDeFrance.Client.User
 {
+	// TODO: deactivate in first implementation
 	public class AccessShare
 	{
 		public Guid Id { get; set; }

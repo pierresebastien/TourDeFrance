@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
+using TourDeFrance.Client.Interfaces;
 using TourDeFrance.Core.Business;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Interfaces;

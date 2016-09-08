@@ -1,4 +1,4 @@
-﻿using TourDeFrance.Client.Drink;
+﻿using System;
 
 namespace TourDeFrance.Client.Requests
 {
@@ -23,5 +23,13 @@ namespace TourDeFrance.Client.Requests
 		public decimal? Volume { get; set; }
 
 		public SubDrinkDefinition[] SubDrinkDefinitions { get; set; }
+	}
+
+
+	public class SubDrinkDefinition
+	{
+		public Guid DrinkId { get; set; }
+
+		public decimal Volume { get; set; }
 	}
 }

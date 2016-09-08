@@ -2,8 +2,8 @@
 using Nancy;
 using Nancy.ModelBinding;
 using TourDeFrance.Client.Requests;
-using TourDeFrance.Client.Stage;
 using System.Linq;
+using TourDeFrance.Client.Responses;
 
 namespace TourDeFrance.Api.Services
 {
@@ -15,10 +15,10 @@ namespace TourDeFrance.Api.Services
 			Get["/{Id}"] = _ => Negotiate.WithModel(GetStage(this.BindAndValidate<ObjectByGuidRequest>()));
 			Get["/{Id}/drinks"] = _ => Negotiate.WithModel(GetStageDrinks(this.BindAndValidate<ObjectByGuidRequest>()));
 			Get["/drinks/{Id}"] = _ => Negotiate.WithModel(GetStageDrink(this.BindAndValidate<ObjectByGuidRequest>()));
-			Post["/"] = _ => Negotiate.WithModel(CreateStage(this.BindAndValidate<>()));
-			Post["/{Id}/drinks"] = _ => Negotiate.WithModel(AddDrinkToStage(this.BindAndValidate<>()));
-			Put["/{Id}"] = _ => Negotiate.WithModel(UpdateStage(this.BindAndValidate<>()));
-			Put["/drinks/{Id}"] = _ => Negotiate.WithModel(UpdateStageDrink(this.BindAndValidate<>()));
+			Post["/"] = _ => Negotiate.WithModel(CreateStage(this.BindAndValidate<CreateStageRequest>()));
+			Post["/{StageId}/drinks"] = _ => Negotiate.WithModel(AddDrinkToStage(this.BindAndValidate<CreateStageDrinkRequest>()));
+			Put["/{Id}"] = _ => Negotiate.WithModel(UpdateStage(this.BindAndValidate<UpdateStageRequest>()));
+			Put["/drinks/{Id}"] = _ => Negotiate.WithModel(UpdateStageDrink(this.BindAndValidate<UpdateStageDrinkRequest>()));
 			Delete["/{Id}"] = _ => Negotiate.WithModel(DeleteStage(this.BindAndValidate<ObjectByGuidRequest>()));
 			Delete["/drinks/{Id}"] = _ => Negotiate.WithModel(DeleteStageDrink(this.BindAndValidate<ObjectByGuidRequest>()));
 		}
@@ -43,25 +43,26 @@ namespace TourDeFrance.Api.Services
 			return StageRepository.GetStageDrinkViewById(request.Id).ToModel();
 		}
 
-		public Stage CreateStage(CreateUpdateStage request)
+		public Stage CreateStage(CreateStageRequest request)
 		{
 			return StageRepository.CreateStage(request.Name, request.Duration).ToModel();
 		}
 
-		public StageDrink AddDrinkToStage(Guid stageId, CreateStageDrink request)
+		public StageDrink AddDrinkToStage(CreateStageDrinkRequest request)
 		{
-			return StageRepository.AddDrinkToStage(stageId, request.DrinkId, request.NumberToDrink, request.OverridedVolume, request.Type).ToModel();
+			return StageRepository.AddDrinkToStage(request.StageId, request.DrinkId, request.NumberToDrink, request.OverridedVolume, request.Type).ToModel();
 		}
 
-		public Stage UpdateStage(Guid stageId, CreateUpdateStage model)
+		public Stage UpdateStage(UpdateStageRequest request)
 		{
-			return StageRepository.UpdateStage(stageId, model.Name, model.Duration).ToModel();
+			return StageRepository.UpdateStage(request.Id, request.Name, request.Duration).ToModel();
 		}
 
-		public StageDrink UpdateStageDrink(Guid stageDrinkId, UpdateStageDrink request)
+		public StageDrink UpdateStageDrink(UpdateStageDrinkRequest request)
 		{
-			// TODO: StageRepository.ChangeDrinkOrder(stageDrinkId, order).ToModel();
-			return StageRepository.UpdateStageDrink(stageDrinkId, request.NumberToDrink, request.OverridedVolume, request.Type).ToModel();
+			// TODO: only one method?? or 2 methods in api?
+			StageRepository.ChangeDrinkOrder(request.Id, request.Order);
+			return StageRepository.UpdateStageDrink(request.Id, request.NumberToDrink, request.OverridedVolume, request.Type).ToModel();
 		}
 
 		public Stage DeleteStage(ObjectByGuidRequest request)

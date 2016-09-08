@@ -9,9 +9,9 @@ namespace TourDeFrance.Core.Business
 	{
 		public IList<ViewAccessShare> AccessShares { get; set; }
 
-		public Client.User.AuthenticatedUser ToAuthenticatedModel()
+		public Client.Responses.AuthenticatedUser ToAuthenticatedModel()
 		{
-			Client.User.AuthenticatedUser user = ToModel<Client.User.AuthenticatedUser>();
+			Client.Responses.AuthenticatedUser user = ToModel<Client.Responses.AuthenticatedUser>();
 			user.AccessShares = AccessShares.Select(x => x.ToModel()).ToArray();
 			return user;
 		}

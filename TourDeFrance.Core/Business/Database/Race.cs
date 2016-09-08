@@ -1,5 +1,7 @@
 ﻿using System;
 using SimpleStack.Orm.Attributes;
+using TourDeFrance.Client.Interfaces;
+using TourDeFrance.Client.Responses;
 using TourDeFrance.Core.Interfaces;
 
 namespace TourDeFrance.Core.Business.Database
@@ -7,9 +9,9 @@ namespace TourDeFrance.Core.Business.Database
 	[Alias("races")]
 	public class DbRace : BaseOwnObjectNameable
 	{
-		public Client.Race.Race ToModel()
+		public Race ToModel()
 		{
-			return new Client.Race.Race
+			return new Race
 			{
 				Id = Id,
 				Name = Name,

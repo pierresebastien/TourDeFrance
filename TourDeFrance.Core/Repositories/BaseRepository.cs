@@ -13,6 +13,7 @@ using ServiceStack.Text;
 using System.Collections.Generic;
 using SimpleStack.Orm;
 using SimpleStack.Orm.Expressions;
+using TourDeFrance.Client.Interfaces;
 using TourDeFrance.Core.Tools.DataBase;
 
 namespace TourDeFrance.Core.Repositories

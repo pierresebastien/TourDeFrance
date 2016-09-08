@@ -5,12 +5,12 @@ using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Exceptions;
 using TourDeFrance.Core.Extensions;
 using TourDeFrance.Core.Repositories.Interfaces;
-using TourDeFrance.Core.Tools;
 using TourDeFrance.Core.Tools.Cache;
 using TourDeFrance.Core.Tools.DataBase;
 
 namespace TourDeFrance.Core.Repositories
 {
+	// TODO: check all methods in repositories and ensure checks are made on all mandatory fields + ensure same checks in api validators
 	public class PlayerRepository : BaseRepository, IPlayerRepository
 	{
 		protected const string PlayerObjectName = "Player";

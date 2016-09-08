@@ -1,8 +1,7 @@
-﻿using System;
-using TourDeFrance.Client.Requests;
-using TourDeFrance.Client.User;
+﻿using TourDeFrance.Client.Requests;
 using Nancy.ModelBinding;
 using Nancy;
+using TourDeFrance.Client.Responses;
 
 namespace TourDeFrance.Api.Services
 {
@@ -12,8 +11,8 @@ namespace TourDeFrance.Api.Services
 		{
 			Get["/me"] = _ => Negotiate.WithModel(Me());
 			Get["/{Id}"] = _ => Negotiate.WithModel(GetUser(this.BindAndValidate<ObjectByGuidRequest>()));
-			Post["/"] = _ => Negotiate.WithModel(CreateUser(this.BindAndValidate<>()));
-			Put["/{Id}"] = _ => Negotiate.WithModel(UpdateUser(this.BindAndValidate<>()));
+			Post["/"] = _ => Negotiate.WithModel(CreateUser(this.BindAndValidate<CreateUserRequest>()));
+			Put["/{Id}"] = _ => Negotiate.WithModel(UpdateUser(this.BindAndValidate<UpdateUserRequest>()));
 		}
 
 		public AuthenticatedUser Me()
@@ -27,7 +26,7 @@ namespace TourDeFrance.Api.Services
 			return UserRepository.GetDbUserById(request.Id).ToModel();
 		}
 
-		public User CreateUser(CreateUser request)
+		public User CreateUser(CreateUserRequest request)
 		{
 			return
 				UserRepository.CreateUser(request.UserName, request.FirstName, request.LastName, request.Gender, request.Email,
@@ -35,10 +34,10 @@ namespace TourDeFrance.Api.Services
 					request.RequireNewPasswordAtLogon).ToModel();
 		}
 
-		public User UpdateUser(Guid userId, CreateUser request)
+		public User UpdateUser(UpdateUserRequest request)
 		{
 			return
-				UserRepository.UpdateUser(userId, request.FirstName, request.LastName, request.Gender, request.Email,
+				UserRepository.UpdateUser(request.Id, request.FirstName, request.LastName, request.Gender, request.Email,
 					request.BirthDate, request.Height, request.Weight, request.IsAdministrator, request.Password,
 					request.RequireNewPasswordAtLogon).ToModel();
 		}

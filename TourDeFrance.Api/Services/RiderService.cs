@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Nancy;
 using Nancy.ModelBinding;
 using TourDeFrance.Client.Requests;
-using TourDeFrance.Client.Rider;
+using TourDeFrance.Client.Responses;
 
 namespace TourDeFrance.Api.Services
 {
@@ -13,8 +12,8 @@ namespace TourDeFrance.Api.Services
 		{
 			Get["/"] = _ => Negotiate.WithModel(GetAllRiders());
 			Get["/{Id}"] = _ => Negotiate.WithModel(GetRider(this.BindAndValidate<ObjectByGuidRequest>()));
-			Post["/"] = _ => Negotiate.WithModel(CreateRider(this.BindAndValidate<>()));
-			Put["/{Id}"] = _ => Negotiate.WithModel(UpdateRider(this.BindAndValidate<>()));
+			Post["/"] = _ => Negotiate.WithModel(CreateRider(this.BindAndValidate<CreateRiderRequest>()));
+			Put["/{Id}"] = _ => Negotiate.WithModel(UpdateRider(this.BindAndValidate<UpdateRiderRequest>()));
 			Delete["/{Id}"] = _ => Negotiate.WithModel(DeleteRider(this.BindAndValidate<ObjectByGuidRequest>()));
 		}
 
@@ -28,18 +27,18 @@ namespace TourDeFrance.Api.Services
 			return RiderRepository.GetRiderById(request.Id).ToModel();
 		}
 
-		public Rider CreateRider(CreateUpdateRider model)
+		public Rider CreateRider(CreateRiderRequest request)
 		{
 			return
-				RiderRepository.CreateRider(model.FirstName, model.LastName, model.Gender, model.BirthDate, model.Nationality,
-					model.Height, model.Weight, model.Picture, model.TeamId).ToModel();
+				RiderRepository.CreateRider(request.FirstName, request.LastName, request.Gender, request.BirthDate,
+					request.Nationality, request.Height, request.Weight, request.Picture, request.TeamId).ToModel();
 		}
 
-		public Rider UpdateRider(Guid riderId, CreateUpdateRider model)
+		public Rider UpdateRider(UpdateRiderRequest request)
 		{
 			return
-				RiderRepository.UpdateRider(riderId, model.FirstName, model.LastName, model.Gender, model.BirthDate,
-					model.Nationality, model.Height, model.Weight, model.Picture, model.TeamId).ToModel();
+				RiderRepository.UpdateRider(request.Id, request.FirstName, request.LastName, request.Gender, request.BirthDate,
+					request.Nationality, request.Height, request.Weight, request.Picture, request.TeamId).ToModel();
 		}
 
 		public Rider DeleteRider(ObjectByGuidRequest request)

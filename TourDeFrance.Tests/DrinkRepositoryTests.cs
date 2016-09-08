@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TourDeFrance.Client.Drink;
 using TourDeFrance.Client.Enums;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Exceptions;

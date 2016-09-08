@@ -1,7 +1,8 @@
 ﻿using System;
 using SimpleStack.Orm.Attributes;
 using TourDeFrance.Client.Enums;
-using TourDeFrance.Client.Stage;
+using TourDeFrance.Client.Interfaces;
+using TourDeFrance.Client.Responses;
 using TourDeFrance.Core.Interfaces;
 
 namespace TourDeFrance.Core.Business.Database

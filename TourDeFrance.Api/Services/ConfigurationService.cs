@@ -1,8 +1,8 @@
 ﻿using Nancy;
 using Nancy.ModelBinding;
 using System.Linq;
-using TourDeFrance.Client.Config;
 using TourDeFrance.Client.Requests;
+using TourDeFrance.Client.Responses;
 
 namespace TourDeFrance.Api.Services
 {

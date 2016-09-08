@@ -1,6 +1,6 @@
 ﻿namespace TourDeFrance.Client.Enums
 {
-	// TODO: other ?
+	// TODO: other ? + combination ?
 	public enum StageType
 	{
 		Flat = 0,

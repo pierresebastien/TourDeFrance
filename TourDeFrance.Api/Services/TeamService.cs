@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Nancy;
 using Nancy.ModelBinding;
 using TourDeFrance.Client.Requests;
-using TourDeFrance.Client.Team;
+using TourDeFrance.Client.Responses;
 
 namespace TourDeFrance.Api.Services
 {
@@ -13,8 +12,8 @@ namespace TourDeFrance.Api.Services
 		{
 			Get["/"] = _ => Negotiate.WithModel(GetAllTeams());
 			Get["/{Id}"] = _ => Negotiate.WithModel(GetTeam(this.BindAndValidate<ObjectByGuidRequest>()));
-			Post["/"] = _ => Negotiate.WithModel(CreateTeam(this.BindAndValidate<>()));
-			Put["/{Id}"] = _ => Negotiate.WithModel(UpdateTeam(this.BindAndValidate<>()));
+			Post["/"] = _ => Negotiate.WithModel(CreateTeam(this.BindAndValidate<CreateTeamRequest>()));
+			Put["/{Id}"] = _ => Negotiate.WithModel(UpdateTeam(this.BindAndValidate<UpdateTeamRequest>()));
 			Delete["/{Id}"] = _ => Negotiate.WithModel(DeleteTeam(this.BindAndValidate<ObjectByGuidRequest>()));
 		}
 
@@ -28,14 +27,14 @@ namespace TourDeFrance.Api.Services
 			return TeamRepository.GetTeamById(request.Id).ToModel();
 		}
 
-		public Team CreateTeam(CreateUpdateTeam request)
+		public Team CreateTeam(CreateTeamRequest request)
 		{
 			return TeamRepository.CreateTeam(request.Name).ToModel();
 		}
 
-		public Team UpdateTeam(Guid teamId, CreateUpdateTeam request)
+		public Team UpdateTeam(UpdateTeamRequest request)
 		{
-			return TeamRepository.UpdateTeam(teamId, request.Name).ToModel();
+			return TeamRepository.UpdateTeam(request.Id, request.Name).ToModel();
 		}
 
 		public Team DeleteTeam(ObjectByGuidRequest request)

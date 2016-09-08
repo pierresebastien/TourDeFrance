@@ -1,10 +1,10 @@
 ﻿using System;
 using FluentValidation;
-using TourDeFrance.Client.Requests;
+using TourDeFrance.Client.Interfaces;
 
 namespace TourDeFrance.Api.Validators
 {
-	public class ObjectByIdRequestValidator<T> : AbstractValidator<T> where T : ObjectByIdRequest
+	public class ObjectByIdRequestValidator<T> : AbstractValidator<T> where T : IIdentifiable<string>
 	{
 		public ObjectByIdRequestValidator()
 		{
@@ -12,7 +12,7 @@ namespace TourDeFrance.Api.Validators
 		}
 	}
 
-	public class ObjectByGuidRequestValidator<T> : AbstractValidator<T> where T : ObjectByGuidRequest
+	public class ObjectByGuidRequestValidator<T> : AbstractValidator<T> where T : IIdentifiable<Guid>
 	{
 		public ObjectByGuidRequestValidator()
 		{

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using TourDeFrance.Client.Drink;
 using TourDeFrance.Client.Requests;
 using Nancy;
 using Nancy.ModelBinding;
 using TourDeFrance.Api.Exceptions;
+using TourDeFrance.Client.Responses;
 
 namespace TourDeFrance.Api.Services
 {

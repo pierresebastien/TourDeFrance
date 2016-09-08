@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dapper;
-using TourDeFrance.Client.Drink;
+using TourDeFrance.Client.Requests;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Exceptions;
 using TourDeFrance.Core.Extensions;
