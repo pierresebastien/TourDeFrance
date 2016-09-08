@@ -32,7 +32,9 @@ namespace TourDeFrance.Tests
 
 		protected abstract Type DatabaseManagerType { get; }
 
-		protected const string SchemaName = "tourdefrance_test";
+		protected const string DatabaseName = "tour_de_france";
+
+		protected const string SchemaName = "test";
 
 		protected IContainer Container;
 
@@ -222,24 +224,24 @@ namespace TourDeFrance.Tests
 	{
 		private static readonly IDialectProvider Provider = new PostgreSQLDialectProvider();
 
-		protected const string BaseConnectionString = "Server=127.0.0.1;Port=5432;User Id=tourdefrance;Password=password;Pooling=false;CommandTimeout=30;";
+		protected static readonly string BaseConnectionString = $"Server=127.0.0.1;Port=5432;User Id=tourdefrance;Password=password;Pooling=false;CommandTimeout=30;Database={SchemaName};";
 
 		protected override DatabaseType DatabaseType => DatabaseType.PostgreSQL;
 
 		protected override IDialectProvider DialectProvider => Provider;
 
-		protected override string ConnectionString => $"{BaseConnectionString}Database={SchemaName};";
+		protected override string ConnectionString => $"{BaseConnectionString}SearchPath={DatabaseName};";
 
 		protected override void CleanDatabase()
 		{
 			using (OrmConnection connection = DialectProvider.CreateConnection(BaseConnectionString))
 			{
-				string queryExist = $"SELECT datname FROM pg_database WHERE datname = '{SchemaName}'";
+				string queryExist = $"SELECT schema_name FROM information_schema.schemata WHERE schema_name = '{SchemaName}'";
 				if (connection.Query<string>(queryExist).Any())
 				{
-					connection.Execute($"DROP DATABASE {SchemaName}");
+					connection.Execute($"DROP SCHEMA {SchemaName} CASCADE");
 				}
-				connection.Execute($"CREATE DATABASE {SchemaName}");
+				connection.Execute($"CREATE SCHEMA {SchemaName}");
 			}
 		}
 
