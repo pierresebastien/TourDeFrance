@@ -7,7 +7,7 @@ namespace TourDeFrance.Api.Services
 	{
 		public InfoService() : base("/infos")
 		{
-			Get["/version"] = _ => Negotiate.WithModel(new Info { Message = config.Version });
+			Get["/version"] = _ => Negotiate.WithModel(new Info {Message = Config.Version.ToString(3)});
 		}
 	}
 }

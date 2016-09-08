@@ -18,6 +18,8 @@ namespace TourDeFrance.Core
 		public DatabaseType DatabaseType { get; set; }
 		public string RedisHost { get; set; }
 		public bool UseLucene { get; set; }
+		public int ApiPort { get; set; }
+		public bool DisableTraceInApi { get; set; }
 
 		public string ApplicationPath => Path.GetDirectoryName(
 			Assembly.GetExecutingAssembly()
@@ -28,9 +30,11 @@ namespace TourDeFrance.Core
 			return new ApplicationConfig
 			{
 				ConnectionString = GetConfigurationValue("connectionString"),
-				DatabaseType = (DatabaseType) Enum.Parse(typeof (DatabaseType), GetConfigurationValue("databaseType", "PostgreSQL")),
+				DatabaseType = (DatabaseType) Enum.Parse(typeof(DatabaseType), GetConfigurationValue("databaseType", "PostgreSQL")),
 				RedisHost = GetConfigurationValue("redisHost"),
-				UseLucene = GetConfigurationValue("useLucene", false)
+				UseLucene = GetConfigurationValue("useLucene", false),
+				ApiPort = GetConfigurationValue("api:port", 0),
+				DisableTraceInApi = GetConfigurationValue("api:disableErrorTraces", true)
 			};
 		}
 
@@ -74,9 +78,12 @@ namespace TourDeFrance.Core
 
 		public void Initialize()
 		{
+			Version = GetType().Assembly.GetName().Version;
 			_configurationRepository.InitValue("TempFolder");
 			_configurationRepository.InitValue("IndexFolder");
 		}
+
+		public Version Version { get; private set; }
 
 		// application config (file)
 		public string ApplicationPath => _applicationConfig.ApplicationPath;
@@ -84,6 +91,22 @@ namespace TourDeFrance.Core
 		public bool UseLucene => _applicationConfig.UseLucene;
 
 		public DatabaseType DatabaseType => _applicationConfig.DatabaseType;
+
+		public int ApiPort => _applicationConfig.ApiPort;
+
+		public bool DisableTraceInApi => _applicationConfig.DisableTraceInApi;
+
+		public string ApiUri
+		{
+			get
+			{
+				if (ApiPort > 0)
+				{
+					return $"http{(IsSecure ? "s" : string.Empty)}://+{ApiPort}";
+				}
+				return string.Empty;
+			}
+		}
 
 		// general
 		public bool IsSecure => PublicUri.StartsWith("https");

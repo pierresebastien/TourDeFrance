@@ -1,6 +1,5 @@
 ﻿using System;
 using Nancy;
-using ServiceStack.ServiceInterface.ServiceModel;
 using TourDeFrance.Api.Exceptions;
 using TourDeFrance.Core;
 using TourDeFrance.Core.Business;
@@ -13,7 +12,6 @@ namespace TourDeFrance.Api.Services
 {
 	// TODO: investigate better solution than using context.current
 	// TODO: restricts all info returned by API base on connected users => improve information + determine some busiess rules to know accessible "objects"
-	// TODO: use get text for messages returned by the api (error mainly)
 	public abstract class BaseService : NancyModule
 	{
 		protected AuthenticatedUser CurrentUser => Core.Context.Current.User;
@@ -50,37 +48,40 @@ namespace TourDeFrance.Api.Services
 
 		protected BaseService(string modulePath) : base(modulePath)
 		{
-			OnError.AddItemToEndOfPipeline((context, exception) =>
-			{
-				HttpStatusCode status;
-				string content = exception.Message;
+			OnError.AddItemToEndOfPipeline(ManageException);
+		}
 
-				if (exception is NotFoundException)
-				{
-					status = HttpStatusCode.NotFound;
-				}
-				else if (exception is UnauthorizedAccessException)
-				{
-					status = HttpStatusCode.Forbidden;
-				}
-				else if(exception is BadRequestException)
-				{
-					status = HttpStatusCode.BadRequest;
-					// TODO: Retrieve Errors from the ModelValidationResult and add them in the ErrorResponse
-				}
-				else if (exception is TourDeFranceException)
-				{
-					status = HttpStatusCode.BadRequest;
-				}
-				else
-				{
-					status = HttpStatusCode.InternalServerError;
-					content = string.Empty;
-					ErrorLogger.LogException(exception, context.Request.Url);
-				}
-				// TODO: use model ???
-				return Negotiate.WithModel(content).WithStatusCode(status);
-			});
+		// TODO: use get text for messages returned by the api (error mainly)
+		protected dynamic ManageException(NancyContext context, Exception exception)
+		{
+			HttpStatusCode status;
+			string content = exception.Message;
+
+			if (exception is NotFoundException)
+			{
+				status = HttpStatusCode.NotFound;
+			}
+			else if (exception is UnauthorizedAccessException)
+			{
+				status = HttpStatusCode.Forbidden;
+			}
+			else if (exception is BadRequestException)
+			{
+				status = HttpStatusCode.BadRequest;
+				// TODO: Retrieve Errors from the ModelValidationResult and add them in the ErrorResponse
+			}
+			else if (exception is TourDeFranceException)
+			{
+				status = HttpStatusCode.BadRequest;
+			}
+			else
+			{
+				status = HttpStatusCode.InternalServerError;
+				content = string.Empty;
+				ErrorLogger.LogException(exception, context.Request.Url);
+			}
+			// TODO: use model ???
+			return Negotiate.WithModel(content).WithStatusCode(status);
 		}
 	}
 }

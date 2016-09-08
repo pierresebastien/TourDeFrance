@@ -6,7 +6,6 @@ using SimpleStack.Orm;
 using SimpleStack.Orm.PostgreSQL;
 using TourDeFrance.Core;
 using TourDeFrance.Core.Interfaces;
-using TourDeFrance.Core.Tools;
 using TourDeFrance.Core.Tools.DataBase;
 using Module = ASK.ServEasy.Module;
 

@@ -11,27 +11,29 @@ namespace TourDeFrance.Api.Processes
 {
     public class ApiSelfHostProcess : ProcessBase
     {
-		private static readonly ILog Logger = LogProvider.For<ApiSelfHostProcess>();
+	    private readonly Config _config;
+	    private static readonly ILog Logger = LogProvider.For<ApiSelfHostProcess>();
 		private IDisposable _webApp;
 
-		public ApiSelfHostProcess() : base("API Self Host")
+		public ApiSelfHostProcess(Config config) : base("API Self Host")
 	    {
-			WatchdogDelay = TimeSpan.MaxValue;
+		    _config = config;
+		    WatchdogDelay = TimeSpan.MaxValue;
 		    LoopDelay = TimeSpan.MaxValue;
 	    }
 
-		// TODO: or based on config key
-	    public override bool MustRun => true;
+	    public override bool MustRun => !string.IsNullOrWhiteSpace(_config.ApiUri);
 
 		public override void Starting()
 		{
 			Logger.Debug("Starting api...");
 
-			StaticConfiguration.DisableErrorTraces = _config.DisableErrorTraces;
+			// TODO: check usage and other configurations
+			StaticConfiguration.DisableErrorTraces = _config.DisableTraceInApi;
 
-			StartOptions options = new StartOptions(_config.Uri);
-			_webApp = WebApp.Start(options, x => Startup(x, _config));
-			Logger.Info($"Running on {_config.Uri}");
+			StartOptions options = new StartOptions(_config.ApiUri);
+			_webApp = WebApp.Start(options, Startup);
+			Logger.Info($"Running on {_config.ApiPort}");
 		}
 
 		private void Startup(IAppBuilder app)
