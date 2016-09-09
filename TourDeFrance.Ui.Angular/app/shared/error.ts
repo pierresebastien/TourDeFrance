@@ -1,5 +1,6 @@
 ﻿﻿/// <reference path="../../references.ts"/>
 
+// TODO: to review
 class ErrorController {
 	errorMessage: string;
 	accessedState: any;

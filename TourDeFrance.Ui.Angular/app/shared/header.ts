@@ -10,6 +10,5 @@ class HeaderController extends BaseController {
 		currentUser: AuthenticatedUser) {
 
 		super(Restangular, GlobalService, $state, $mdToast, currentUser);
-		this.hasSharedUsers = this.currentUser.accessShares.length > 0;
 	}
 }

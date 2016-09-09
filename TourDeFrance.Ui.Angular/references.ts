@@ -18,6 +18,7 @@
 /// <reference path="./app/shared/header.ts" />
 /// <reference path="./app/shared/menu.ts" />
 /// <reference path="./app/home/home.ts" />
+/// <reference path="./app/login/login.ts" />
 
 // Services
 /// <reference path="./services/global.ts" />

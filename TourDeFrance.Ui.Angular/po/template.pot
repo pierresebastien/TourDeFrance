@@ -4,16 +4,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: shared\menu.tpl.html:52
+msgid "Config"
+msgstr ""
+
 #: shared\not_found.tpl.html:2
 msgid "Could not find the page: {{ error.accessedState.url }}. This page is supposed to exist? Help us and report the issue to <a ng-href=\"mailto:{{ error.adminMail }}\">{{ error.adminMail }}</a>"
+msgstr ""
+
+#: shared\menu.tpl.html:28
+msgid "Drinks"
 msgstr ""
 
 #: shared\error.tpl.html:1
 msgid "Error"
 msgstr ""
 
+#: shared\menu.tpl.html:14
+msgid "Games"
+msgstr ""
+
 #: shared\not_found.tpl.html:4
 msgid "Go back to the <a ng-href=\"{{ error.previousState.url }}\">previous page</a>."
+msgstr ""
+
+#: shared\menu.tpl.html:18
+msgid "History"
 msgstr ""
 
 #: shared\error.tpl.html:4
@@ -24,12 +40,36 @@ msgstr ""
 msgid "Page Not Found"
 msgstr ""
 
+#: shared\menu.tpl.html:40
+msgid "Players"
+msgstr ""
+
+#: shared\menu.tpl.html:36
+msgid "Races"
+msgstr ""
+
 #: shared\forbidden.tpl.html:1
 msgid "Sorry,"
 msgstr ""
 
+#: shared\menu.tpl.html:32
+msgid "Stages"
+msgstr ""
+
+#: shared\menu.tpl.html:44
+msgid "Teams"
+msgstr ""
+
+#: shared\api_stopped.tpl.html:1
+msgid "The application is not running"
+msgstr ""
+
 #: shared\error.tpl.html:2
 msgid "There was an error processing your request."
+msgstr ""
+
+#: shared\menu.tpl.html:48
+msgid "Users"
 msgstr ""
 
 #: shared\forbidden.tpl.html:3

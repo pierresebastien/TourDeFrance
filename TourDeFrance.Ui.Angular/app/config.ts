@@ -4,9 +4,9 @@
 var CONST_API_URL = location.protocol.concat("//").concat(window.location.hostname).concat("/api");
 
 class GravatarConfig {
-    constructor(gravatarServiceProvider: any) {
-        gravatarServiceProvider.defaults = { "default": "mm" };
-    }
+	constructor(gravatarServiceProvider: any) {
+		gravatarServiceProvider.defaults = { "default": "mm" };
+	}
 }
 
 class ApiSetUp {
@@ -38,7 +38,7 @@ class RestangularConfig { // Used in a .run since .config does not allow Service
 				//$mdToast.show(response.data, "Bad Request");
 				return true; // The error is not handled and the calling function will execute its error callback
 			case 401: // Unauthorized
-				$state.go("not_logged.unauthorized");
+				$state.go("login");
 				return false; // The error is considered as handled and the calling function will do nothing
 			case 403: // Forbidden
 				GlobalService.setError(response.data, currentState);
@@ -46,7 +46,7 @@ class RestangularConfig { // Used in a .run since .config does not allow Service
 				return false;
 			case 404: // Not Found
 				GlobalService.setError(response.data, currentState);
-				$state.go("root.error.notfound");
+				$state.go("root.error.not_found");
 				return false;
 			case 500: // Internal Server Error
 				GlobalService.setError(response.data);
@@ -54,7 +54,7 @@ class RestangularConfig { // Used in a .run since .config does not allow Service
 				return false;
 			case 502: // Bad gateway
 			case 503:
-				$state.go("not_logged.api_stopped");
+				$state.go("api_stopped");
 				return false;
 			default:
 				GlobalService.setError(response.status + " - " + response.data);
@@ -73,9 +73,29 @@ class RestangularConfig { // Used in a .run since .config does not allow Service
 class RouteConfig {
 	constructor($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
 
-		$urlRouterProvider.otherwise("/error/notfound");
+		$urlRouterProvider.otherwise("/login");
 
 		$stateProvider
+			.state("login",
+			{
+				url: "/login",
+				views: {
+					'@': {
+						templateUrl: "app/login/login.tpl.html",
+						controller: LoginController,
+						controllerAs: "login"
+					}
+				}
+			})
+			.state("api_stopped",
+			{
+				url: "/stopped",
+				views: {
+					'@': {
+						templateUrl: "app/shared/api_stopped.tpl.html"
+					}
+				}
+			})
 			.state("root",
 			{
 				url: "",
@@ -87,12 +107,12 @@ class RouteConfig {
 				},
 				views: {
 					'header': {
-						templateUrl: "/Angular/app/shared/header.tpl.html",
+						templateUrl: "app/shared/header.tpl.html",
 						controller: HeaderController,
 						controllerAs: "header"
 					},
 					'menu': {
-						templateUrl: "/Angular/app/shared/menu.tpl.html",
+						templateUrl: "app/shared/menu.tpl.html",
 						controller: MenuController,
 						controllerAs: "menu"
 					}
@@ -105,7 +125,7 @@ class RouteConfig {
 				views: {
 					// We need to use the absolute path to use the unnamed ui-view from root (even if there's no view)
 					'@': {
-						templateUrl: "/Angular/app/home/home.tpl.html",
+						templateUrl: "app/home/home.tpl.html",
 						controller: HomeController,
 						controllerAs: "home"
 					}
@@ -131,18 +151,18 @@ class RouteConfig {
 				url: "/forbidden",
 				views: {
 					'@': {
-						templateUrl: "/Angular/app/shared/forbidden.tpl.html",
+						templateUrl: "app/shared/forbidden.tpl.html",
 						controller: ErrorController,
 						controllerAs: "error"
 					}
 				}
 			})
-			.state("root.error.notfound",
+			.state("root.error.not_found",
 			{
 				url: "/notfound",
 				views: {
 					'@': {
-						templateUrl: "/Angular/app/shared/not_found.tpl.html",
+						templateUrl: "app/shared/not_found.tpl.html",
 						controller: ErrorController,
 						controllerAs: "error"
 					}
@@ -153,7 +173,7 @@ class RouteConfig {
 				url: "/internal",
 				views: {
 					'@': {
-						templateUrl: "/Angular/app/shared/error.tpl.html",
+						templateUrl: "app/shared/error.tpl.html",
 						controller: ErrorController,
 						controllerAs: "error"
 					}
