@@ -1,6 +1,6 @@
 ﻿﻿/// <reference path="../../references.ts"/>
 
-// TODO: to review
+// TODO: to review (extends base controller?)
 class ErrorController {
 	errorMessage: string;
 	accessedState: any;

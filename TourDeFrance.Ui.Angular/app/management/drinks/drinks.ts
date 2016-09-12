@@ -1,6 +1,6 @@
-﻿/// <reference path="../../references.ts"/>
+﻿﻿/// <reference path="../../../references.ts"/>
 
-class MenuController extends BaseController {
+class DrinkController extends BaseController {
 	constructor(Restangular: restangular.IService,
 		GlobalService: tourdefrance.services.IGlobalService,
 		$state: ng.ui.IStateService,

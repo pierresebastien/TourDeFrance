@@ -178,6 +178,93 @@ class RouteConfig {
 						controllerAs: "error"
 					}
 				}
+			})
+			.state("root.admin",
+			{
+				url: "/admin",
+				abstract: true
+			})
+			.state("root.admin.config",
+			{
+				url: "/config",
+				views: {
+					'@': {
+						templateUrl: "app/admin/config/config.tpl.html",
+						controller: ConfigController,
+						controllerAs: "config"
+					}
+				}
+			})
+			.state("root.admin.users",
+			{
+				url: "/users",
+				views: {
+					'@': {
+						templateUrl: "app/admin/users/users.tpl.html",
+						controller: UserController,
+						controllerAs: "user"
+					}
+				}
+			})
+			.state("root.management",
+			{
+				url: "/management",
+				abstract: true
+			})
+			.state("root.management.drinks",
+			{
+				url: "/drinks",
+				views: {
+					'@': {
+						templateUrl: "app/management/drinks/drinks.tpl.html",
+						controller: DrinkController,
+						controllerAs: "drink"
+					}
+				}
+			})
+			.state("root.management.stages",
+			{
+				url: "/stages",
+				views: {
+					'@': {
+						templateUrl: "app/management/stages/stages.tpl.html",
+						controller: StageController,
+						controllerAs: "stage"
+					}
+				}
+			})
+			.state("root.management.races",
+			{
+				url: "/races",
+				views: {
+					'@': {
+						templateUrl: "app/management/races/races.tpl.html",
+						controller: RaceController,
+						controllerAs: "race"
+					}
+				}
+			})
+			.state("root.management.riders",
+			{
+				url: "/riders",
+				views: {
+					'@': {
+						templateUrl: "app/management/riders/riders.tpl.html",
+						controller: RiderController,
+						controllerAs: "rider"
+					}
+				}
+			})
+			.state("root.management.teams",
+			{
+				url: "/teams",
+				views: {
+					'@': {
+						templateUrl: "app/management/teams/teams.tpl.html",
+						controller: TeamController,
+						controllerAs: "team"
+					}
+				}
 			});
 	}
 }

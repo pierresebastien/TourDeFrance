@@ -19,6 +19,13 @@
 /// <reference path="./app/shared/menu.ts" />
 /// <reference path="./app/home/home.ts" />
 /// <reference path="./app/login/login.ts" />
+/// <reference path="./app/admin/config/config.ts" />
+/// <reference path="./app/admin/users/users.ts" />
+/// <reference path="./app/management/drinks/drinks.ts" />
+/// <reference path="./app/management/riders/riders.ts" />
+/// <reference path="./app/management/races/races.ts" />
+/// <reference path="./app/management/stages/stages.ts" />
+/// <reference path="./app/management/teams/teams.ts" />
 
 // Services
 /// <reference path="./services/global.ts" />

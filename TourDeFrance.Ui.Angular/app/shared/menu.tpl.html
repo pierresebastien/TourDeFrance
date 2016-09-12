@@ -7,51 +7,46 @@
 		</div>
 	</md-toolbar>
 	<md-list flex>
-		<md-item>
-			<a>
-				<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.games">
-					<div class="inset"><md-icon md-font-icon="fa fa-fw fa-bicycle"></md-icon></div>
-					<div class="inset" translate>Games</div>
-				</md-list-item>
-				<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.history">
-					<div class="inset"><md-icon md-font-icon="fa fa-fw fa-trophy"></md-icon></div>
-					<div class="inset" translate>History</div>
-				</md-list-item>
-			</a>
-		</md-item>
+		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.games">
+			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-bicycle"></md-icon></div>
+			<div class="inset" translate>Games</div>
+		</md-list-item>
+		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.history">
+			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-trophy"></md-icon></div>
+			<div class="inset" translate>History</div>
+		</md-list-item>
+
 		<md-divider></md-divider>
 		<md-subheader>Management</md-subheader>
-		<md-item>
-			<a>
-				<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.drinks">
-					<div class="inset"><md-icon md-font-icon="fa fa-fw fa-beer"></md-icon></div>
-					<div class="inset" translate>Drinks</div>
-				</md-list-item>
-				<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.stages">
-					<div class="inset"><md-icon md-font-icon="fa fa-fw fa-map-marker"></md-icon></div>
-					<div class="inset" translate>Stages</div>
-				</md-list-item>
-				<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.races">
-					<div class="inset"><md-icon md-font-icon="fa fa-fw fa-map-o"></md-icon></div>
-					<div class="inset" translate>Races</div>
-				</md-list-item>
-				<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.players">
-					<div class="inset"><md-icon md-font-icon="fa fa-fw fa-user"></md-icon></div>
-					<div class="inset" translate>Players</div>
-				</md-list-item>
-				<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.teams">
-					<div class="inset"><md-icon md-font-icon="fa fa-fw fa-users"></md-icon></div>
-					<div class="inset" translate>Teams</div>
-				</md-list-item>
-				<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.users">
-					<div class="inset"><md-icon md-font-icon="fa fa-fw fa-user"></md-icon></div>
-					<div class="inset" translate>Users</div>
-				</md-list-item>
-				<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.config">
-					<div class="inset"><md-icon md-font-icon="fa fa-fw fa-wrench"></md-icon></div>
-					<div class="inset" translate>Config</div>
-				</md-list-item>
-			</a>
-		</md-item>
+		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.management.drinks">
+			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-beer"></md-icon></div>
+			<div class="inset" translate>Drinks</div>
+		</md-list-item>
+		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.management.stages">
+			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-map-marker"></md-icon></div>
+			<div class="inset" translate>Stages</div>
+		</md-list-item>
+		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.management.races">
+			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-map-o"></md-icon></div>
+			<div class="inset" translate>Races</div>
+		</md-list-item>
+		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.management.riders">
+			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-user"></md-icon></div>
+			<div class="inset" translate>Riders</div>
+		</md-list-item>
+		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.management.teams">
+			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-users"></md-icon></div>
+			<div class="inset" translate>Teams</div>
+		</md-list-item>
+
+		<md-subheader>Administration</md-subheader>
+		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.admin.users">
+			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-user"></md-icon></div>
+			<div class="inset" translate>Users</div>
+		</md-list-item>
+		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.admin.config">
+			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-wrench"></md-icon></div>
+			<div class="inset" translate>Config</div>
+		</md-list-item>
 	</md-list>
 </md-sidenav>
