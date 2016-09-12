@@ -94,7 +94,7 @@ gulp.task('concat', ['concat:models', 'concat:services', 'concat:controllers', '
 gulp.task('uglify', function () {
   return gulp.src(['./dist/*.js'])
 	.pipe(rename({ suffix: '.min' }))
-    .pipe(uglify())
+    .pipe(uglify({mangle:false}))
     .pipe(gulp.dest('./dist/'));
 });
 
