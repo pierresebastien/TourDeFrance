@@ -4,12 +4,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: shared\menu.tpl.html:49
-msgid "Config"
+#: shared\not_found.tpl.html:3
+msgid "... It may never recover."
 msgstr ""
 
-#: shared\not_found.tpl.html:2
-msgid "Could not find the page: {{ error.accessedState.url }}. This page is supposed to exist? Help us and report the issue to <a ng-href=\"mailto:{{ error.adminMail }}\">{{ error.adminMail }}</a>"
+#: shared\not_found.tpl.html:5
+msgid "Back Home"
+msgstr ""
+
+#: shared\menu.tpl.html:49
+msgid "Config"
 msgstr ""
 
 #: shared\menu.tpl.html:23
@@ -20,24 +24,32 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
+#: shared\not_found.tpl.html:1
+msgid "Error 404!"
+msgstr ""
+
 #: shared\menu.tpl.html:12
 msgid "Games"
 msgstr ""
 
+#: shared\forbidden.tpl.html:3
+msgid "Get <span ui-sref=\"root.home\">outta here</span> before Chuck Norris finds you!"
+msgstr ""
+
 #: shared\not_found.tpl.html:4
-msgid "Go back to the <a ng-href=\"{{ error.previousState.url }}\">previous page</a>."
+msgid "Go Back"
 msgstr ""
 
 #: shared\menu.tpl.html:16
 msgid "History"
 msgstr ""
 
-#: shared\error.tpl.html:4
-msgid "More informations"
+#: shared\not_found.tpl.html:2
+msgid "Looks like Chuck Norris broke this page."
 msgstr ""
 
-#: shared\not_found.tpl.html:1
-msgid "Page Not Found"
+#: shared\error.tpl.html:4
+msgid "More informations"
 msgstr ""
 
 #: shared\menu.tpl.html:31
@@ -46,10 +58,6 @@ msgstr ""
 
 #: shared\menu.tpl.html:35
 msgid "Riders"
-msgstr ""
-
-#: shared\forbidden.tpl.html:1
-msgid "Sorry,"
 msgstr ""
 
 #: shared\menu.tpl.html:27
@@ -72,6 +80,6 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: shared\forbidden.tpl.html:3
-msgid "you don't have sufficient permissions to access this page."
+#: shared\forbidden.tpl.html:1
+msgid "Whoa, you don't have sufficient priviliges to acces this page."
 msgstr ""

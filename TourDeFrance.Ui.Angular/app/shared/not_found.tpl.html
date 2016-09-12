@@ -1,4 +1,7 @@
-﻿﻿<h1 translate>Page Not Found</h1>
-<p translate>Could not find the page: {{ error.accessedState.url }}. This page is supposed to exist? Help us and report the issue to <a ng-href="mailto:{{ error.adminMail }}">{{ error.adminMail }}</a></p>
+﻿﻿<h1 translate>Error 404!</h1>
+<p translate>Looks like Chuck Norris broke this page.</p>
+<p translate>... It may never recover.</p>
+<a ng-href="{{ error.previousState.url }}" translate>Go Back</a>
+<a ui-sref="root.home" translate>Back Home</a>
 
-<p translate>Go back to the <a ng-href="{{ error.previousState.url }}">previous page</a>.</p>
+<img src="../../content/chuck_norris_not_found.png" />
