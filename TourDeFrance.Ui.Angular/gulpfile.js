@@ -65,19 +65,19 @@ gulp.task('translations', function () {
 
 /* CONCAT */
 gulp.task('concat:models', function() {
-  return gulp.src(['./models/**/*.js'])
+  return gulp.src(['models/enums.js', './models/**/!(enums)*.js'])
     .pipe(concat('models.js'))
     .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('concat:services', function() {
-  return gulp.src(['./services/**/*.js'])
+  return gulp.src(['./services/**/!(services)*.js', 'services/services.js'])
     .pipe(concat('services.js'))
     .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('concat:controllers', function() {
-  return gulp.src(['./app/*/**/*.js'])
+  return gulp.src(['app/shared/base_controller.js', './app/*/**/!(base_controller)*.js'])
     .pipe(concat('controllers.js'))
     .pipe(gulp.dest('./dist/'));
 });
