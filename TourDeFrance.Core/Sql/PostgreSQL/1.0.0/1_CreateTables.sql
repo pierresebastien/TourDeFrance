@@ -53,18 +53,6 @@ CREATE TABLE "users"
 
 CREATE UNIQUE INDEX uidx_users_username ON "users" ("username" ASC); 
 
-CREATE TABLE "access_shares" 
-(
-  "sharing_user_id" uuid NOT NULL, 
-  "shared_user_id" uuid NOT NULL, 
-  "id" uuid PRIMARY KEY, 
-  "creation_date" timestamp NOT NULL, 
-  "last_update_date" timestamp NOT NULL, 
-  "last_update_by" text NULL, 
-  CONSTRAINT "FK_access_shares_users_sharing_user_id" FOREIGN KEY ("sharing_user_id") REFERENCES "users" ("id"), 
-  CONSTRAINT "FK_access_shares_users_shared_user_id" FOREIGN KEY ("shared_user_id") REFERENCES "users" ("id") 
-); 
-
 CREATE TABLE "global_mail_templates" 
 (
   "template" text NULL, 

@@ -24,17 +24,4 @@ class AuthenticatedUser extends User {
     lastPasswordChangeDate: Date;
     requireNewPasswordAtLogon: boolean;
     numberOfFailedAttempts: number;
-    accessShares: AccessShare[];
-}
-
-class AccessShare {
-    id: string;
-    sharingUserId: string;
-    sharingFirstName: string;
-    sharingLastName: string;
-    sharingUsername: string;
-    sharedUserId: string;
-    sharedUsername: string;
-    sharedFirstname: string;
-    sharedLastName: string;
 }

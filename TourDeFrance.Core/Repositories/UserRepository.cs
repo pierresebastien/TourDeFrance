@@ -15,7 +15,6 @@ using System.Text.RegularExpressions;
 using ServiceStack.Common;
 using SimpleStack.Orm.Expressions;
 using TourDeFrance.Client.Enums;
-using TourDeFrance.Core.Business.Database.Views;
 using TourDeFrance.Core.Business.Email;
 using TourDeFrance.Core.Logging;
 using TourDeFrance.Core.Tools.DataBase;
@@ -270,53 +269,10 @@ namespace TourDeFrance.Core.Repositories
 				if (user != null)
 				{
 					authenticatedUser = user.TranslateTo<AuthenticatedUser>(); // TODO: remove translate to usage
-					authenticatedUser.AccessShares = GetSharedAccessForUserId(authenticatedUser.Id).ToList();
 				}
 				scope.Complete();
 			}
 			return authenticatedUser;
-		}
-
-		public void ConnectAs(Guid id)
-		{
-			if (CurrentRealUser != null && id == CurrentRealUser.Id)
-			{
-				Logger.InfoFormat("User '{0}' logged as '{1}' logged back as normal user",
-					CurrentRealUser.DisplayName, CurrentUser.DisplayName);
-				Context.Current.User = CurrentRealUser;
-				Context.Current.RealUser = null;
-			}
-			else
-			{
-				bool canConnectAsOtherUser = CurrentUser.IsAdministrator ||
-											 CurrentUser.AccessShares.Select(x => x.SharingUserId).Contains(id);
-				if (!canConnectAsOtherUser)
-				{
-					throw new UnauthorizedAccessException("You don't have permission to log on as this user");
-				}
-
-				bool alreayLoggedAs = CurrentRealUser != null;
-				if (!alreayLoggedAs)
-				{
-					Context.Current.RealUser = CurrentUser;
-				}
-
-				DbUser user = GetDbUserById(id);
-				RemoveKeysFromCache($"{typeof (AuthenticatedUser).Name}:{user.Username}");
-				AuthenticatedUser u = GetAuthenticatedUser(user.Username);
-				Context.Current.User = u;
-
-				if (alreayLoggedAs)
-				{
-					Logger.InfoFormat("User '{0}' logged as '{1}' want to be logged as '{2}'", CurrentRealUser.DisplayName,
-						CurrentUser.DisplayName, u.DisplayName);
-				}
-				else
-				{
-					Logger.InfoFormat("User '{0}' want to be logged as '{1}'", Context.Current.RealUser.DisplayName,
-						CurrentUser.DisplayName);
-				}
-			}
 		}
 
 		#endregion
@@ -565,85 +521,6 @@ namespace TourDeFrance.Core.Repositories
 				};
 			Action<SqlExpressionVisitor<DbUser>> orderBy = x => x.OrderBy(y => y.Username);
 			return SearchDbObjects(where, offset, max, orderBy);
-		}
-
-		#endregion
-
-		#region Access sharing
-
-		public void ShareAccessRights(Guid sharingUserId, Guid sharedUserId)
-		{
-			using (var scope = new TransactionScope())
-			{
-				if(!CurrentUser.IsAdministrator && CurrentUser.Id != sharedUserId)
-				{
-					throw new UnauthorizedAccessException();
-				}
-
-				DbUser sharingUser = GetDbUserById(sharingUserId);
-				DbUser sharedUser = GetDbUserById(sharedUserId);
-
-				var accessShare = new DbAccessShare
-				{
-					SharingUserId = sharingUser.Id,
-					SharedUserId = sharedUser.Id
-				};
-
-				var existing = scope.Connection.FirstOrDefault<DbAccessShare>(x => x.SharingUserId == sharingUser.Id && x.SharedUserId == sharedUser.Id);
-				if (existing == null)
-				{
-					accessShare.BeforeInsert();
-					scope.Connection.Insert(accessShare);
-				}
-				scope.Complete();
-			}
-		}
-
-		public void UnshareAccessRights(Guid sharingUserId, Guid sharedUserId)
-		{
-			using (var scope = new TransactionScope())
-			{
-				if (!CurrentUser.IsAdministrator && CurrentUser.Id != sharedUserId)
-				{
-					throw new UnauthorizedAccessException();
-				}
-
-				DbUser sharingUser = GetDbUserById(sharingUserId);
-				DbUser sharedUser = GetDbUserById(sharedUserId);
-
-				var existing =
-					scope.Connection.FirstOrDefault<DbAccessShare>(
-						x => x.SharingUserId == sharingUser.Id && x.SharedUserId == sharedUser.Id);
-				if (existing != null)
-				{
-					scope.Connection.DeleteAll<DbAccessShare>(x => x.Id == existing.Id);
-				}
-				scope.Complete();
-			}
-		}
-
-		public IEnumerable<ViewAccessShare> GetSharedAccessForUserId(Guid id)
-		{
-			using (var scope = new TransactionScope())
-			{
-				DbUser user = GetDbUserById(id);
-				IEnumerable<ViewAccessShare> accessShares =
-					scope.Connection.Select<ViewAccessShare>(x => x.SharedUserId == user.Id);
-				scope.Complete();
-				return accessShares;
-			}
-		}
-		
-		public IEnumerable<ViewAccessShare> GetSharingAccessForUserId(Guid id)
-		{
-			using (var scope = new TransactionScope())
-			{
-				DbUser user = GetDbUserById(id);
-				IEnumerable<ViewAccessShare> accessShares =
-					scope.Connection.Select<ViewAccessShare>(x => x.SharingUserId == user.Id);
-				scope.Complete();
-				return accessShares;
-			}
 		}
 
 		#endregion

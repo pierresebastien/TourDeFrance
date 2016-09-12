@@ -1,6 +1,5 @@
 ﻿using System;
 using TourDeFrance.Client.Enums;
-using TourDeFrance.Client.User;
 
 namespace TourDeFrance.Client.Responses
 {
@@ -11,8 +10,6 @@ namespace TourDeFrance.Client.Responses
 		public bool RequireNewPasswordAtLogon { get; set; }
 		
 		public int NumberOfFailedAttempts { get; set; }
-
-		public AccessShare[] AccessShares { get; set; }
 	}
 
 	public class User : SimpleUser

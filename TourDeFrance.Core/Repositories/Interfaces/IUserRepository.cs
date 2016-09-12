@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using TourDeFrance.Client.Enums;
 using TourDeFrance.Core.Business;
 using TourDeFrance.Core.Business.Database;
-using TourDeFrance.Core.Business.Database.Views;
 
 namespace TourDeFrance.Core.Repositories.Interfaces
 {
@@ -45,7 +43,6 @@ namespace TourDeFrance.Core.Repositories.Interfaces
 		/// <returns></returns>
 		AuthenticatedUser GetAuthenticatedUser(string username);
 
-		void ConnectAs(Guid id);
 
 		/// <summary>
 		/// Send an email to the user with information to recover it's password
@@ -75,18 +72,5 @@ namespace TourDeFrance.Core.Repositories.Interfaces
 		DbUser GetUserByEmailAddress(string email, bool throwIfNotExist = true);
 
 		PagingResult<DbUser> GetUsers(string query, int offset, int max, bool? isBlocked, bool? isDisabled);
-
-		void ShareAccessRights(Guid sharingUserId, Guid sharedUserId);
-
-		void UnshareAccessRights(Guid sharingUserId, Guid sharedUserId);
-
-		/// <summary>
-		///    Retrieve the list of users with whom the specified user share his rights
-		/// </summary>
-		/// <param name="id">the id of the user</param>
-		/// <returns></returns>
-		IEnumerable<ViewAccessShare> GetSharingAccessForUserId(Guid id);
-
-		IEnumerable<ViewAccessShare> GetSharedAccessForUserId(Guid id);
 	}
 }

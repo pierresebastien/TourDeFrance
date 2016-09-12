@@ -91,7 +91,6 @@ namespace TourDeFrance.Core.Tools.DataBase
 			scope.Connection.CreateTable<DbVersion>(DropExistingDatabase);
 			scope.Connection.CreateTable<DbConfig>(DropExistingDatabase);
 			scope.Connection.CreateTable<DbUser>(DropExistingDatabase);
-			scope.Connection.CreateTable<DbAccessShare>(DropExistingDatabase);
 			scope.Connection.CreateTable<DbGlobalMailTemplate>(DropExistingDatabase);
 			scope.Connection.CreateTable<DbMailTemplate>(DropExistingDatabase);
 			scope.Connection.CreateTable<DbDrink>(DropExistingDatabase);

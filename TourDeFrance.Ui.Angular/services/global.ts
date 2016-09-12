@@ -9,11 +9,7 @@ module tourdefrance.services {
 		previousState: ng.ui.IState;
 		setError(message: string, accessedPage?: any);
 
-		getRealUser(): AuthenticatedUser;
 		getCurrentUser(): ng.IPromise<AuthenticatedUser>;
-
-		connectAs(userId: string);
-		logBack();
 	}
 
 	export class GlobalService implements IGlobalService {
@@ -36,22 +32,6 @@ module tourdefrance.services {
 			this.errorMessage = message;
 		}
 
-		public connectAs(userId: string) {
-			this.Restangular.one('users', userId)
-				.one('connect')
-				.put()
-				.then((newUser: AuthenticatedUser) => {
-					// TODO:
-					// var url: any = GlobalService.getWebUrl() + '#' + this.$state.get('root.home').url;
-					// this.$window.location = url;
-					// this.$window.location.reload();
-				});
-		}
-
-		public logBack() {
-			this.connectAs(this.realUser.id);
-		}
-
 		public getCurrentUser(): ng.IPromise<AuthenticatedUser> {
 			var deferred = this.$q.defer();
 
@@ -64,29 +44,13 @@ module tourdefrance.services {
 			return deferred.promise;
 		}
 
-		public getRealUser(): AuthenticatedUser {
-			return this.realUser;
-		}
-
 		private initialize(deferred: ng.IDeferred<AuthenticatedUser>): void {
-			var requests: ng.IPromise<void>[] = [];
-
-			requests.push(this.Restangular
+			this.Restangular
 				.all("users")
 				.one("me")
 				.get<AuthenticatedUser>()
-				.then((x: any) => this.currentUser = x));
-			requests.push(this.Restangular.all("users")
-				.one("realme")
-				.get<AuthenticatedUser>()
 				.then((x: any) => {
-					if (x != null) {
-						this.realUser = x;
-					}
-				}));
-
-			this.$q.all(requests)
-				.then(() => {
+					this.currentUser = x;
 					deferred.resolve(this.currentUser);
 				});
 		}

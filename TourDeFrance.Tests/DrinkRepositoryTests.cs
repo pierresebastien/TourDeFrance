@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TourDeFrance.Client.Enums;
+using TourDeFrance.Client.Requests;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Exceptions;
 using TourDeFrance.Core.Tools.DataBase;
