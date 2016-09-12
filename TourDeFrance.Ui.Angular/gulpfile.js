@@ -1,16 +1,18 @@
-/* TODO:
-- minify files -> https://github.com/terinjokes/gulp-uglify?
+/* TODO: 
+- use pump ? see https://github.com/terinjokes/gulp-uglify?
+- remove run-sequence if update to gulp 4
 */
 'use strict';
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var ts = require('gulp-typescript');
+var concat = require('gulp-concat');
+var rename = require("gulp-rename");
+var uglify = require('gulp-uglify');
 var gettext = require('gulp-angular-gettext');
-
-gulp.task('default', function() {
-  // place code for your default task here
-});
+var runSequence = require('run-sequence');
+var clean = require('gulp-clean');
 
 /* SASS */
 gulp.task('sass', function () {
@@ -61,7 +63,52 @@ gulp.task('translations', function () {
         .pipe(gulp.dest('./translations/'));
 });
 
+/* CONCAT */
+gulp.task('concat:models', function() {
+  return gulp.src(['./models/**/*.js'])
+    .pipe(concat('models.js'))
+    .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('concat:services', function() {
+  return gulp.src(['./services/**/*.js'])
+    .pipe(concat('services.js'))
+    .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('concat:controllers', function() {
+  return gulp.src(['./app/*/**/*.js'])
+    .pipe(concat('controllers.js'))
+    .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('concat:app', function() {
+  return gulp.src(['./app/config.js', './app/app.js'])
+    .pipe(concat('main.js'))
+    .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('concat', ['concat:models', 'concat:services', 'concat:controllers', 'concat:app']);
+
+/* UGLIFY */
+gulp.task('uglify', function () {
+  return gulp.src(['./dist/*.js'])
+	.pipe(rename({ suffix: '.min' }))
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist/'));
+});
+
+/* CLEAN */
+gulp.task('clean', function () {
+    return gulp.src(['./dist/', './translations/', './content/css/'], {read: false})
+        .pipe(clean());
+});
 
 /* GLOBAL TASKS */
-gulp.task('build', ['sass', 'typescript', 'pot']);
+gulp.task('default', function() {
+  // place code for your default task here
+});
+gulp.task('build', function(callback) {
+  runSequence('clean', ['sass', 'typescript', 'pot'], 'concat', 'uglify', callback);
+});
 gulp.task('watch', ['sass:watch', 'typescript:watch']);
