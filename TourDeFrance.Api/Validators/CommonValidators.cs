@@ -4,7 +4,7 @@ using TourDeFrance.Client.Interfaces;
 
 namespace TourDeFrance.Api.Validators
 {
-	public class ObjectByIdRequestValidator<T> : AbstractValidator<T> where T : IIdentifiable<string>
+	public class ObjectByIdRequestValidator: AbstractValidator<IIdentifiable<string>>
 	{
 		public ObjectByIdRequestValidator()
 		{
@@ -12,7 +12,7 @@ namespace TourDeFrance.Api.Validators
 		}
 	}
 
-	public class ObjectByGuidRequestValidator<T> : AbstractValidator<T> where T : IIdentifiable<Guid>
+	public class ObjectByGuidRequestValidator : AbstractValidator<IIdentifiable<Guid>>
 	{
 		public ObjectByGuidRequestValidator()
 		{

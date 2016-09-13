@@ -1,1 +1,13 @@
-﻿
+﻿<md-list flex>
+	<md-list-item ng-repeat="drink in drink.drinks" class="noright">
+		<p>{{ drink.name }}</p>
+		<md-button class="md-icon-button" aria-label="Edit">
+			<md-tooltip>Edit</md-tooltip>
+			<md-icon md-font-iconn="fa fa-fw fa-pencil"></md-icon>
+		</md-button>
+		<md-button class="md-fab" aria-label="Delete">
+			<md-tooltip>Delete</md-tooltip>
+			<md-icon md-font-icon="fa fa-fw fa-trash"></md-icon>
+		</md-button>
+	</md-list-item>
+</md-list>

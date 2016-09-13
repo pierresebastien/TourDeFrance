@@ -5,9 +5,9 @@ using TourDeFrance.Client.Requests;
 namespace TourDeFrance.Api.Validators
 {
 	// TODO: improve rules on email, username, password
-	public abstract class BaseUserRequestValidator<T> : AbstractValidator<T> where T : BaseUserRequest
+	public class BaseUserRequestValidator : AbstractValidator<BaseUserRequest>
 	{
-		protected BaseUserRequestValidator()
+		public BaseUserRequestValidator()
 		{
 			RuleFor(x => x.Password).Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage("Password can't be null or empty");
 			RuleFor(x => x.Email).Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage("Email can't be null or empty");
@@ -19,19 +19,21 @@ namespace TourDeFrance.Api.Validators
 		}
 	}
 
-	public class CreateUserRequestValidator : BaseUserRequestValidator<CreateUserRequest>
+	public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
 	{
 		public CreateUserRequestValidator()
 		{
+			Include(new BaseUserRequestValidator());
 			RuleFor(x => x.UserName).Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage("Username cannot be null or empty");
 		}
 	}
 
-	public class UpdateUserRequestValidator : BaseUserRequestValidator<UpdateUserRequest>
+	public class UpdateUserRequestValidator : AbstractValidator<UpdateUserRequest>
 	{
 		public UpdateUserRequestValidator()
 		{
-			RuleFor(r => r.Id).Must(x => x == Guid.Empty).WithMessage("Id cannot be empty");
+			Include(new ObjectByGuidRequestValidator());
+			Include(new BaseUserRequestValidator());
 		}
 	}
 }

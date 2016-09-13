@@ -1,7 +1,12 @@
-﻿﻿<h1 translate>Error 404!</h1>
-<p translate>Looks like Chuck Norris broke this page.</p>
-<p translate>... It may never recover.</p>
-<a ng-href="{{ error.previousState.url }}" translate>Go Back</a>
-<a ui-sref="root.home" translate>Back Home</a>
-
-<img src="../../content/chuck_norris_not_found.png" />
+﻿<div layout="row">
+	<div flex>
+		<h1 translate>Error 404!</h1>
+		<p translate>Looks like Chuck Norris broke this page.</p>
+		<p translate>... It may never recover.</p>
+		<a ng-href="{{ error.previousState.url }}" translate>Go Back</a>
+		<a ui-sref="root.home" translate>Back Home</a>
+	</div>
+	<div flex>
+		<img src="../../content/chuck_norris_not_found.png" />
+	</div>
+</div>

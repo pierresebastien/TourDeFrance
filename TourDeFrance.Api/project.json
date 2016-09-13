@@ -9,6 +9,7 @@
     "Nancy": "1.4.3",
     "Nancy.Bootstrappers.Autofac": "1.4.1",
     "Nancy.Owin": "1.4.1",
+    "FluentValidation": "6.2.1",
     "Nancy.Validation.FluentValidation": "1.4.1",
     "Newtonsoft.Json": "9.0.1",
     "TourDeFrance.Client": { "target": "project" },

@@ -102,7 +102,7 @@ namespace TourDeFrance.Core
 			{
 				if (ApiPort > 0)
 				{
-					return $"http{(IsSecure ? "s" : string.Empty)}://+{ApiPort}";
+					return $"http{(IsSecure ? "s" : string.Empty)}://+:{ApiPort}";
 				}
 				return string.Empty;
 			}

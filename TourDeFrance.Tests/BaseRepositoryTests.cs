@@ -224,13 +224,13 @@ namespace TourDeFrance.Tests
 	{
 		private static readonly IDialectProvider Provider = new PostgreSQLDialectProvider();
 
-		protected static readonly string BaseConnectionString = $"Server=127.0.0.1;Port=5432;User Id=tourdefrance;Password=password;Pooling=false;CommandTimeout=30;Database={SchemaName};";
+		protected static readonly string BaseConnectionString = $"Server=127.0.0.1;Port=5432;User Id=tourdefrance;Password=password;Pooling=false;CommandTimeout=30;Database={DatabaseName};";
 
 		protected override DatabaseType DatabaseType => DatabaseType.PostgreSQL;
 
 		protected override IDialectProvider DialectProvider => Provider;
 
-		protected override string ConnectionString => $"{BaseConnectionString}SearchPath={DatabaseName};";
+		protected override string ConnectionString => $"{BaseConnectionString}SearchPath={SchemaName};";
 
 		protected override void CleanDatabase()
 		{

@@ -15,9 +15,8 @@ class ApiSetUp {
 	}
 }
 
-// TODO: replace toastr by matrial - toast
 class RestangularConfig { // Used in a .run since .config does not allow Services
-	constructor(Restangular: restangular.IProvider, $state: ng.ui.IStateService, GlobalService: tourdefrance.services.IGlobalService, $mdToast: ng.material.IToastService, $location: ng.ILocationService, $window: Window) {
+	constructor(Restangular: restangular.IProvider, $state: ng.ui.IStateService, GlobalService: tourdefrance.services.IGlobalService, $mdToast: ng.material.IToastService) {
 		Restangular.setErrorInterceptor((response: restangular.IResponse, deferred: ng.IDeferred<any>) => {
 			var currentState = {
 				name: $state.current.name,
@@ -26,16 +25,17 @@ class RestangularConfig { // Used in a .run since .config does not allow Service
 			};
 			switch (response.status) {
 			case 400: // Bad Request = TourDeFranceException
-				// TODO: check angular toast usage !!!
-				//var toastOptions: ng.material.IToastOptions = {};
 				//toastOptions.closeButton = true;
-				//toastOptions.newestOnTop = true;
-				//toastOptions.positionClass = "toast-top-full-width";
 				//toastOptions.timeOut = 0;
 				//toastOptions.hideDuration = 0;
 				//toastOptions.showDuration = 0;
-				//$mdToast.options = toastOptions;
-				//$mdToast.show(response.data, "Bad Request");
+				//toastr.show(response.data, "Bad Request");
+				$mdToast.show(
+					$mdToast.simple()
+					.textContent(response.data)
+					.position('top right')
+					.hideDelay(3000)
+				);
 				return true; // The error is not handled and the calling function will execute its error callback
 			case 401: // Unauthorized
 				$state.go("login");

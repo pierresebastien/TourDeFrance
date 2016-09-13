@@ -39,15 +39,12 @@ namespace TourDeFrance.Api
 			}
 		}
 
-		protected override void ConfigureApplicationContainer(ILifetimeScope existingContainer)
+		protected override ILifetimeScope GetApplicationContainer()
 		{
-			Logger.Debug("Configuring Application Container");
-			ContainerBuilder builder = new ContainerBuilder();
-			builder.Update(existingContainer.ComponentRegistry);
-			builder.Update(_container);
+			return _container;
 		}
 
-		// TODO: to check + soem config keys ???
+		// TODO: to check + some config keys ??? + initialize tour de france context ??
 		protected override void RequestStartup(ILifetimeScope container, IPipelines pipelines, NancyContext context)
 		{
 			Logger.Debug($"RequestStartup: {context.Request.Url}");

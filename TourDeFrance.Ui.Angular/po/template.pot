@@ -4,11 +4,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: shared\not_found.tpl.html:3
+#: shared\not_found.tpl.html:5
 msgid "... It may never recover."
 msgstr ""
 
-#: shared\not_found.tpl.html:5
+#: shared\not_found.tpl.html:7
 msgid "Back Home"
 msgstr ""
 
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: shared\not_found.tpl.html:1
+#: shared\not_found.tpl.html:3
 msgid "Error 404!"
 msgstr ""
 
@@ -32,11 +32,11 @@ msgstr ""
 msgid "Games"
 msgstr ""
 
-#: shared\forbidden.tpl.html:3
+#: shared\forbidden.tpl.html:4
 msgid "Get <span ui-sref=\"root.home\">outta here</span> before Chuck Norris finds you!"
 msgstr ""
 
-#: shared\not_found.tpl.html:4
+#: shared\not_found.tpl.html:6
 msgid "Go Back"
 msgstr ""
 
@@ -44,7 +44,7 @@ msgstr ""
 msgid "History"
 msgstr ""
 
-#: shared\not_found.tpl.html:2
+#: shared\not_found.tpl.html:4
 msgid "Looks like Chuck Norris broke this page."
 msgstr ""
 
@@ -80,6 +80,6 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: shared\forbidden.tpl.html:1
+#: shared\forbidden.tpl.html:3
 msgid "Whoa, you don't have sufficient priviliges to acces this page."
 msgstr ""

@@ -13,10 +13,11 @@ namespace TourDeFrance.Api.Validators
 		}
 	}
 
-	public class UpdateRaceStageRequestValidator : ObjectByGuidRequestValidator<UpdateRaceStageRequest>
+	public class UpdateRaceStageRequestValidator : AbstractValidator<UpdateRaceStageRequest>
 	{
 		public UpdateRaceStageRequestValidator()
 		{
+			Include(new ObjectByGuidRequestValidator());
 			RuleFor(x => x.Order).GreaterThan(0).WithMessage("Order must be strictly positive");
 		}
 	}

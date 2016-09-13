@@ -77,14 +77,14 @@ namespace TourDeFrance.Core
 		public Type EmailTemplateRepositoryType { get; set; }
 		public Type SearchHistoryRepositoryType { get; set; }
 
-		public void Initialize(ApplicationConfig config, ContainerBuilder builder = null)
+		public void Initialize(ApplicationConfig config)
 		{
 			// TODO: or all assemblies ?
 			Assembly[] assemblies =
 				Directory.GetFiles(config.ApplicationPath, "*.dll")
 						 .Where(x => Path.GetFileName(x).StartsWith("TourDeFrance")).Select(Assembly.LoadFrom).ToArray();
 
-			var b = builder ?? new ContainerBuilder();
+			var b = new ContainerBuilder();
 			try
 			{
 				b.RegisterInstance(DialectProvider).AsSelf().AsImplementedInterfaces().SingleInstance();

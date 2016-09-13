@@ -4,7 +4,7 @@ using TourDeFrance.Client.Requests;
 
 namespace TourDeFrance.Api.Validators
 {
-    public class CreateRiderRequestValidator<T> : AbstractValidator<T> where T : CreateRiderRequest
+    public class CreateRiderRequestValidator : AbstractValidator<CreateRiderRequest>
 	{
 		public CreateRiderRequestValidator()
 		{
@@ -18,11 +18,12 @@ namespace TourDeFrance.Api.Validators
 		}
 	}
 
-	public class UpdateRiderRequestValidator : CreateRiderRequestValidator<UpdateRiderRequest>
+	public class UpdateRiderRequestValidator : AbstractValidator<UpdateRiderRequest>
 	{
 		public UpdateRiderRequestValidator()
 		{
-			RuleFor(r => r.Id).Must(x => x == Guid.Empty).WithMessage("Id cannot be empty");
+			Include(new ObjectByGuidRequestValidator());
+			Include(new CreateRiderRequestValidator());
 		}
 	}
 }
