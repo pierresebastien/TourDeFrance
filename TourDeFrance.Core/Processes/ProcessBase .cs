@@ -15,6 +15,8 @@ namespace TourDeFrance.Core.Processes
 
 		public abstract bool MustRun { get; }
 
+		protected Setup Setup { get; private set; }
+
 		protected ProcessBase(string name)
 		{
 			Name = name;
@@ -23,8 +25,9 @@ namespace TourDeFrance.Core.Processes
 			Schedule = "* * * * *";
 		}
 
-		public virtual void Initializing()
+		public virtual void Initializing(Setup setup)
 		{
+			Setup = setup;
 		}
 
 		public virtual void Starting()

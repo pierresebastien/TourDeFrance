@@ -9,20 +9,20 @@ using TourDeFrance.Core.Processes;
 
 namespace TourDeFrance.Api.Processes
 {
-    public class ApiSelfHostProcess : ProcessBase
-    {
-	    private readonly Config _config;
-	    private static readonly ILog Logger = LogProvider.For<ApiSelfHostProcess>();
+	public class ApiSelfHostProcess : ProcessBase
+	{
+		private readonly Config _config;
+		private static readonly ILog Logger = LogProvider.For<ApiSelfHostProcess>();
 		private IDisposable _webApp;
 
 		public ApiSelfHostProcess(Config config) : base("API Self Host")
-	    {
-		    _config = config;
-		    WatchdogDelay = TimeSpan.MaxValue;
-		    LoopDelay = TimeSpan.MaxValue;
-	    }
+		{
+			_config = config;
+			WatchdogDelay = TimeSpan.MaxValue;
+			LoopDelay = TimeSpan.MaxValue;
+		}
 
-	    public override bool MustRun => !string.IsNullOrWhiteSpace(_config.ApiUri);
+		public override bool MustRun => !string.IsNullOrWhiteSpace(_config.ApiUri);
 
 		public override void Starting()
 		{
@@ -40,7 +40,7 @@ namespace TourDeFrance.Api.Processes
 		{
 			app.Map("/api", x =>
 			{
-				var options = new NancyOptions {Bootstrapper = new Bootstrapper(Context.Current.Container)};
+				var options = new NancyOptions {Bootstrapper = new Bootstrapper(Setup)};
 				x.UseNancy(options);
 			});
 		}

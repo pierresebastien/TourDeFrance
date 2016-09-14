@@ -2,6 +2,7 @@
 using Nancy.ModelBinding;
 using Nancy;
 using TourDeFrance.Client.Responses;
+using TourDeFrance.Core;
 
 namespace TourDeFrance.Api.Services
 {
@@ -17,7 +18,9 @@ namespace TourDeFrance.Api.Services
 
 		public AuthenticatedUser Me()
 		{
-			return CurrentUser.ToAuthenticatedModel();
+			// TODO: to change
+			// return CurrentUser.ToAuthenticatedModel();
+			return UserRepository.GetAuthenticatedUser(Constants.ADMIN_USERNAME).ToAuthenticatedModel();
 		}
 
 		public User GetUser(ObjectByGuidRequest request)

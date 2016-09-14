@@ -1,5 +1,4 @@
 ﻿using ASK.ServEasy;
-using System.Threading;
 using TourDeFrance.Core;
 using TourDeFrance.Core.Interfaces;
 
@@ -11,7 +10,7 @@ namespace TourDeFrance.Service
 		private readonly IProcess _process;
 
 		public ProcessModuleThread(Setup setup, IProcess process)
-			: base(process.Name, ApartmentState.MTA, true, false)
+			: base(process.Name)
 		{
 			_setup = setup;
 			_process = process;
@@ -26,13 +25,13 @@ namespace TourDeFrance.Service
 
 		protected override void Initializing()
 		{
-			_process.Initializing();
+			_process.Initializing(_setup);
 		}
 
 		protected override void Starting()
 		{
 			_setup.InitializeContext();
-			Context.Current.User = Context.Current.UserRepository.GetAuthenticatedUser(Constants.SYSTEM_USERNAME);
+			Context.Current.User = Context.Current.UserRepository.GetAuthenticatedUser(Constants.ADMIN_USERNAME);
 			_process.Starting();
 		}
 

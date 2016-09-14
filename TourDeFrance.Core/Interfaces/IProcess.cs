@@ -14,7 +14,7 @@ namespace TourDeFrance.Core.Interfaces
 
 		bool MustRun { get; }
 
-		void Initializing();
+		void Initializing(Setup setup);
 
 		void Starting();
 
