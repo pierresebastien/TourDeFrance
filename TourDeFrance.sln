@@ -13,7 +13,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6E93B10-3529-41FE-8C0D-45641711C991}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
-		SolutionInfo.cs = SolutionInfo.cs
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TourDeFrance.Client", "TourDeFrance.Client\TourDeFrance.Client.xproj", "{50823627-6F3F-4353-8930-E9C432B30E3E}"

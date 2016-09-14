@@ -1,6 +1,9 @@
 {
+  "name": "TourDeFrance.Service",
   "version": "0.1.0.0",
   "description": "Service part of Tour de France application",
+  "copyright": "Copyright © Sébastien Pierre 2015-2016",
+  "title": "Tour de France Service",
   "authors": [ "Sébastien Pierre" ],
 
   "dependencies": {

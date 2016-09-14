@@ -1,6 +1,9 @@
 {
+  "name" : "TourDeFrance.Core",
   "version": "0.1.0.0",
   "description": "Business core of Tour de France application",
+  "copyright": "Copyright © Sébastien Pierre 2015-2016",
+  "title": "Tour de France Core",
   "authors": [ "Sébastien Pierre" ],
 
   "dependencies": {

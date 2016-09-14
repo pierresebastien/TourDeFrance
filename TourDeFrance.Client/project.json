@@ -1,6 +1,9 @@
 ﻿{
+  "name": "TourDeFrance.Client",
   "version": "0.1.0.0",
   "description": "Client objects of Tour de France application",
+  "copyright": "Copyright © Sébastien Pierre 2015-2016",
+  "title": "Tour de France Client",
   "authors": [ "Sébastien Pierre" ],
 
   "dependencies": {
