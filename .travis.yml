@@ -1,6 +1,7 @@
 language: csharp
 solution: TourDeFrance.sln
 mono: latest
+dotnet: 1.0.0-preview2-003121
 install:
   - dotnet restore
   - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
