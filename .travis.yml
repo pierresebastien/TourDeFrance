@@ -1,0 +1,7 @@
+language: csharp
+solution: TourDeFrance.sln
+install:
+  - nuget TourDeFrance.sln
+script:
+  - xbuild /p:Configuration=Debug TourDeFrance.sln
+  - mono ./packages/NUnit.Runners.2.6.4/tools/nunit-console.exe TourDeFrance.Tests/bin/Debug/net45/TourDeFrance.Tests.dlls
