@@ -55,9 +55,9 @@ namespace TourDeFrance.Core.Business
 		[Ignore]
 		public decimal GameVolume => OverridedVolume ?? Volume ?? 0;
 
-		public Client.Stage.StageDrink ToModel()
+		public Client.Responses.StageDrink ToModel()
 		{
-			return new Client.Stage.StageDrink
+			return new Client.Responses.StageDrink
 			{
 				Id = Id,
 				DrinkId = DrinkId,

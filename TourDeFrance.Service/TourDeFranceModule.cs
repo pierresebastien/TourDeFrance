@@ -6,7 +6,6 @@ using SimpleStack.Orm;
 using SimpleStack.Orm.PostgreSQL;
 using TourDeFrance.Core;
 using TourDeFrance.Core.Interfaces;
-using TourDeFrance.Core.Tools;
 using TourDeFrance.Core.Tools.DataBase;
 using Module = ASK.ServEasy.Module;
 
@@ -34,7 +33,7 @@ namespace TourDeFrance.Service
 			Setup setup = new Setup(dialectProvider);
 			setup.Initialize(config);
 			setup.InitializeContext();
-			Context.Current.User = Context.Current.UserRepository.GetAuthenticatedUser("System");
+			Context.Current.User = Context.Current.UserRepository.GetAuthenticatedUser(Constants.ADMIN_USERNAME);
 
 			foreach (IProcess process in setup.Container.Resolve<IEnumerable<IProcess>>())
 			{

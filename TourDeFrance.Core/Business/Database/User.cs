@@ -1,6 +1,7 @@
 ﻿using System;
 using SimpleStack.Orm.Attributes;
 using TourDeFrance.Client.Enums;
+using TourDeFrance.Client.Responses;
 
 namespace TourDeFrance.Core.Business.Database
 {
@@ -66,7 +67,7 @@ namespace TourDeFrance.Core.Business.Database
 		[Ignore]
 		public string DisplayName => FirstName + " " + LastName;
 
-		protected T ToSimpleModel<T>() where T: Client.User.SimpleUser, new()
+		protected T ToSimpleModel<T>() where T: SimpleUser, new()
 		{
 			return new T
 			{
@@ -82,12 +83,12 @@ namespace TourDeFrance.Core.Business.Database
 			};
 		}
 
-		public Client.User.SimpleUser ToSimpleModel()
+		public SimpleUser ToSimpleModel()
 		{
-			return ToSimpleModel<Client.User.SimpleUser>();
+			return ToSimpleModel<SimpleUser>();
 		}
 
-		protected T ToModel<T>() where T : Client.User.User, new()
+		protected T ToModel<T>() where T : User, new()
 		{
 			T user = ToSimpleModel<T>();
 			user.Height = Height;
@@ -98,9 +99,9 @@ namespace TourDeFrance.Core.Business.Database
 			return user;
 		}
 
-		public Client.User.User ToModel()
+		public User ToModel()
 		{
-			return ToModel<Client.User.User>();
+			return ToModel<User>();
 		}
 	}
 }

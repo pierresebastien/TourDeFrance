@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using log4net;
 using ServiceStack.CacheAccess;
 using ServiceStack.Net30.Collections.Concurrent;
+using TourDeFrance.Core.Logging;
+using TourDeFrance.Core.Extensions;
 
 namespace TourDeFrance.Core.Tools.Cache
 {
 	public sealed class MemoryCacheClient : ICacheClient
 	{
-		private static readonly ILog Log = LogManager.GetLogger(typeof(MemoryCacheClient));
+		private static readonly ILog Log = LogProvider.For<MemoryCacheClient>();
 
 		private ConcurrentDictionary<string, CacheEntry> _memory;
 		private ConcurrentDictionary<string, int> _counters;
@@ -131,7 +132,7 @@ namespace TourDeFrance.Core.Tools.Cache
 				}
 				catch (Exception ex)
 				{
-					Log.Error($"Error trying to remove {key} from the cache", ex);
+					Log.ErrorException($"Error trying to remove {key} from the cache", ex);
 				}
 			}
 		}

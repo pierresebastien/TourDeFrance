@@ -23,9 +23,9 @@ namespace TourDeFrance.Core.Business
 		[Ignore]
 		public decimal CalculatedAlcoholByVolume => AlcoholByVolume.CalculateDrinkAlcoholByVolume(SubDrinks);
 
-		public Client.Drink.Drink ToModel()
+		public Client.Responses.Drink ToModel()
 		{
-			return new Client.Drink.Drink
+			return new Client.Responses.Drink
 			{
 				Id = Id,
 				Name = Name,
@@ -71,9 +71,9 @@ namespace TourDeFrance.Core.Business
 		[Alias("name")]
 		public string Name { get; set; }
 
-		public Client.Drink.SubDrink ToModel()
+		public Client.Responses.SubDrink ToModel()
 		{
-			return new Client.Drink.SubDrink
+			return new Client.Responses.SubDrink
 			{
 				Id = Id,
 				DrinkId = SubDrinkId,

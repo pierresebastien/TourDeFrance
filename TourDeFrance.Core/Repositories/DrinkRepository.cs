@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dapper;
-using TourDeFrance.Client.Drink;
+using TourDeFrance.Client.Requests;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Exceptions;
 using TourDeFrance.Core.Extensions;
@@ -36,7 +36,7 @@ namespace TourDeFrance.Core.Repositories
 				alcoholByVolume.EnsureIsNotNull("Alcohol by volume must be specified");
 				volume.EnsureIsNotNull("Volume must be specified");
 				alcoholByVolume?.EnsureIsPositive("Alcohol by volume must be >= 0");
-				volume?.EnsureIsStrictlyPositive("Volume mus be > 0");
+				volume?.EnsureIsStrictlyPositive("Volume must be > 0");
 			}
 
 			using (var scope = new TransactionScope())
@@ -65,13 +65,13 @@ namespace TourDeFrance.Core.Repositories
 				}
 
 				Drink result = GetDrinkById(drink.Id);
+				Cache.Remove(drink.Id.GenerateCacheKey<Drink>());
+
 				scope.Complete();
 				return result;
 			}
 		}
 
-		// TODO: invalidate before get drink by id
-		// TODO : or return db object for each create, update and delete methods
 		[InvalidateCache(types: new[] { typeof(Drink) }, typeArgumentOrders: new[] { 0 })]
 		public Drink UpdateDrink(Guid id, string name, decimal? alcoholByVolume, decimal? volume, IEnumerable<SubDrinkDefinition> subDrinks)
 		{
@@ -107,7 +107,7 @@ namespace TourDeFrance.Core.Repositories
 				drink.AlcoholByVolume = alcoholByVolume;
 				drink.Volume = volume;
 				drink.BeforeUpdate();
-				scope.Connection.Update(drink);
+				scope.Connection.Update<DbDrink>(drink);
 
 				scope.Connection.DeleteAll<DbSubDrink>(x => x.DrinkId == drink.Id);
 				foreach (var subDrink in subDrinksList)
@@ -127,6 +127,7 @@ namespace TourDeFrance.Core.Repositories
 					scope.Connection.Insert(dbSubDrink);
 				}
 
+				Cache.Remove(drink.Id.GenerateCacheKey<Drink>());
 				Drink result = GetDrinkById(drink.Id);
 				scope.Complete();
 				return result;

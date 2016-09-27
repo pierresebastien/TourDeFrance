@@ -3,12 +3,12 @@
   "major" integer,
   "minor" integer,
   "patch" integer,
-  PRIMARY KEY("major", "minor", "revision")
+  PRIMARY KEY("major", "minor", "patch")
 ); 
 
 CREATE TABLE "config" 
 (
-  "key" text NULL, 
+  "key" citext NOT NULL, 
   "value" text NULL, 
   "default_value" text NULL, 
   "display_name" text NULL, 
@@ -27,14 +27,14 @@ CREATE UNIQUE INDEX uidx_config_key ON "config" ("key" ASC);
 
 CREATE TABLE "users" 
 (
-  "username" text NULL, 
+  "username" citext NOT NULL, 
   "password" text NULL, 
   "salt" text NULL, 
-  "first_name" text NULL, 
-  "last_name" text NULL, 
+  "first_name" citext NULL, 
+  "last_name" citext NULL, 
   "gender" text NOT NULL, 
   "birth_date" timestamp NULL, 
-  "email" text NULL, 
+  "email" citext NULL, 
   "is_administrator" boolean NOT NULL, 
   "is_blocked" boolean NOT NULL, 
   "is_disabled" boolean NOT NULL, 
@@ -42,7 +42,7 @@ CREATE TABLE "users"
   "previous_passwords" text NULL, 
   "require_new_password_at_logon" boolean NOT NULL, 
   "number_of_failed_attempts" integer NOT NULL, 
-  "api_key" text NULL,
+  "api_key" citext NULL,
   "height" numeric(38,6) NULL,
   "weight" numeric(38,6) NULL, 
   "id" uuid PRIMARY KEY, 
@@ -53,22 +53,10 @@ CREATE TABLE "users"
 
 CREATE UNIQUE INDEX uidx_users_username ON "users" ("username" ASC); 
 
-CREATE TABLE "access_shares" 
-(
-  "sharing_user_id" uuid NOT NULL, 
-  "shared_user_id" uuid NOT NULL, 
-  "id" uuid PRIMARY KEY, 
-  "creation_date" timestamp NOT NULL, 
-  "last_update_date" timestamp NOT NULL, 
-  "last_update_by" text NULL, 
-  CONSTRAINT "FK_access_shares_users_sharing_user_id" FOREIGN KEY ("sharing_user_id") REFERENCES "users" ("id"), 
-  CONSTRAINT "FK_access_shares_users_shared_user_id" FOREIGN KEY ("shared_user_id") REFERENCES "users" ("id") 
-); 
-
 CREATE TABLE "global_mail_templates" 
 (
   "template" text NULL, 
-  "name" text NULL, 
+  "name" citext NULL, 
   "id" uuid PRIMARY KEY, 
   "creation_date" timestamp NOT NULL, 
   "last_update_date" timestamp NOT NULL, 
@@ -89,7 +77,7 @@ CREATE TABLE "mail_templates"
   "footer_template" text NULL, 
   "number_of_override" integer NULL, 
   "owner" uuid NOT NULL, 
-  "name" text NULL, 
+  "name" citext NULL, 
   "id" uuid PRIMARY KEY, 
   "creation_date" timestamp NOT NULL, 
   "last_update_date" timestamp NOT NULL, 
@@ -106,7 +94,7 @@ CREATE TABLE "drinks"
   "alcohol_by_volume" numeric(38,6) NULL,
   "volume" numeric(38,6) NULL, 
   "owner" uuid NOT NULL, 
-  "name" text NULL, 
+  "name" citext NULL, 
   "id" uuid PRIMARY KEY, 
   "creation_date" timestamp NOT NULL, 
   "last_update_date" timestamp NOT NULL, 
@@ -133,7 +121,7 @@ CREATE TABLE "stages"
 (
   "duration" integer NOT NULL, 
   "owner" uuid NOT NULL, 
-  "name" text NULL, 
+  "name" citext NULL, 
   "id" uuid PRIMARY KEY, 
   "creation_date" timestamp NOT NULL, 
   "last_update_date" timestamp NOT NULL, 
@@ -162,7 +150,7 @@ CREATE TABLE "stage_drinks"
 CREATE TABLE "races" 
 (
   "owner" uuid NOT NULL, 
-  "name" text NULL, 
+  "name" citext NULL, 
   "id" uuid PRIMARY KEY, 
   "creation_date" timestamp NOT NULL, 
   "last_update_date" timestamp NOT NULL, 
@@ -190,7 +178,7 @@ CREATE TABLE "teams"
 (
   "logo" bytea NULL, 
   "owner" uuid NOT NULL, 
-  "name" text NULL, 
+  "name" citext NULL, 
   "id" uuid PRIMARY KEY, 
   "creation_date" timestamp NOT NULL, 
   "last_update_date" timestamp NOT NULL, 
@@ -203,8 +191,8 @@ CREATE UNIQUE INDEX uidx_teams_name ON "teams" ("name" ASC);
 
 CREATE TABLE "riders" 
 (
-  "first_name" text NULL, 
-  "last_name" text NULL, 
+  "first_name" citext NULL, 
+  "last_name" citext NULL, 
   "gender" text NOT NULL, 
   "birth_date" timestamp NULL, 
   "nationality" text NULL, 
@@ -238,9 +226,9 @@ CREATE TABLE "games"
 
 CREATE TABLE "players" 
 (
-  "nickname" text NULL, 
-  "first_name" text NULL, 
-  "last_name" text NULL, 
+  "nickname" citext NULL, 
+  "first_name" citext NULL, 
+  "last_name" citext NULL, 
   "gender" text NOT NULL, 
   "birth_date" timestamp NULL, 
   "height" numeric(38,6) NULL,

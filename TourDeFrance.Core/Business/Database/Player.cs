@@ -1,6 +1,7 @@
 ﻿using System;
 using SimpleStack.Orm.Attributes;
 using TourDeFrance.Client.Enums;
+using TourDeFrance.Client.Responses;
 
 namespace TourDeFrance.Core.Business.Database
 {
@@ -31,9 +32,9 @@ namespace TourDeFrance.Core.Business.Database
 
 		// TODO: picure ???
 
-		public Client.Player.Player ToModel()
+		public Player ToModel()
 		{
-			return new Client.Player.Player
+			return new Player
 			{
 				Id = Id,
 				OwnerId = Owner,

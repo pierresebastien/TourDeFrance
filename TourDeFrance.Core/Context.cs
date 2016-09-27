@@ -24,6 +24,7 @@ namespace TourDeFrance.Core
 			EventDispatcher = container.Resolve<EventDispatcher>();
 			Cache = container.Resolve<ICacheClient>();
 			EmailSender = container.Resolve<IEmailSender>();
+			PrioritizedStack = container.Resolve<IPrioritizedStack>();
 		}
 
 		public static Context Current
@@ -100,6 +101,8 @@ namespace TourDeFrance.Core
 		public ICacheClient Cache { get; private set; }
 
 		public IEmailSender EmailSender { get; private set; }
+
+		public IPrioritizedStack PrioritizedStack { get; private set; }
 
 		#region Repositories
 

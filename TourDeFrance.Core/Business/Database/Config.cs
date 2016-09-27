@@ -3,6 +3,7 @@ using System.Linq;
 using ServiceStack.Text;
 using SimpleStack.Orm.Attributes;
 using TourDeFrance.Client.Enums;
+using TourDeFrance.Client.Interfaces;
 using TourDeFrance.Core.Exceptions;
 using TourDeFrance.Core.Extensions;
 using TourDeFrance.Core.Interfaces;
@@ -100,7 +101,7 @@ namespace TourDeFrance.Core.Business.Database
 			}
 		}
 
-		public Client.Config.Config ToModel()
+		public Client.Responses.Config ToModel()
 		{
 			object value;
 			switch (Type)
@@ -120,7 +121,7 @@ namespace TourDeFrance.Core.Business.Database
 				default:
 					throw new ArgumentOutOfRangeException(string.Empty, $"Invalid config type : {Type}");
 			}
-			return new Client.Config.Config
+			return new Client.Responses.Config
 			{
 				Key = Key,
 				StringValue = Value,

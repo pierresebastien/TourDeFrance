@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using ServiceStack.Common;
 using TourDeFrance.Core.Business;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Exceptions;
@@ -478,21 +477,23 @@ namespace TourDeFrance.Tests
 			DbRace race = RaceRepository.CreateRace("Test");
 			RaceRepository.AddStageToRace(race.Id, stage1.Id);
 
-			DbRaceStage raceStage = RaceRepository.AddStageToRace(race.Id, stage2.Id).TranslateTo<DbRaceStage>();
+			Guid raceStageId = RaceRepository.AddStageToRace(race.Id, stage2.Id).Id;
+			DbRaceStage raceStage = RaceRepository.GetRaceStageById(raceStageId);
 			Assert.AreEqual(race.Id, raceStage.RaceId);
 			Assert.AreEqual(stage2.Id, raceStage.StageId);
 			Assert.AreEqual(2, raceStage.Order);
-			CheckCache(raceStage, raceStage.Id, id => RaceRepository.GetRaceStageById(id));
+			CheckCache(raceStage, raceStageId);
 
-			raceStage = RaceRepository.ChangeStageOrder(raceStage.Id, 1).TranslateTo<DbRaceStage>();
+			RaceRepository.ChangeStageOrder(raceStage.Id, 1);
+			raceStage = RaceRepository.GetRaceStageById(raceStageId);
 			Assert.AreEqual(race.Id, raceStage.RaceId);
 			Assert.AreEqual(stage2.Id, raceStage.StageId);
 			Assert.AreEqual(1, raceStage.Order);
-			CheckCache(raceStage, raceStage.Id, id => RaceRepository.GetRaceStageById(id));
+			CheckCache(raceStage, raceStageId);
 
-			RaceRepository.RemoveStageFromRace(raceStage.Id);
-			Assert.IsNull(GetCacheObject<DbStageDrink>(raceStage.Id));
-			Assert.Throws<NotFoundException>(() => RaceRepository.GetRaceStageById(raceStage.Id));
+			RaceRepository.RemoveStageFromRace(raceStageId);
+			Assert.IsNull(GetCacheObject<DbStageDrink>(raceStageId));
+			Assert.Throws<NotFoundException>(() => RaceRepository.GetRaceStageById(raceStageId));
 		}
 
 		#endregion

@@ -1,0 +1,133 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: shared\not_found.tpl.html:5
+msgid "... It may never recover."
+msgstr ""
+
+#: management\drinks\create.tpl.html:26
+msgid "ABV"
+msgstr ""
+
+#: management\drinks\create.tpl.html:33
+msgid "Alcohol by volume is required."
+msgstr ""
+
+#: management\drinks\create.tpl.html:35
+msgid "Alcohol by volume must be < 100."
+msgstr ""
+
+#: management\drinks\create.tpl.html:34
+msgid "Alcohol by volume must be >= 0."
+msgstr ""
+
+#: shared\not_found.tpl.html:7
+msgid "Back Home"
+msgstr ""
+
+#: shared\menu.js:33
+msgid "Config"
+msgstr ""
+
+#: management\drinks\drinks.tpl.html:31
+msgid "Delete"
+msgstr ""
+
+#: shared\menu.js:22
+msgid "Drinks"
+msgstr ""
+
+#: management\drinks\drinks.tpl.html:27
+msgid "Edit"
+msgstr ""
+
+#: shared\error.tpl.html:1
+msgid "Error"
+msgstr ""
+
+#: shared\not_found.tpl.html:3
+msgid "Error 404!"
+msgstr ""
+
+#: shared\menu.js:15
+msgid "Games"
+msgstr ""
+
+#: shared\forbidden.tpl.html:4
+msgid "Get <span ui-sref=\"root.home\">outta here</span> before Chuck Norris finds you!"
+msgstr ""
+
+#: shared\not_found.tpl.html:6
+msgid "Go Back"
+msgstr ""
+
+#: shared\menu.js:16
+msgid "History"
+msgstr ""
+
+#: management\drinks\create.tpl.html:12
+msgid "Is composed drink ?"
+msgstr ""
+
+#: shared\not_found.tpl.html:4
+msgid "Looks like Chuck Norris broke this page."
+msgstr ""
+
+#: shared\error.tpl.html:4
+msgid "More informations"
+msgstr ""
+
+#: management\drinks\create.tpl.html:4
+msgid "Name"
+msgstr ""
+
+#: management\drinks\create.tpl.html:7
+msgid "Name is required."
+msgstr ""
+
+#: shared\menu.js:24
+msgid "Races"
+msgstr ""
+
+#: shared\menu.js:25
+msgid "Riders"
+msgstr ""
+
+#: shared\menu.js:23
+msgid "Stages"
+msgstr ""
+
+#: shared\menu.js:26
+msgid "Teams"
+msgstr ""
+
+#: shared\api_stopped.tpl.html:1
+msgid "The application is not running"
+msgstr ""
+
+#: shared\error.tpl.html:2
+msgid "There was an error processing your request."
+msgstr ""
+
+#: shared\menu.js:32
+msgid "Users"
+msgstr ""
+
+#: management\drinks\create.tpl.html:16
+msgid "Volume"
+msgstr ""
+
+#: management\drinks\create.tpl.html:20
+msgid "Volume is required."
+msgstr ""
+
+#: management\drinks\create.tpl.html:21
+msgid "Volume must be > 0."
+msgstr ""
+
+#: shared\forbidden.tpl.html:3
+msgid "Whoa, you don't have sufficient priviliges to acces this page."
+msgstr ""

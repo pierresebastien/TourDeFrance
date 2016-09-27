@@ -1,0 +1,36 @@
+﻿<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" hide-print>
+	<!--<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" hide-print>-->
+	<header class="nav-header">
+		<a layout="column" ui-sref="root.home">
+			<!--<a layout="column" ui-sref="root.home" class="docs-logo">-->
+			<img class="md-avatar" gravatar-src="'{{menu.currentUser.email}}'"/>
+			<h1 class="md-heading">{{menu.currentUser.displayName}}</h1>
+			<!--<h1 class="docs-logotype md-heading">{{menu.currentUser.displayName}}</h1>-->
+		</a>
+	</header>
+	<md-content flex role="navigation">
+		<ul>
+			<!--<ul class="docs-menu">-->
+			<li ng-repeat="section in menu.sections">
+				<!--<li ng-repeat="section in menu.sections" class="parent-list-item">-->
+				<md-button class="md-button-toggle" aria-controls="menu-{{section.name}}" aria-expanded="false">
+					<div flex layout="row">
+						{{section.name}}
+						<span flex></span>
+						<span aria-hidde="true" class="md-toggle-icon">
+							<md-icon md-font-icon="fa fa-fw fa-angle-down"></md-icon>
+						</span>
+					</div>
+				</md-button>
+				<ul id="menu-{{section.name}}" class="menu-toggle-list">
+					<li ng-repeat="subSection in section.subSections">
+						<md-button ui-sref="{{subSection.route}}">
+							<md-icon md-font-icon="fa fa-fw fa-{{subSection.icon}}"></md-icon>
+							<span>{{subSection.name}}</span>
+						</md-button>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</md-content>
+</md-sidenav>

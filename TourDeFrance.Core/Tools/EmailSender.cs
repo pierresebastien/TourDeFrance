@@ -1,5 +1,4 @@
-﻿using log4net;
-using MimeKit;
+﻿using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,6 +7,7 @@ using System.Net.Configuration;
 using System.Net.Mail;
 using TourDeFrance.Core.Extensions;
 using TourDeFrance.Core.Interfaces;
+using TourDeFrance.Core.Logging;
 using TourDeFrance.Core.Repositories.Interfaces;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
@@ -17,7 +17,7 @@ namespace TourDeFrance.Core.Tools
 	{
 		private readonly IEmailTemplateRepository _emailTemplateRepository;
 		private readonly Config _config;
-		private static readonly ILog Logger = LogManager.GetLogger(typeof(EmailSender));
+		private static readonly ILog Logger = LogProvider.For<EmailSender>();
 
 		protected static readonly Action<MimeMessage> SendMail;
 		protected static readonly SmtpSection SmtpConfig;

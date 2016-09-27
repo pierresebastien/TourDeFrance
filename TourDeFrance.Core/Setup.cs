@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
-using ServiceStack.Logging;
 using TourDeFrance.Core.Interfaces;
 using TourDeFrance.Core.Repositories;
 using TourDeFrance.Core.Tools;
@@ -11,25 +10,27 @@ using TourDeFrance.Core.Tools.Cache;
 using ServiceStack.Redis;
 using System.IO;
 using SimpleStack.Orm;
+using TourDeFrance.Core.Logging;
 using TourDeFrance.Core.Tools.DataBase;
 
 namespace TourDeFrance.Core
 {
-	// TODO: review cache (check possibility with roslyn instead of using fody)
-	// TODO: unit test (nunit)
-	// TODO: wixsharp setup
-	// TODO: improve autofac usage -> module??, factories?? (module in test to change default autofac registration)
-	// TODO: review owner mechanism in all repo
-	// TODO: improve usage of const in repositories
-	// TODO: reduce usage of var
-	// TODO: !! date => to universal time
-	// TODO: !! json object in database
-	// TODO: all method in repositories => virtual
-	// TODO: usage of required on non nullable field in database??
-	// TODO: ensure 18 years old for each birth date??? or ensure is in past
+	// TODO: to remember
+	// review cache (check possibility with roslyn instead of using fody)
+	// improve autofac usage -> module??, factories?? (module in test to change default autofac registration)
+	// review owner mechanism in all repo
+	// improve usage of const in repositories
+	// reduce usage of var
+	// !! date => to universal time
+	// !! json object in database
+	// all method in repositories => virtual
+	// usage of required on non nullable field in database??
+	// ensure 18 years old for each birth date??? or ensure is in past
+	// investigate : https://code.google.com/p/elmah/
+	// review servicestack licence
 	public class Setup
 	{
-		private static readonly ILog Logger = LogManager.GetLogger(typeof (Setup));
+		private static readonly ILog Logger = LogProvider.For<Setup>();
 
 		public Setup(IDialectProvider dialectProvider)
 		{
@@ -67,14 +68,14 @@ namespace TourDeFrance.Core
 		public Type EmailTemplateRepositoryType { get; set; }
 		public Type SearchHistoryRepositoryType { get; set; }
 
-		public void Initialize(ApplicationConfig config, ContainerBuilder builder = null)
+		public void Initialize(ApplicationConfig config)
 		{
 			// TODO: or all assemblies ?
 			Assembly[] assemblies =
 				Directory.GetFiles(config.ApplicationPath, "*.dll")
 						 .Where(x => Path.GetFileName(x).StartsWith("TourDeFrance")).Select(Assembly.LoadFrom).ToArray();
 
-			var b = builder ?? new ContainerBuilder();
+			var b = new ContainerBuilder();
 			try
 			{
 				b.RegisterInstance(DialectProvider).AsSelf().AsImplementedInterfaces().SingleInstance();
@@ -87,15 +88,17 @@ namespace TourDeFrance.Core
 				if (string.IsNullOrWhiteSpace(config.RedisHost))
 				{
 					b.RegisterType<MemoryCacheClient>().AsImplementedInterfaces().SingleInstance();
+					b.RegisterType<InMemoryPrioritizedStack>().AsImplementedInterfaces().SingleInstance();
 				}
 				else{
-					PooledRedisClientManager redisClientManager = new PooledRedisClientManager(0, config.RedisHost);
+					IRedisClientsManager redisClientManager = new PooledRedisClientManager(0, config.RedisHost);
 					using (IRedisClient client = redisClientManager.GetClient())
 					{
 						client.RemoveAll(client.SearchKeys(Constants.BASE_CACHE_KEY + "*"));
 					}
 					b.RegisterInstance(redisClientManager).AsImplementedInterfaces().SingleInstance();
 					b.RegisterType<RedisClientManagerCacheClient>().AsImplementedInterfaces().SingleInstance();
+					b.RegisterType<RedisPrioritizedStack>().AsImplementedInterfaces().SingleInstance();
 				}
 
 				// TODO: repository single instance ???
@@ -124,10 +127,10 @@ namespace TourDeFrance.Core
 			}
 			catch (ReflectionTypeLoadException reflectionTypeLoadException)
 			{
-				Logger.Fatal("Error while loading Autofac components", reflectionTypeLoadException);
+				Logger.FatalException("Error while loading Autofac components", reflectionTypeLoadException);
 				foreach (var e in reflectionTypeLoadException.LoaderExceptions)
 				{
-					Logger.Fatal("Reflection error", e);
+					Logger.FatalException("Reflection error", e);
 				}
 				throw;
 			}

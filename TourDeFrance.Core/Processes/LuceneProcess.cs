@@ -1,13 +1,13 @@
 ﻿using Autofac;
-using log4net;
 using System;
+using TourDeFrance.Core.Logging;
 using TourDeFrance.Core.Repositories.Interfaces;
 
 namespace TourDeFrance.Core.Processes
 {
 	public class LuceneProcess : ProcessBase
 	{
-		private static readonly ILog Logger = LogManager.GetLogger(typeof(LuceneProcess));
+		private static readonly ILog Logger = LogProvider.For<LuceneProcess>();
 
 		public LuceneProcess() : base("Indexation")
 		{
@@ -24,7 +24,7 @@ namespace TourDeFrance.Core.Processes
 
 		public override void Running(Func<bool> watchdog)
 		{
-			Logger.Debug("Looking for indexation jobs in instance");
+			Logger.Debug("Looking for indexation jobs");
 			Context.Current.Container.Resolve<ILuceneRepository>().ProcessWaitingJobs();
 		}
 	}

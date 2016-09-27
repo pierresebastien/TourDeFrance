@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using Dapper;
@@ -11,12 +12,12 @@ using Lucene.Net.Index;
 using Lucene.Net.QueryParsers;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
+using ServiceStack.Redis;
 using SimpleStack.Orm.Expressions;
 using TourDeFrance.Client.Enums;
 using TourDeFrance.Core.Exceptions;
 using TourDeFrance.Core.Extensions;
 using TourDeFrance.Core.Repositories.Interfaces;
-using TourDeFrance.Core.Tools;
 using Directory = System.IO.Directory;
 using Document = Lucene.Net.Documents.Document;
 using Version = Lucene.Net.Util.Version;
@@ -184,38 +185,38 @@ namespace TourDeFrance.Core.Repositories
 
 		protected virtual void ProcessWaitingHistoryJobs()
 		{
-			throw new NotImplementedException();
-			//using (IRedisClient cache = Context.Current.RedisClientsManager.GetClient())
-			//using (var scope =  new TransactionScope())
-			//{
-			//	// re index all
-			//	if (Cache.Get<string>(ReIndexHistoryKey) != null)
-			//	{
-			//		string key = $"lucene:{IndexName.History}:*".FormatQueueKey();
-			//		Cache.RemoveAll(Cache.SearchKeys(key));
-			//		ReIndexHistory();
-			//		Cache.Remove(ReIndexHistoryKey);
-			//	}
+			var stack = Context.Current.PrioritizedStack;
 
-			//	// index
-			//	IList<Guid> logIds = new List<Guid>();
-			//	string logEntryIdString = cache.PopItemWithLowestScoreFromSortedSet(IndexHistorySetName);
-			//	while (logEntryIdString != null)
-			//	{
-			//		logIds.Add(Guid.Parse(logEntryIdString));
-			//		logEntryIdString = cache.PopItemWithLowestScoreFromSortedSet(IndexHistorySetName);
-			//	}
+			using (var scope = new TransactionScope())
+			{
+				// re index all
+				// TODO: review how to trigger reindex all ??? 
+				if (Cache.Get<string>(ReIndexHistoryKey) != null)
+				{
+					stack.FlushAll(IndexHistorySetName);
+					ReIndexHistory();
+					Cache.Remove(ReIndexHistoryKey);
+				}
 
-			//	int currentId = 0;
-			//	const int maxIdByProcess = 1000;
-			//	while (currentId < logIds.Count)
-			//	{
-			//		AddOrUpdateHistoryLines(logIds.Skip(currentId).Take(maxIdByProcess).ToArray());
-			//		currentId += maxIdByProcess;
-			//	}
+				// index
+				IList<Guid> logIds = new List<Guid>();
+				string logEntryIdString = stack.PopItem(IndexHistorySetName);
+				while (logEntryIdString != null)
+				{
+					logIds.Add(Guid.Parse(logEntryIdString));
+					logEntryIdString = stack.PopItem(IndexHistorySetName);
+				}
 
-			//	scope.Complete();
-			//}
+				int currentId = 0;
+				const int maxIdByProcess = 1000;
+				while (currentId < logIds.Count)
+				{
+					AddOrUpdateHistoryLines(logIds.Skip(currentId).Take(maxIdByProcess).ToArray());
+					currentId += maxIdByProcess;
+				}
+
+				scope.Complete();
+			}
 		}
 
 		/// <summary>

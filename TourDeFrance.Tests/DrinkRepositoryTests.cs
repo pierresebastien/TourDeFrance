@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TourDeFrance.Client.Drink;
 using TourDeFrance.Client.Enums;
+using TourDeFrance.Client.Requests;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Exceptions;
 using TourDeFrance.Core.Tools.DataBase;
@@ -364,7 +364,7 @@ namespace TourDeFrance.Tests
 			drink = DrinkRepository.UpdateDrink(drink.Id, "Cocktail", 7, 6, null);
 			Assert.AreEqual("Cocktail", drink.Name);
 			Assert.AreEqual(7, drink.AlcoholByVolume);
-			Assert.AreEqual(6, drink.AlcoholByVolume);
+			Assert.AreEqual(6, drink.Volume);
 			Assert.AreEqual(0, drink.SubDrinks.Count);
 		}
 

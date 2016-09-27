@@ -16,6 +16,7 @@ using TourDeFrance.Core.Repositories.Interfaces;
 using Dapper;
 using TourDeFrance.Client.Enums;
 using TourDeFrance.Core.Tools.DataBase;
+using TourDeFrance.Tests.Tools;
 
 namespace TourDeFrance.Tests
 {
@@ -29,7 +30,11 @@ namespace TourDeFrance.Tests
 
 		protected abstract void CleanDatabase();
 
-		protected const string SchemaName = "tourdefrance_test";
+		protected abstract Type DatabaseManagerType { get; }
+
+		protected const string DatabaseName = "tour_de_france";
+
+		protected const string SchemaName = "test";
 
 		protected IContainer Container;
 
@@ -83,7 +88,7 @@ namespace TourDeFrance.Tests
 				RedisHost = "", // TODO: use redis in test ???
 				UseLucene = false
 			};
-			var setup = new Setup(DialectProvider) {DataBaseManagerType = typeof (OrmDatabaseManager)};
+			var setup = new Setup(DialectProvider) {DataBaseManagerType = DatabaseManagerType };
 			setup.Initialize(config);
 			Container = setup.Container;
 			setup.InitializeContext();
@@ -161,6 +166,14 @@ namespace TourDeFrance.Tests
 			AssertTwoObjectAreEquals(cacheT, t);
 		}
 
+		protected void CheckCache<T, TKey>(T t, TKey key)
+		{
+			string cacheKey = key.GenerateCacheKey<T>();
+			var cacheT = Cache.Get<T>(cacheKey);
+			Assert.IsNotNull(cacheT);
+			AssertTwoObjectAreEquals(cacheT, t);
+		}
+
 		protected IList<T> CheckCacheOnList<T, TKey>(string cacheName, TKey key, Func<TKey, IEnumerable<T>> getObject)
 		{
 			string cacheKey = $"{cacheName}:{key}".FormatCacheKey();
@@ -186,6 +199,8 @@ namespace TourDeFrance.Tests
 		#endregion
 	}
 
+	// TODO: in memory not supported for the moment because we create a lot of new connections
+	// => put on disk + review with shared memory db
 	[TestFixture]
 	public class RepositoryTestsBaseSqLite : BaseRepositoryTests
 	{
@@ -200,6 +215,8 @@ namespace TourDeFrance.Tests
 		protected override void CleanDatabase()
 		{
 		}
+
+		protected override Type DatabaseManagerType => typeof(OrmDatabaseManager);
 	}
 
 	[TestFixture]
@@ -207,25 +224,27 @@ namespace TourDeFrance.Tests
 	{
 		private static readonly IDialectProvider Provider = new PostgreSQLDialectProvider();
 
-		protected const string BaseConnectionString = "Server=127.0.0.1;Port=5432;User Id=tourdefrance;Password=password;Pooling=false;CommandTimeout=30;";
+		protected static readonly string BaseConnectionString = $"Server=127.0.0.1;Port=5432;User Id=tourdefrance;Password=password;Pooling=false;CommandTimeout=30;Database={DatabaseName};";
 
 		protected override DatabaseType DatabaseType => DatabaseType.PostgreSQL;
 
 		protected override IDialectProvider DialectProvider => Provider;
 
-		protected override string ConnectionString => $"{BaseConnectionString}Database={SchemaName};";
+		protected override string ConnectionString => $"{BaseConnectionString}SearchPath={SchemaName};";
 
 		protected override void CleanDatabase()
 		{
 			using (OrmConnection connection = DialectProvider.CreateConnection(BaseConnectionString))
 			{
-				string queryExist = $"SELECT datname FROM pg_database WHERE datname = '{SchemaName}'";
+				string queryExist = $"SELECT schema_name FROM information_schema.schemata WHERE schema_name = '{SchemaName}'";
 				if (connection.Query<string>(queryExist).Any())
 				{
-					connection.Execute($"DROP DATABASE {SchemaName}");
+					connection.Execute($"DROP SCHEMA {SchemaName} CASCADE");
 				}
-				connection.Execute($"CREATE DATABASE {SchemaName}");
+				connection.Execute($"CREATE SCHEMA {SchemaName}");
 			}
 		}
+
+		protected override Type DatabaseManagerType => typeof(TestScriptDatabaseManager);
 	}
 }

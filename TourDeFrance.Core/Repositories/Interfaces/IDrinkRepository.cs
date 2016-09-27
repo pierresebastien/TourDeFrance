@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TourDeFrance.Client.Drink;
+using TourDeFrance.Client.Requests;
 using Drink = TourDeFrance.Core.Business.Drink;
 
 namespace TourDeFrance.Core.Repositories.Interfaces

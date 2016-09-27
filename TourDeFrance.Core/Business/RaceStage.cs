@@ -36,9 +36,9 @@ namespace TourDeFrance.Core.Business
 		[Alias("duration")]
 		public int Duration { get; set; }
 
-		public Client.Race.RaceStage ToModel()
+		public Client.Responses.RaceStage ToModel()
 		{
-			return new Client.Race.RaceStage
+			return new Client.Responses.RaceStage
 			{
 				Id = Id,
 				RaceId = RaceId,

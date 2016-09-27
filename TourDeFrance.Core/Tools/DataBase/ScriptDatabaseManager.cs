@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Dapper;
-using log4net;
 using SimpleStack.Orm;
 using TourDeFrance.Core.Business.Database;
+using TourDeFrance.Core.Logging;
 
 namespace TourDeFrance.Core.Tools.DataBase
 {
@@ -17,7 +17,7 @@ namespace TourDeFrance.Core.Tools.DataBase
 		protected readonly ApplicationConfig Config;
 		protected readonly string ScriptPath;
 
-		private static readonly ILog Logger = LogManager.GetLogger(typeof(ScriptDatabaseManager));
+		private static readonly ILog Logger = LogProvider.For<ScriptDatabaseManager>();
 
 		public ScriptDatabaseManager(IDialectProvider dialectProvider, ApplicationConfig config)
 		{
@@ -111,12 +111,12 @@ namespace TourDeFrance.Core.Tools.DataBase
 					string basePath = Path.Combine(Path.GetTempPath(), "TourDeFrance");
 
 					string temporaryPath = Path.Combine(basePath, "Temp");
-					scope.Connection.Update(new DbConfig { Key = "TempFolder", Value = temporaryPath, DefaultValue = temporaryPath },
-						x => new { x.Value, x.DefaultValue });
+					scope.Connection.UpdateAll(new DbConfig {Value = temporaryPath, DefaultValue = temporaryPath},
+						x => x.Key == "TempFolder", x => new {x.Value, x.DefaultValue});
 
 					string lucenePath = Path.Combine(basePath, "Lucene");
-					scope.Connection.Update(new DbConfig { Key = "IndexFolder", Value = lucenePath, DefaultValue = lucenePath },
-						x => new { x.Value, x.DefaultValue });
+					scope.Connection.UpdateAll(new DbConfig {Value = lucenePath, DefaultValue = lucenePath},
+						x => x.Key == "IndexFolder", x => new {x.Value, x.DefaultValue});
 					break;
 			}
 		}

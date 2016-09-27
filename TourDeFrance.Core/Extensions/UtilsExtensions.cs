@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
+using TourDeFrance.Client.Interfaces;
 using TourDeFrance.Core.Business;
 using TourDeFrance.Core.Business.Database;
 using TourDeFrance.Core.Interfaces;
+using TourDeFrance.Core.Logging;
 
 namespace TourDeFrance.Core.Extensions
 {
@@ -137,5 +139,11 @@ namespace TourDeFrance.Core.Extensions
 		}
 
 		#endregion
+
+		// TODO: check if better thant ILog.ErrorException()
+		public static void Error(this ILog logger, string message, Exception e)
+		{
+			logger.Error($"{message}{e.Message}\nStacktrace : {e.StackTrace}");
+		}
 	}
 }

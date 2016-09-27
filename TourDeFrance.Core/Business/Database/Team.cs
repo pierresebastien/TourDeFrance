@@ -1,4 +1,5 @@
 ﻿using SimpleStack.Orm.Attributes;
+using TourDeFrance.Client.Responses;
 
 namespace TourDeFrance.Core.Business.Database
 {
@@ -9,9 +10,9 @@ namespace TourDeFrance.Core.Business.Database
 		[Alias("logo")]
 		public byte[] Logo { get; set; }
 
-		public Client.Team.Team ToModel()
+		public Team ToModel()
 		{
-			return new Client.Team.Team
+			return new Team
 			{
 				Id = Id,
 				Name = Name,

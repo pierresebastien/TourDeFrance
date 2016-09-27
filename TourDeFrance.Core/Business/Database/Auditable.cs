@@ -1,5 +1,6 @@
 ﻿using System;
 using SimpleStack.Orm.Attributes;
+using TourDeFrance.Client.Interfaces;
 using TourDeFrance.Core.Interfaces;
 
 namespace TourDeFrance.Core.Business.Database
@@ -29,7 +30,7 @@ namespace TourDeFrance.Core.Business.Database
 		public void BeforeUpdate()
 		{
 			LastUpdateDate = DateTime.Now.ToUniversalTime();
-			LastUpdateBy = Context.Current.User != null ? Context.Current.User.Username : "System";
+			LastUpdateBy = Context.Current.User != null ? Context.Current.User.Username : Constants.SYSTEM_USERNAME;
 		}
 	}
 

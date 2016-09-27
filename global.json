@@ -1,0 +1,3 @@
+﻿{
+  "projects": [ "TourDeFrance.Api", "TourDeFrance.Client", "TourDeFrance.Core", "TourDeFrance.Service", "TourDeFrance.Tests", "TourDeFrance.Ui.Angular"]
+}

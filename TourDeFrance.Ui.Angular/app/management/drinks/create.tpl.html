@@ -1,0 +1,42 @@
+﻿<md-content layout-padding>
+	<form name="createDrinkForm">
+		<md-input-container class="md-block" flex-gt-xs>
+			<label translate>Name</label>
+			<input required ng-model="create.drink.name" name="name">
+			<div ng-messages="createDrinkForm.name.$error" multiple md-auto-hide="false">
+				<div ng-message="required" translate>Name is required.</div>
+			</div>
+		</md-input-container>
+	
+		<md-switch ng-model="create.isComposedDrink" aria-label="Is composed drink ?">
+			<span translate>Is composed drink ?</span>
+		</md-switch>
+		
+		<md-input-container class="md-block" ng-if="!create.isComposedDrink">
+			<label translate>Volume (in cl)</label>
+			<input required type="number" step="any" name="volume" ng-model="create.drink.volume" min="1" />
+
+			<div ng-messages="createDrinkForm.volume.$error" multiple md-auto-hide="false">
+				<div ng-message="required" translate>Volume is required.</div>
+				<div ng-message="min" translate>Volume must be > 0.</div>
+			</div>
+		</md-input-container>
+		
+		<md-slider-container ng-if="!create.isComposedDrink">
+			<span translate>ABV</span>
+			<md-slider flex min="0" step="0.1" max="100" ng-model="create.drink.alcoholByVolume" aria-label="Alcohol by volume" id="abv-slider">
+			</md-slider>
+			<md-input-container class="md-block">
+				<input flex required type="number" step="0.1" name="alcohol" ng-model="create.drink.alcoholByVolume" min="0" max="100" aria-label="Alcohol by volume" aria-controls="abv-slider"/>
+
+				<div ng-messages="createDrinkForm.alcohol.$error" multiple md-auto-hide="false">
+					<div ng-message="required" translate>Alcohol by volume is required.</div>
+					<div ng-message="min" translate>Alcohol by volume must be >= 0.</div>
+					<div ng-message="max" translate>Alcohol by volume must be < 100.</div>
+				</div>
+			</md-input-container>
+		</md-slider-container>
+		
+		<md-button class="md-raised md-primary">Create</md-button>
+	</form>
+</md-content>

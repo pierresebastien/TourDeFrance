@@ -13,6 +13,7 @@ using ServiceStack.Text;
 using System.Collections.Generic;
 using SimpleStack.Orm;
 using SimpleStack.Orm.Expressions;
+using TourDeFrance.Client.Interfaces;
 using TourDeFrance.Core.Tools.DataBase;
 
 namespace TourDeFrance.Core.Repositories
@@ -87,10 +88,13 @@ namespace TourDeFrance.Core.Repositories
 				log.BeforeInsert();
 				scope.Connection.Insert(log);
 
-				// TODO: if lucene but no redis => another system to generate pile
+				
+
 				if (Config.UseLucene)
 				{
-					scope.RedisTransaction.QueueCommand(x => x.AddItemToSortedSet(IndexHistorySetName, log.Id.ToString(), 1));
+					// TODO: better to add this in transction scope
+					Context.Current.PrioritizedStack.AddItem(IndexHistorySetName, log.Id.ToString(), 1);
+					//scope.RedisTransaction.QueueCommand(x => x.AddItemToSortedSet(IndexHistorySetName, log.Id.ToString(), 1));
 				}
 
 				scope.Complete();

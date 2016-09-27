@@ -102,6 +102,8 @@ namespace TourDeFrance.Core.Repositories
 				scope.Connection.Insert(stageRace);
 
 				RaceStage result = GetRaceStageViewById(stageRace.Id);
+				Cache.Remove(stageRace.Id.GenerateCacheKey<DbRaceStage>());
+
 				scope.Complete();
 				return result;
 			}

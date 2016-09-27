@@ -1,6 +1,7 @@
 ﻿using System;
 using SimpleStack.Orm.Attributes;
 using TourDeFrance.Client.Enums;
+using TourDeFrance.Client.Responses;
 
 namespace TourDeFrance.Core.Business.Database
 {
@@ -35,9 +36,9 @@ namespace TourDeFrance.Core.Business.Database
 		[Alias("team_id")]
 		public Guid TeamId { get; set; }
 
-		public Client.Rider.Rider ToModel()
+		public Rider ToModel()
 		{
-			return new Client.Rider.Rider
+			return new Rider
 			{
 				Id = Id,
 				TeamId = TeamId,

@@ -1,0 +1,31 @@
+{
+  "name": "TourDeFrance.Service",
+  "version": "0.1.0.0",
+  "description": "Service part of Tour de France application",
+  "copyright": "Copyright © Sébastien Pierre 2015-2016",
+  "title": "Tour de France Service",
+  "authors": [ "Sébastien Pierre" ],
+
+  "dependencies": {
+    "ASK.ServEasy": "4.0.1.0",
+    "ASK.ServEasy.Windows": "4.0.1.0",
+    "DockPanelSuite": "2.9.0.0",
+    "log4net": "2.0.5",
+    "Npgsql": "3.1.7",
+    "SimpleStack.Orm.PostgreSQL": "1.0.0-rc9",
+    "TourDeFrance.Api": { "target": "project" },
+    "TourDeFrance.Client": { "target": "project" },
+    "TourDeFrance.Core": { "target": "project" }
+  },
+
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+      }
+    }
+  },
+
+  "buildOptions": {
+    "emitEntryPoint": true
+  }
+}
