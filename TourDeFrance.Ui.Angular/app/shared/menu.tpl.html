@@ -1,52 +1,36 @@
-﻿<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-	<md-toolbar class="md-tall md-hue-2">
-		<span flex></span>
-		<div layout="column" class="md-toolbar-tools-bottom inset">
-			<img class="md-avatar" gravatar-src="'admin@tourdefrancebibitif.com'" />
-			<div>John Doe</div>
-		</div>
-	</md-toolbar>
-	<md-list flex>
-		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.games">
-			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-bicycle"></md-icon></div>
-			<div class="inset" translate>Games</div>
-		</md-list-item>
-		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.history">
-			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-trophy"></md-icon></div>
-			<div class="inset" translate>History</div>
-		</md-list-item>
-
-		<md-divider></md-divider>
-		<md-subheader>Management</md-subheader>
-		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.management.drinks">
-			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-beer"></md-icon></div>
-			<div class="inset" translate>Drinks</div>
-		</md-list-item>
-		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.management.stages">
-			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-map-marker"></md-icon></div>
-			<div class="inset" translate>Stages</div>
-		</md-list-item>
-		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.management.races">
-			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-map-o"></md-icon></div>
-			<div class="inset" translate>Races</div>
-		</md-list-item>
-		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.management.riders">
-			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-user"></md-icon></div>
-			<div class="inset" translate>Riders</div>
-		</md-list-item>
-		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.management.teams">
-			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-users"></md-icon></div>
-			<div class="inset" translate>Teams</div>
-		</md-list-item>
-
-		<md-subheader>Administration</md-subheader>
-		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.admin.users">
-			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-user"></md-icon></div>
-			<div class="inset" translate>Users</div>
-		</md-list-item>
-		<md-list-item md-ink-ripple layout="row" layout-align="start center" ui-sref="root.admin.config">
-			<div class="inset"><md-icon md-font-icon="fa fa-fw fa-wrench"></md-icon></div>
-			<div class="inset" translate>Config</div>
-		</md-list-item>
-	</md-list>
+﻿<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" hide-print>
+	<!--<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" hide-print>-->
+	<header class="nav-header">
+		<a layout="column" ui-sref="root.home">
+			<!--<a layout="column" ui-sref="root.home" class="docs-logo">-->
+			<img class="md-avatar" gravatar-src="'{{menu.currentUser.email}}'"/>
+			<h1 class="md-heading">{{menu.currentUser.displayName}}</h1>
+			<!--<h1 class="docs-logotype md-heading">{{menu.currentUser.displayName}}</h1>-->
+		</a>
+	</header>
+	<md-content flex role="navigation">
+		<ul>
+			<!--<ul class="docs-menu">-->
+			<li ng-repeat="section in menu.sections">
+				<!--<li ng-repeat="section in menu.sections" class="parent-list-item">-->
+				<md-button class="md-button-toggle" aria-controls="menu-{{section.name}}" aria-expanded="false">
+					<div flex layout="row">
+						{{section.name}}
+						<span flex></span>
+						<span aria-hidde="true" class="md-toggle-icon">
+							<md-icon md-font-icon="fa fa-fw fa-angle-down"></md-icon>
+						</span>
+					</div>
+				</md-button>
+				<ul id="menu-{{section.name}}" class="menu-toggle-list">
+					<li ng-repeat="subSection in section.subSections">
+						<md-button ui-sref="{{subSection.route}}">
+							<md-icon md-font-icon="fa fa-fw fa-{{subSection.icon}}"></md-icon>
+							<span>{{subSection.name}}</span>
+						</md-button>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</md-content>
 </md-sidenav>

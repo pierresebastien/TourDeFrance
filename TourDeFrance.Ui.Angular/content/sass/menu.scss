@@ -1,0 +1,167 @@
+﻿/* inspired by angular material doc site css */
+
+$menu-bg-color: #106CC8;
+$menu-bg-focus-color: #267ED5;
+$menu-font-color: white;
+$menu-width: 272px;
+
+.site-sidenav {
+    background: $menu-bg-color;
+    width: $menu-width;
+    min-width: $menu-width;
+    max-width: $menu-width;
+
+    md-content {
+        background: transparent;
+    }
+
+    &.md-locked-open-add-active,
+    &.md-locked-open {
+        width: $menu-width;
+        min-width: $menu-width;
+        max-width: $menu-width;
+    }
+
+    > * {
+        min-width: 218px;
+    }
+}
+
+.docs-menu {
+    list-style: none;
+    padding: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    li {
+        margin: 0;
+    }
+
+    > li {
+        border-bottom: 1px solid #267ED5;
+
+        &:nth-child(1) {
+            border-top: none;
+        }
+    }
+
+    .md-button {
+        border-radius: 0;
+        color: $menu-font-color;
+        cursor: pointer;
+        display: block;
+        align-items: inherit;
+        line-height: 40px;
+        margin: 0;
+        max-height: 40px;
+        overflow: hidden;
+        padding: 0px 16px;
+        text-align: left;
+        text-decoration: none;
+        white-space: normal;
+        width: 100%;
+
+        &:hover,
+        &:focus {
+            background: $menu-bg-focus-color !important;
+        }
+
+        md-icon {
+            color: $menu-font-color;
+        }
+
+        &.active {
+            background: $menu-bg-focus-color;
+        }
+    }
+
+    button.md-button::-moz-focus-inner {
+        padding: 0;
+    }
+
+    md-select {
+        /* Override md-select margins.  With margins the menu will look incorrect and causes mobile list to not be scrollable. */
+        margin: 0;
+        width: 100%;
+
+        md-select-label {
+            justify-content: flex-end;
+            padding-top: 10px;
+
+            span {
+                margin-right: auto;
+                padding-left: 13px;
+            }
+        }
+
+        .md-select-icon {
+            margin-right: 28px;
+        }
+    }
+
+    .menu-toggle-list {
+        a.md-button {
+            display: block;
+            padding: 0 16px 0 32px;
+            text-transform: none;
+            text-rendering: optimizeLegibility;
+            font-weight: 500;
+        }
+    }
+}
+
+.menu-toggle-list {
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    -webkit-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+    -webkit-transition-property: height;
+    -moz-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+    -moz-transition-property: height;
+    transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+    transition-property: height;
+}
+
+.md-button-toggle {
+    .md-toggle-icon {
+        display: block;
+        margin-left: auto;
+        speak: none;
+        vertical-align: middle;
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        transition: transform 0.3s ease-in-out;
+        -webkit-transition: -webkit-transform 0.3s ease-in-out;
+
+        &.toggled {
+            transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+        }
+    }
+}
+
+
+.md-whiteframe-glow-z1 {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14),
+              0px 0px 2px 2px rgba(0, 0, 0, 0.098),
+              0px 0px 5px 1px rgba(0, 0, 0, 0.084);
+}
+
+html[dir=rtl] .docs-menu .md-button,
+body[dir=rtl] .docs-menu .md-button {
+  unicode-bidi: embed;
+  text-align: right;
+}
+
+.parent-list-item:last-child {
+  margin-bottom: 20px;
+  /* Prevent the hidden License link from causing a double bottom-border */
+  border-bottom: none;
+}
