@@ -5,7 +5,7 @@
 * Add authentication in API (use [identity server](https://identityserver.io/) ?)
 * Add [SignalR](https://github.com/SignalR/SignalR) to push event to client browsers
 * Add a lot of unit tests and migrate to NUnit3
-* Use [travis](https://travis-ci.org/) (or other?) for continious integration
+* Use [travis](https://travis-ci.org/) & [AppVeyor](https://www.appveyor.com/) for continious integration
 * Use [swagger](http://swagger.io/swagger-ui/) to document the api (check usage of [nancy.openapi](https://github.com/thesheps/nancy.openapi) or [nancy.swagger](https://github.com/yahehe/Nancy.Swagger))
 * Add support for dot net core (check compatibility of nuget dependencies)
 * Create project with [wixsharp](https://wixsharp.codeplex.com/) to generate windows setup with [wix toolset](http://wixtoolset.org/)
@@ -20,14 +20,13 @@
 	+ [Angular image cropper](https://github.com/bcabanes/angular-image-cropper)
 	+ [Angular xeditable](https://vitalets.github.io/angular-xeditable/) (check if integrated in angular material)
 	+ [Angular surprise](https://github.com/rafaelcamargo/ng-surprise)
-	+ [Angular input masks](https://github.com/assisrafael/angular-input-masks) (check if integrated in angular material)
-	+ [Angular regex](https://github.com/zerohouse/ng-regex) (check if integrated in angular material)
 	+ [Angular color picker](https://github.com/brianpkelley/md-color-picker)
 	+ [Angular drag & drop](https://github.com/kshutkin/drag_n_drop)
 	+ [Angular confirm button](https://github.com/MrBoolean/ng-confirm)
 	+ [Angular popover](http://verical.github.io/#/ngDropover) (check if integrated in angular material)
 	+ [Angular loading](http://bsalex.github.io/angular-loading-overlay/_site/) to replace angular spinner
 	+ [Angular incremental list](https://github.com/tfoxy/angular-incremental-list)
+	+ Graphs with [Angular nvd3](http://krispo.github.io/angular-nvd3/#/) or [Angular chart.js](http://jtblin.github.io/angular-chart.js/)
 * Creation of new ui project with [react](https://facebook.github.io/react/) and [bootstrap](http://getbootstrap.com/), [semantic ui](http://semantic-ui.com/) or [metro ui](https://metroui.org.ua/)
 * Migrate current ui project to Angular2 ?
 * Review cache system, drop redis support ? use [Akavache](https://github.com/akavache/Akavache) instead ?
