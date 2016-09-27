@@ -1,5 +1,10 @@
 # TourDeFrance
 
+|             |Build Status|
+|-------------|:----------:|
+|**Linux**    |[![Build Status](https://travis-ci.org/pierresebastien/TourDeFrance.svg)](https://travis-ci.org/pierresebastien/TourDeFrance)|
+|**Windows**  |/|
+
 ##Roadmap
 
 * Add authentication in API (use [identity server](https://identityserver.io/) ?)
