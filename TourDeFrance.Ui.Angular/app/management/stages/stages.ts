@@ -5,8 +5,9 @@ class StageController extends BaseController {
 		GlobalService: tourdefrance.services.IGlobalService,
 		$state: ng.ui.IStateService,
 		$mdToast: ng.material.IToastService,
+		gettextCatalog: angular.gettext.gettextCatalog,
 		currentUser: AuthenticatedUser) {
 
-		super(Restangular, GlobalService, $state, $mdToast, currentUser);
+		super(Restangular, GlobalService, $state, $mdToast, gettextCatalog, currentUser);
 	}
 }

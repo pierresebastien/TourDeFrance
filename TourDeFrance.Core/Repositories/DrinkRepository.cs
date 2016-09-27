@@ -36,7 +36,7 @@ namespace TourDeFrance.Core.Repositories
 				alcoholByVolume.EnsureIsNotNull("Alcohol by volume must be specified");
 				volume.EnsureIsNotNull("Volume must be specified");
 				alcoholByVolume?.EnsureIsPositive("Alcohol by volume must be >= 0");
-				volume?.EnsureIsStrictlyPositive("Volume mus be > 0");
+				volume?.EnsureIsStrictlyPositive("Volume must be > 0");
 			}
 
 			using (var scope = new TransactionScope())

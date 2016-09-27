@@ -222,6 +222,17 @@ class RouteConfig {
 					}
 				}
 			})
+			.state("root.management.drinks.create",
+			{
+				url: "/create",
+				views: {
+					'@': {
+						templateUrl: "app/management/drinks/create.tpl.html",
+						controller: CreateDrinkController,
+						controllerAs: "create"
+					}
+				}
+			})
 			.state("root.management.stages",
 			{
 				url: "/stages",

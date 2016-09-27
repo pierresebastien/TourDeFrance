@@ -5,7 +5,7 @@ module tourdefrance {
 
 	angular.module('tourdefrance',
 		[
-			'tourdefrance.services', 'ui.router', 'restangular', 'infinite-scroll', 'ui.gravatar', 'angularSpinner', 'ngMaterial', 'gettext'
+			'tourdefrance.services', 'ui.router', 'restangular', 'infinite-scroll', 'ui.gravatar', 'angularSpinner', 'ngMaterial', 'ngMessages', 'gettext'
 		])
 		.config([
 			'$httpProvider', ($httpProvider: ng.IHttpProvider) => {

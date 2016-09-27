@@ -10,6 +10,7 @@ abstract class BaseController {
 		protected GlobalService: tourdefrance.services.IGlobalService,
 		protected $state: ng.ui.IStateService,
 		protected $mdToast: ng.material.IToastService,
+		protected gettextCatalog: angular.gettext.gettextCatalog,
 		currentUser: AuthenticatedUser) {
 
 		this.currentUser = currentUser;

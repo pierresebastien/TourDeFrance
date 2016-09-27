@@ -8,16 +8,40 @@ msgstr ""
 msgid "... It may never recover."
 msgstr ""
 
+#: management\drinks\create.tpl.html:26
+msgid "ABV"
+msgstr ""
+
+#: management\drinks\create.tpl.html:33
+msgid "Alcohol by volume is required."
+msgstr ""
+
+#: management\drinks\create.tpl.html:35
+msgid "Alcohol by volume must be < 100."
+msgstr ""
+
+#: management\drinks\create.tpl.html:34
+msgid "Alcohol by volume must be >= 0."
+msgstr ""
+
 #: shared\not_found.tpl.html:7
 msgid "Back Home"
 msgstr ""
 
-#: shared\menu.tpl.html:49
+#: shared\menu.js:33
 msgid "Config"
 msgstr ""
 
-#: shared\menu.tpl.html:23
+#: management\drinks\drinks.tpl.html:31
+msgid "Delete"
+msgstr ""
+
+#: shared\menu.js:22
 msgid "Drinks"
+msgstr ""
+
+#: management\drinks\drinks.tpl.html:27
+msgid "Edit"
 msgstr ""
 
 #: shared\error.tpl.html:1
@@ -28,7 +52,7 @@ msgstr ""
 msgid "Error 404!"
 msgstr ""
 
-#: shared\menu.tpl.html:12
+#: shared\menu.js:15
 msgid "Games"
 msgstr ""
 
@@ -40,8 +64,12 @@ msgstr ""
 msgid "Go Back"
 msgstr ""
 
-#: shared\menu.tpl.html:16
+#: shared\menu.js:16
 msgid "History"
+msgstr ""
+
+#: management\drinks\create.tpl.html:12
+msgid "Is composed drink ?"
 msgstr ""
 
 #: shared\not_found.tpl.html:4
@@ -52,19 +80,27 @@ msgstr ""
 msgid "More informations"
 msgstr ""
 
-#: shared\menu.tpl.html:31
+#: management\drinks\create.tpl.html:4
+msgid "Name"
+msgstr ""
+
+#: management\drinks\create.tpl.html:7
+msgid "Name is required."
+msgstr ""
+
+#: shared\menu.js:24
 msgid "Races"
 msgstr ""
 
-#: shared\menu.tpl.html:35
+#: shared\menu.js:25
 msgid "Riders"
 msgstr ""
 
-#: shared\menu.tpl.html:27
+#: shared\menu.js:23
 msgid "Stages"
 msgstr ""
 
-#: shared\menu.tpl.html:39
+#: shared\menu.js:26
 msgid "Teams"
 msgstr ""
 
@@ -76,8 +112,20 @@ msgstr ""
 msgid "There was an error processing your request."
 msgstr ""
 
-#: shared\menu.tpl.html:45
+#: shared\menu.js:32
 msgid "Users"
+msgstr ""
+
+#: management\drinks\create.tpl.html:16
+msgid "Volume"
+msgstr ""
+
+#: management\drinks\create.tpl.html:20
+msgid "Volume is required."
+msgstr ""
+
+#: management\drinks\create.tpl.html:21
+msgid "Volume must be > 0."
 msgstr ""
 
 #: shared\forbidden.tpl.html:3
