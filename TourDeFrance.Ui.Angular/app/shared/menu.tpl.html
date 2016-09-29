@@ -3,16 +3,16 @@
 	<header class="nav-header">
 		<a layout="column" ui-sref="root.home">
 			<!--<a layout="column" ui-sref="root.home" class="docs-logo">-->
-			<img class="md-avatar" gravatar-src="'{{menu.currentUser.email}}'"/>
-			<h1 class="md-heading">{{menu.currentUser.displayName}}</h1>
-			<!--<h1 class="docs-logotype md-heading">{{menu.currentUser.displayName}}</h1>-->
+			<img class="md-avatar" gravatar-src="'{{menuController.currentUser.email}}'"/>
+			<h1 class="md-heading">{{menuController.currentUser.displayName}}</h1>
+			<!--<h1 class="docs-logotype md-heading">{{menuController.currentUser.displayName}}</h1>-->
 		</a>
 	</header>
 	<md-content flex role="navigation">
 		<ul>
 			<!--<ul class="docs-menu">-->
-			<li ng-repeat="section in menu.sections">
-				<!--<li ng-repeat="section in menu.sections" class="parent-list-item">-->
+			<li ng-repeat="section in menuController.sections">
+				<!--<li ng-repeat="section in menuController.sections" class="parent-list-item">-->
 				<md-button class="md-button-toggle" aria-controls="menu-{{section.name}}" aria-expanded="false">
 					<div flex layout="row">
 						{{section.name}}

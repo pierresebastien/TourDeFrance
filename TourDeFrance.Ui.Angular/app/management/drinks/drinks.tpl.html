@@ -1,17 +1,17 @@
 ﻿<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ui-sref="root.management.drinks.create">
-	<md-tooltip>Add</md-tooltip>
+	<md-tooltip><span translate>Add</span></md-tooltip>
 	<md-icon md-font-icon="fa fa-fw fa-plus"></md-icon>
 </md-button>
 
 <!--<md-list flex>
-	<md-list-item ng-repeat="drink in drink.drinks" class="noright">
+	<md-list-item ng-repeat="drink in drinkController.drinks" class="noright">
 		<p>{{ drink.name }}</p>
 		<md-button class="md-icon-button" aria-label="Edit">
-			<md-tooltip>Edit</md-tooltip>
+			<md-tooltip><span translate>Edit</span></md-tooltip>
 			<md-icon md-font-iconn="fa fa-fw fa-pencil"></md-icon>
 		</md-button>
 		<md-button class="md-fab" aria-label="Delete">
-			<md-tooltip>Delete</md-tooltip>
+			<md-tooltip><span translate>Delete</span></md-tooltip>
 			<md-icon md-font-icon="fa fa-fw fa-trash"></md-icon>
 		</md-button>
 	</md-list-item>
@@ -21,14 +21,14 @@
 			  md-row-height-gt-md="1:1" md-row-height="4:3"
 			  md-gutter="8px" md-gutter-gt-sm="4px">
 
-	<md-grid-tile ng-repeat="drink in drink.drinks">
+	<md-grid-tile ng-repeat="drink in drinkController.drinks" class="md-whiteframe-z2">
 		<p>{{ drink.name }}</p>
-		<md-button class="md-icon-button" aria-label="Edit">
-			<md-tooltip translate>Edit</md-tooltip>
-			<md-icon md-font-iconn="fa fa-fw fa-pencil"></md-icon>
+		<md-button class="md-fab" aria-label="Edit">
+			<md-tooltip><span translate>Edit</span></md-tooltip>
+			<md-icon md-font-icon="fa fa-fw fa-pencil"></md-icon>
 		</md-button>
-		<md-button class="md-fab" aria-label="Delete">
-			<md-tooltip translate>Delete</md-tooltip>
+		<md-button class="md-fab" aria-label="Delete" ng-click="drinkController.deleteDrink(drink.id)">
+			<md-tooltip><span translate>Delete</span></md-tooltip>
 			<md-icon md-font-icon="fa fa-fw fa-trash"></md-icon>
 		</md-button>
 	</md-grid-tile>

@@ -29,6 +29,7 @@
 
 // Services
 /// <reference path="./services/global.ts" />
+/// <reference path="./services/drink.ts" />
 /// <reference path="./services/services.ts" />
 
 // Others

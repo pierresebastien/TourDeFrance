@@ -86,7 +86,12 @@ namespace TourDeFrance.Core
 
 		internal ApplicationConfig ApplicationConfig { get; private set; }
 
-		public AuthenticatedUser User { get; set; }
+		public AuthenticatedUser User
+		{
+			// TODO: to change
+			get { return UserRepository.GetAuthenticatedUser(Constants.ADMIN_USERNAME); }
+			set { }
+		}
 
 		public AuthenticatedUser RealUser { get; set; }
 

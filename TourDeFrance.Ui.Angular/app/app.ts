@@ -15,6 +15,7 @@ module tourdefrance {
 		.config(RouteConfig)
 		.config(ApiSetUp)
 		.config(GravatarConfig)
+		.config(ThemeConfig)
 		.run(RestangularConfig)
 		.run(UiRouterConfig);
 }

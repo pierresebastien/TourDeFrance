@@ -36,6 +36,14 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: management\drinks\drinks.js:50
+msgid "Drink created"
+msgstr ""
+
+#: management\drinks\drinks.js:24
+msgid "Drink deleted"
+msgstr ""
+
 #: shared\menu.js:22
 msgid "Drinks"
 msgstr ""
@@ -117,7 +125,7 @@ msgid "Users"
 msgstr ""
 
 #: management\drinks\create.tpl.html:16
-msgid "Volume"
+msgid "Volume (in cl)"
 msgstr ""
 
 #: management\drinks\create.tpl.html:20

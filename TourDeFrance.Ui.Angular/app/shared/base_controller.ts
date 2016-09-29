@@ -2,17 +2,9 @@
 
 // TODO: to review
 abstract class BaseController {
-	baseWebUrl: string;
-	baseApiUrl: string;
-	currentUser: AuthenticatedUser;
 
-	constructor(protected Restangular: restangular.IService,
-		protected GlobalService: tourdefrance.services.IGlobalService,
-		protected $state: ng.ui.IStateService,
-		protected $mdToast: ng.material.IToastService,
+	constructor(protected  $mdToast: ng.material.IToastService,
 		protected gettextCatalog: angular.gettext.gettextCatalog,
-		currentUser: AuthenticatedUser) {
-
-		this.currentUser = currentUser;
+		protected currentUser: AuthenticatedUser) {
 	}
 }

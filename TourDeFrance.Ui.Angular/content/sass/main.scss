@@ -122,3 +122,28 @@ ul {
         }
     }
 }
+
+// TODO: to improve
+md-toast.md-success-toast-theme {
+    .md-toast-content {
+        background-color: green;
+    }
+}
+
+md-toast.md-warn-toast-theme {
+    .md-toast-content {
+        background-color: orange;
+    }
+}
+
+md-toast.md-info-toast-theme {
+    .md-toast-content {
+        background-color: cornflowerblue;
+    }
+}
+
+md-toast.md-danger-toast-theme {
+    .md-toast-content {
+        background-color: red;
+    }
+}

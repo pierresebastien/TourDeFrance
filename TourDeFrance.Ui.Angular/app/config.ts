@@ -15,6 +15,7 @@ class ApiSetUp {
 	}
 }
 
+// TODO: to review (+ reponse.data usage)
 class RestangularConfig { // Used in a .run since .config does not allow Services
 	constructor(Restangular: restangular.IProvider, $state: ng.ui.IStateService, GlobalService: tourdefrance.services.IGlobalService, $mdToast: ng.material.IToastService) {
 		Restangular.setErrorInterceptor((response: restangular.IResponse, deferred: ng.IDeferred<any>) => {
@@ -33,6 +34,7 @@ class RestangularConfig { // Used in a .run since .config does not allow Service
 				$mdToast.show(
 					$mdToast.simple()
 					.textContent(response.data)
+					.theme("danger-toast")
 					.position('top right')
 					.hideDelay(3000)
 				);
@@ -83,7 +85,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/login/login.tpl.html",
 						controller: LoginController,
-						controllerAs: "login"
+						controllerAs: "loginController"
 					}
 				}
 			})
@@ -101,7 +103,7 @@ class RouteConfig {
 				url: "",
 				abstract: true, // Cannot access directly to the page, must call a child
 				resolve: {
-					currentUser: function(GlobalService: tourdefrance.services.IGlobalService) {
+					currentUser: function (GlobalService: tourdefrance.services.IGlobalService) {
 						return GlobalService.getCurrentUser();
 					}
 				},
@@ -109,12 +111,12 @@ class RouteConfig {
 					'header': {
 						templateUrl: "app/shared/header.tpl.html",
 						controller: HeaderController,
-						controllerAs: "header"
+						controllerAs: "headerController"
 					},
 					'menu': {
 						templateUrl: "app/shared/menu.tpl.html",
 						controller: MenuController,
-						controllerAs: "menu"
+						controllerAs: "menuController"
 					}
 				}
 			})
@@ -127,7 +129,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/home/home.tpl.html",
 						controller: HomeController,
-						controllerAs: "home"
+						controllerAs: "homeController"
 					}
 				}
 			})
@@ -153,7 +155,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/shared/forbidden.tpl.html",
 						controller: ErrorController,
-						controllerAs: "error"
+						controllerAs: "errorController"
 					}
 				}
 			})
@@ -164,7 +166,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/shared/not_found.tpl.html",
 						controller: ErrorController,
-						controllerAs: "error"
+						controllerAs: "errorController"
 					}
 				}
 			})
@@ -175,7 +177,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/shared/error.tpl.html",
 						controller: ErrorController,
-						controllerAs: "error"
+						controllerAs: "errorController"
 					}
 				}
 			})
@@ -191,7 +193,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/admin/config/config.tpl.html",
 						controller: ConfigController,
-						controllerAs: "config"
+						controllerAs: "configController"
 					}
 				}
 			})
@@ -202,7 +204,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/admin/users/users.tpl.html",
 						controller: UserController,
-						controllerAs: "user"
+						controllerAs: "userController"
 					}
 				}
 			})
@@ -218,7 +220,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/management/drinks/drinks.tpl.html",
 						controller: DrinkController,
-						controllerAs: "drink"
+						controllerAs: "drinkController"
 					}
 				}
 			})
@@ -229,7 +231,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/management/drinks/create.tpl.html",
 						controller: CreateDrinkController,
-						controllerAs: "create"
+						controllerAs: "createDrinkController"
 					}
 				}
 			})
@@ -240,7 +242,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/management/stages/stages.tpl.html",
 						controller: StageController,
-						controllerAs: "stage"
+						controllerAs: "stageController"
 					}
 				}
 			})
@@ -251,7 +253,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/management/races/races.tpl.html",
 						controller: RaceController,
-						controllerAs: "race"
+						controllerAs: "raceController"
 					}
 				}
 			})
@@ -262,7 +264,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/management/riders/riders.tpl.html",
 						controller: RiderController,
-						controllerAs: "rider"
+						controllerAs: "riderController"
 					}
 				}
 			})
@@ -273,7 +275,7 @@ class RouteConfig {
 					'@': {
 						templateUrl: "app/management/teams/teams.tpl.html",
 						controller: TeamController,
-						controllerAs: "team"
+						controllerAs: "teamController"
 					}
 				}
 			});
@@ -319,5 +321,21 @@ class HtmlTemplateHttpInterceptor {
 
 	public static factory() {
 		return new HtmlTemplateHttpInterceptor();
+	}
+}
+
+class ThemeConfig {
+	constructor($mdThemingProvider: ng.material.IThemingProvider) {
+		$mdThemingProvider.theme("success-toast");
+		$mdThemingProvider.theme("warn-toast");
+		$mdThemingProvider.theme("info-toast");
+		$mdThemingProvider.theme("danger-toast");
+
+		// TODO: to review + check with sass variables
+		$mdThemingProvider.theme("default")
+			.primaryPalette("indigo")
+			.accentPalette("pink")
+			.warnPalette("red")
+			.backgroundPalette("grey");
 	}
 }
