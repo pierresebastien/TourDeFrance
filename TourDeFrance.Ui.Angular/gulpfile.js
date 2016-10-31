@@ -70,6 +70,12 @@ gulp.task('concat:models', function() {
     .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('concat:components', function() {
+  return gulp.src(['./components/**/!(components)*.js', 'components/components.js'])
+    .pipe(concat('components.js'))
+    .pipe(gulp.dest('./dist/'));
+});
+
 gulp.task('concat:services', function() {
   return gulp.src(['./services/**/!(services)*.js', 'services/services.js'])
     .pipe(concat('services.js'))
@@ -88,7 +94,7 @@ gulp.task('concat:app', function() {
     .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('concat', ['concat:models', 'concat:services', 'concat:controllers', 'concat:app']);
+gulp.task('concat', ['concat:models', 'concat:components', 'concat:services', 'concat:controllers', 'concat:app']);
 
 /* UGLIFY */
 gulp.task('uglify', function () {

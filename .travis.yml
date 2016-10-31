@@ -1,4 +1,4 @@
-# doesn't wok for now, will review it later
+# doesn't work for now, will review it later
 language: csharp
 sudo: required  
 dist: trusty

@@ -1,36 +1,32 @@
 ﻿<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" hide-print>
-	<!--<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" hide-print>-->
 	<header class="nav-header">
 		<a layout="column" ui-sref="root.home">
-			<!--<a layout="column" ui-sref="root.home" class="docs-logo">-->
 			<img class="md-avatar" gravatar-src="'{{menuController.currentUser.email}}'"/>
 			<h1 class="md-heading">{{menuController.currentUser.displayName}}</h1>
-			<!--<h1 class="docs-logotype md-heading">{{menuController.currentUser.displayName}}</h1>-->
 		</a>
 	</header>
 	<md-content flex role="navigation">
-		<ul>
-			<!--<ul class="docs-menu">-->
-			<li ng-repeat="section in menuController.sections">
-				<!--<li ng-repeat="section in menuController.sections" class="parent-list-item">-->
+		<ul class="site-menu">
+			<tdf-menu-toggle ng-repeat="section in menuController.sections" class="menu-section" section="section"></tdf-menu-toggle>
+			<!--<li ng-repeat="section in menuController.sections" class="menu-section">
 				<md-button class="md-button-toggle" aria-controls="menu-{{section.name}}" aria-expanded="false">
 					<div flex layout="row">
 						{{section.name}}
 						<span flex></span>
-						<span aria-hidde="true" class="md-toggle-icon">
+						<span aria-hidde="true" class="md-toggle-icon" ng-class="{'toggled' : section.isOpen}">
 							<md-icon md-font-icon="fa fa-fw fa-angle-down"></md-icon>
 						</span>
 					</div>
 				</md-button>
 				<ul id="menu-{{section.name}}" class="menu-toggle-list">
 					<li ng-repeat="subSection in section.subSections">
-						<md-button ui-sref="{{subSection.route}}">
+						<md-button ui-sref="{{subSection.route}}" ng-class="{'active' : subSection.isSelected}">
 							<md-icon md-font-icon="fa fa-fw fa-{{subSection.icon}}"></md-icon>
 							<span>{{subSection.name}}</span>
 						</md-button>
 					</li>
 				</ul>
-			</li>
+			</li>-->
 		</ul>
 	</md-content>
 </md-sidenav>

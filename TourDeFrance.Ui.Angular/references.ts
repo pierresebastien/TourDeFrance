@@ -27,6 +27,11 @@
 /// <reference path="./app/management/stages/stages.ts" />
 /// <reference path="./app/management/teams/teams.ts" />
 
+// Components
+/// <reference path="./components/menu_toggle.ts" />
+/// <reference path="./components/menu_link.ts" />
+/// <reference path="./components/components.ts" />
+
 // Services
 /// <reference path="./services/global.ts" />
 /// <reference path="./services/drink.ts" />

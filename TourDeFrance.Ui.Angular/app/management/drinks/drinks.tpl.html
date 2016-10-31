@@ -3,33 +3,27 @@
 	<md-icon md-font-icon="fa fa-fw fa-plus"></md-icon>
 </md-button>
 
-<!--<md-list flex>
-	<md-list-item ng-repeat="drink in drinkController.drinks" class="noright">
-		<p>{{ drink.name }}</p>
-		<md-button class="md-icon-button" aria-label="Edit">
-			<md-tooltip><span translate>Edit</span></md-tooltip>
-			<md-icon md-font-iconn="fa fa-fw fa-pencil"></md-icon>
-		</md-button>
-		<md-button class="md-fab" aria-label="Delete">
-			<md-tooltip><span translate>Delete</span></md-tooltip>
-			<md-icon md-font-icon="fa fa-fw fa-trash"></md-icon>
-		</md-button>
-	</md-list-item>
-</md-list>-->
+<!-- TODO: extract style in sass file -->
+<div class="md-padding" layout="row" layout-wrap>
+	<md-card style="width: 300px;" ng-repeat="drink in drinkController.drinks">
+		<md-card-content layout="row" layout-align="space-between">
 
-<md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
-			  md-row-height-gt-md="1:1" md-row-height="4:3"
-			  md-gutter="8px" md-gutter-gt-sm="4px">
-
-	<md-grid-tile ng-repeat="drink in drinkController.drinks" class="md-whiteframe-z2">
-		<p>{{ drink.name }}</p>
-		<md-button class="md-fab" aria-label="Edit">
-			<md-tooltip><span translate>Edit</span></md-tooltip>
-			<md-icon md-font-icon="fa fa-fw fa-pencil"></md-icon>
-		</md-button>
-		<md-button class="md-fab" aria-label="Delete" ng-click="drinkController.deleteDrink(drink.id)">
-			<md-tooltip><span translate>Delete</span></md-tooltip>
-			<md-icon md-font-icon="fa fa-fw fa-trash"></md-icon>
-		</md-button>
-	</md-grid-tile>
-</md-grid-list>
+			<div layout="column">
+				<h2 style="overflow: hidden; text-overflow: ellipsis; width: 100%; white-space: nowrap;">{{drink.name }}</h2>
+				<h4><span translate>Volume</span> : {{drink.volume}} cl</h4>
+				<h4><span translate>ABV</span> : {{drink.alcoholByVolume}} %</h4>
+			</div>
+			
+			<md-card-actions layout="column" layout-align="end end">
+				<md-button class="md-icon-button" aria-label="Edit">
+					<md-tooltip><span translate>Edit</span></md-tooltip>
+					<md-icon md-font-icon="fa fa-fw fa-pencil"></md-icon>
+				</md-button>
+				<md-button class="md-icon-button" aria-label="Delete" ng-click="drinkController.deleteDrink(drink.id)">
+					<md-tooltip><span translate>Delete</span></md-tooltip>
+					<md-icon md-font-icon="fa fa-fw fa-trash"></md-icon>
+				</md-button>
+			</md-card-actions>
+		</md-card-content>
+	</md-card>
+</div>

@@ -1,0 +1,7 @@
+﻿<md-button ng-class="{'active' : menu.page.isSelected}" ui-sref="{{menu.page.route}}" ng-click="menu.focus()">
+	<md-icon md-font-icon="fa fa-fw fa-{{menu.page.icon}}"></md-icon>
+	<span>{{menu.page.name}}</span>
+	<span class="md-visually-hidden" ng-if="menu.page.isSelected">
+		current page
+	</span>
+</md-button>
